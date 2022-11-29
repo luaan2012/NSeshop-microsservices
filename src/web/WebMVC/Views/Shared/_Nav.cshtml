@@ -6,7 +6,7 @@
 			<nav class="limiter-menu-desktop container">
 					
 				<!-- Logo desktop -->		
-				<a href="#" class="logo">
+				<a asp-action="Index" asp-controller="Home" class="logo">
 					<img src="~/images/logo-01.png" alt="IMG-LOGO">
 				</a>
 
@@ -14,23 +14,23 @@
 				<div class="menu-desktop">
 					<ul class="main-menu">
 						<li class="active-menu">
-							<a href="index.html">Home</a>
+							<a asp-action="Index" asp-controller="Home">Home</a>
 						</li>
 
 						<li>
-							<a asp-action="Loja" asp-controller="Home">Loja</a>
+							<a asp-action="Store" asp-controller="Home">Loja</a>
 						</li>
 
 						<li>
-							<a href="blog.html">Blog</a>
+							<a asp-action="Index" asp-controller="Institucional">Blog</a>
 						</li>
 
 						<li>
-							<a href="about.html">Sobre</a>
+							<a asp-action="About" asp-controller="Institucional">Sobre</a>
 						</li>
 
 						<li>
-							<a href="contact.html">Contato</a>
+							<a asp-action="Contact" asp-controller="Institucional">Contato</a>
 						</li>
 					</ul>
 				</div>	

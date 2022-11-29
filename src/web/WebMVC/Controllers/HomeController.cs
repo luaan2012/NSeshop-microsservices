@@ -18,7 +18,7 @@ namespace WebMVC.Controllers
             return View();
         }
 
-        public IActionResult Loja()
+        public IActionResult Store()
         {
             return View();
         }

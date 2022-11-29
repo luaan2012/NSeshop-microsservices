@@ -18,6 +18,11 @@ namespace WebMVC.Controllers
             return View();
         }
 
+        public IActionResult Loja()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

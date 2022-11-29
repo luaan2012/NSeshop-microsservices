@@ -1,0 +1,30 @@
+docker run -d --hostname rabbit-host --name rabbit-nerdstore -p 15672:15672 -p 5672:5672 rabbitmq:management
+
+rabbitmq password: guest
+
+sqrc - Segregação de Responsabilidade de Comando e Consulta
+
+amqp - Advanced Message Queuing Protocol
+
+Exchange - responsavel por receber a mensagem e enviar para fila
+
+Bindings - Faz a ligacao entre os exchange e filas
+
+Route keys - palavras chaves ultilizadas no roteamento das mensagens
+
+ 
+
+
+
+
+-----------------------------------------------------------------------------------------
+EasyNetQ - for rabbitmq
+
+FluentValidation
+
+Poly
+
+NetDevPack
+
+
+

@@ -1,0 +1,34 @@
+version: "3"
+
+services: 
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbit-nerdstore
+        environment:
+            RABBITMQ_DEFAULT_USER: "nerdstore"
+            RABBITMQ_DEFAULT_PASS: "nerdstore"
+
+    api-identidade:
+        image: luan/nerdstore-api-identidade:latest
+        container_name: nerdstore-api-identidade
+        build:
+            context: ../src
+            dockerfile: ./services/ES.Identidade.API/Dockerfile
+        ports:
+          - "5001:5001"
+        environment:
+          - ASPNETCORE_ENVIRONMENT=Development
+          - ASPNETCORE_URLS=http://*:5001
+
+    api-catalogo:
+        image: luan/nerdstore-api-catalogo:latest
+        container_name: nerdstore-api-catalogo
+        build:
+            context: ../src
+            dockerfile: ./services/ES.Catalogo.API/Dockerfile
+        ports:
+          - "5301:5301"
+        environment:
+          - ASPNETCORE_ENVIRONMENT=Development
+          - ASPNETCORE_URLS=http://*:5301

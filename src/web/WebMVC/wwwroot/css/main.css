@@ -1208,23 +1208,23 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .item-slick1 {
-  height: calc(100vh - 40px);
+  height: calc(80vh - 40px);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .rs1-slick1 .item-slick1 {
-  height: calc(100vh - 84px);
+  height: calc(80vh - 84px);
 }
 
 .rs2-slick1 .item-slick1 {
-  height: 100vh;
+  height: 80vh;
 }
 
 @media (max-width: 991px) {
   .item-slick1 {
-    height: calc(100vh - 70px) !important;
+    height: calc(80vh - 70px) !important;
   }
 }
 

@@ -3,7 +3,7 @@
 namespace NS.Core.Validation
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
-    public class CartExpirationAttribute : ValidationAttribute
+    public class CardExpirationAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {

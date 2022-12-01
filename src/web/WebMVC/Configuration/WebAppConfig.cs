@@ -1,9 +1,8 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using NS.WebApp.MVC.Extensions;
-using NSE.WebApp.MVC.Extensions;
+using NS.WebMVC.Extensions;
 
-namespace NS.WebApp.MVC.Configuration
+namespace NS.WebMVC.Configuration
 {
     public static class WebAppConfig
     {

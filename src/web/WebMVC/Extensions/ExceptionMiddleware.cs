@@ -1,27 +1,24 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Grpc.Core;
-using Microsoft.AspNetCore.Http;
-using NSE.WebApp.MVC.Services;
+using NS.WebMVC.Services;
 using Polly.CircuitBreaker;
 using Refit;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NS.WebMVC.Extensions
 {
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private static IAutenticacaoService _autenticacaoService;
+        private static IAuthenticationsService _autenticationService;
 
         public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext, IAutenticacaoService autenticacaoService)
+        public async Task InvokeAsync(HttpContext httpContext, IAuthenticationsService autenticationService)
         {
-            _autenticacaoService = autenticacaoService;
+            _autenticationService = autenticationService;
 
             try
             {
@@ -69,16 +66,16 @@ namespace NSE.WebApp.MVC.Extensions
         {
             if (statusCode == HttpStatusCode.Unauthorized)
             {
-                if (_autenticacaoService.TokenExpirado())
+                if (_autenticationService.TokenExpiration())
                 {
-                    if (_autenticacaoService.RefreshTokenValido().Result)
+                    if (_autenticationService.RefreshTokenValid().Result)
                     {
                         context.Response.Redirect(context.Request.Path);
                         return;
                     }
                 }
 
-                _autenticacaoService.Logout();
+                _autenticationService.Logout();
                 context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }

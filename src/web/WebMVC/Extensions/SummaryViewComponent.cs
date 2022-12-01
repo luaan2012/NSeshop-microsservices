@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NS.WebMVC.Extensions
 {
     public class SummaryViewComponent : ViewComponent
     {

@@ -277,5 +277,19 @@
         $('.js-modal1').removeClass('show-modal1');
     });
 
+    let urlPage = window.location.pathname.split("/");
+    let active = "";
+
+    if (urlPage[2] != undefined) {
+        active = urlPage[2];
+    } else {
+        active = urlPage[1];
+    }
+
+    let item = $(".menu-desktop ul li[data-link='" + active + "']");
+
+    item.addClass("active-menu");
 
 })(jQuery);
+
+

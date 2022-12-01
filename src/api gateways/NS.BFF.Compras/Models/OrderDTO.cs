@@ -43,7 +43,7 @@ namespace NS.BFF.Compras.Models
         public string NameCart { get; set; }
 
         [RegularExpression(@"(0[1-9]|1[0-2])\/[0-9]{2}", ErrorMessage = "O vencimento deve estar no padrão MM/AA")]
-        [CartExpiration(ErrorMessage = "Cartão Expirado")]
+        [CardExpiration(ErrorMessage = "Cartão Expirado")]
         [Required(ErrorMessage = "Informe o vencimento")]
         [DisplayName("Data de Vencimento MM/AA")]
         public string CartExpiration { get; set; }

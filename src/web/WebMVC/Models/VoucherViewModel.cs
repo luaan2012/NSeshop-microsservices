@@ -1,7 +1,7 @@
-﻿namespace NS.WebApp.MVC.Models
+﻿namespace NS.WebMVC.Models
 {
     public class VoucherViewModel
     {
-        public string Codigo { get; set; }
+        public string Code { get; set; }
     }
 }

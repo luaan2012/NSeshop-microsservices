@@ -1,4 +1,4 @@
-﻿namespace NS.WebApp.MVC.Models
+﻿namespace NS.WebMVC.Models
 {
     public class OrderViewModel
     {
@@ -18,13 +18,13 @@
         public decimal Discount { get; set; }
         public bool VoucherUsed { get; set; }
 
-        public List<ItemPedidoViewModel> PedidoItems { get; set; } = new List<ItemPedidoViewModel>();
+        public List<ItemOrderViewModel> PedidoItems { get; set; } = new List<ItemOrderViewModel>();
 
         #endregion
 
         #region Item Order
 
-        public class ItemPedidoViewModel
+        public class ItemOrderViewModel
         {
             public Guid ProductId { get; set; }
             public string Name { get; set; }

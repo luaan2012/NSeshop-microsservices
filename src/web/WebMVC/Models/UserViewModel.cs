@@ -1,9 +1,9 @@
 ﻿using NS.Core.Communication;
-using NS.WebApp.MVC.Extensions;
+using NS.WebMVC.Extensions;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace NS.WebApp.MVC.Models
+namespace NS.WebMVC.Models
 {
     public class UserRegister
     {

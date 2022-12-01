@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace NS.WebApp.MVC.Models
+namespace NS.WebMVC.Models
 {
     public class AddressViewModel
     {

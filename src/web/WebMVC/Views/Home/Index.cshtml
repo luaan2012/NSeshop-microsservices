@@ -1372,6 +1372,7 @@
 
 
 @section scripts {
+	
     <script>
 
         $('.parallax100').parallax100();
@@ -1400,5 +1401,20 @@
                 ps.update();
             })
         });
+
+		(function($){
+			
+			let urlPage = new URLSearchParams(window.location.search).get('login')
+
+			if(urlPage){
+				$('#modalLoginForm').modal('show');
+				url = new URL(window.location.href);
+                url.searchParams.delete("login");
+                window.history.pushState('', '', url);
+			}
+
+		}(jQuery));
+
+		
     </script>
 }

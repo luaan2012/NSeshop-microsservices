@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace NS.WebApp.MVC.Models
+namespace NS.WebMVC.Models
 {
-    public class OrderTransacaoViewModel
+    public class OrderTransactionViewModel
     {
         #region Order
 
@@ -14,7 +14,7 @@ namespace NS.WebApp.MVC.Models
         public string VoucherCode { get; set; }
         public bool VoucherUsed { get; set; }
 
-        public List<ItemCarrinhoViewModel> Items { get; set; } = new List<ItemCarrinhoViewModel>();
+        public List<ItemCartViewModel> Items { get; set; } = new List<ItemCartViewModel>();
 
         #endregion
 

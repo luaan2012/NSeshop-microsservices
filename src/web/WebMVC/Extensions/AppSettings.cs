@@ -1,10 +1,10 @@
-﻿namespace NS.WebApp.MVC.Extensions
+﻿namespace NS.WebMVC.Extensions
 {
     public class AppSettings
     {
-        public string AutenticacaoUrl { get; set; }
-        public string CatalogoUrl { get; set; }
-        public string ClienteUrl { get; set; }
-        public string ComprasBffUrl { get; set; }
+        public string AuthenticationURL { get; set; }
+        public string CatalogUrl { get; set; }
+        public string ClientUrl { get; set; }
+        public string ShopsBffUrl { get; set; }
     }
 }

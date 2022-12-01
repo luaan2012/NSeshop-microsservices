@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using NS.APICore.User;
 using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
-using NSE.WebAPI.Core.Usuario;
 
-namespace NSE.WebApp.MVC.Services.Handlers
+
+namespace NS.WebMVC.Services.Handlers
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {

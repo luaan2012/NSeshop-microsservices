@@ -1,9 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using Microsoft.AspNetCore.Mvc.Razor;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NS.WebMVC.Extensions
 {
     public static class RazorHelpers
     {
@@ -19,75 +18,75 @@ namespace NSE.WebApp.MVC.Extensions
             return sBuilder.ToString();
         }
 
-        public static string FormatoMoeda(this RazorPage page, decimal valor)
+        public static string FormatCoin(this RazorPage page, decimal value)
         {
-            return FormatoMoeda(valor);
+            return FormatCoin(value);
         }
 
-        private static string FormatoMoeda(decimal valor)
+        private static string FormatCoin(decimal value)
         {
-            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", valor);
+            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", value);
         }
 
-        public static string MensagemEstoque(this RazorPage page, int quantidade)
+        public static string StockMessage(this RazorPage page, int quantity)
         {
-            return quantidade > 0 ? $"Apenas {quantidade} em estoque!" : "Produto esgotado!";
+            return quantity > 0 ? $"Apenas {quantity} em estoque!" : "Produto esgotado!";
         }
 
-        public static string UnidadesPorProduto(this RazorPage page, int unidades)
+        public static string UnitsByCoin(this RazorPage page, int units)
         {
-            return unidades > 1 ? $"{unidades} unidades" : $"{unidades} unidade";
+            return units > 1 ? $"{units} unidades" : $"{units} unidade";
         }
 
-        public static string SelectOptionsPorQuantidade(this RazorPage page, int quantidade, int valorSelecionado = 0)
+        public static string SelectOptionsByQuantities(this RazorPage page, int quantity, int valueSelected = 0)
         {
             var sb = new StringBuilder();
-            for (var i = 1; i <= quantidade; i++)
+            for (var i = 1; i <= quantity; i++)
             {
                 var selected = "";
-                if (i == valorSelecionado) selected = "selected";
+                if (i == valueSelected) selected = "selected";
                 sb.Append($"<option {selected} value='{i}'>{i}</option>");
             }
 
             return sb.ToString();
         }
 
-        public static string UnidadesPorProdutoValorTotal(this RazorPage page, int unidades, decimal valor)
+        public static string UnitsByProductValueTotal(this RazorPage page, int units, decimal value)
         {
-            return $"{unidades}x {FormatoMoeda(valor)} = Total: {FormatoMoeda(valor * unidades)}";
+            return $"{units}x {FormatCoin(value)} = Total: {FormatCoin(value * units)}";
         }
 
-        public static string ExibeStatus(this RazorPage page, int status)
+        public static string ShowStatus(this RazorPage page, int status)
         {
-            var statusMensagem = "";
-            var statusClasse = "";
+            var statusMessage = "";
+            var statusClass = "";
 
             switch (status)
             {
                 case 1:
-                    statusClasse = "info";
-                    statusMensagem = "Em aprovação";
+                    statusClass = "info";
+                    statusMessage = "Em aprovação";
                     break;
                 case 2:
-                    statusClasse = "primary";
-                    statusMensagem = "Aprovado";
+                    statusClass = "primary";
+                    statusMessage = "Aprovado";
                     break;
                 case 3:
-                    statusClasse = "danger";
-                    statusMensagem = "Recusado";
+                    statusClass = "danger";
+                    statusMessage = "Recusado";
                     break;
                 case 4:
-                    statusClasse = "success";
-                    statusMensagem = "Entregue";
+                    statusClass = "success";
+                    statusMessage = "Entregue";
                     break;
                 case 5:
-                    statusClasse = "warning";
-                    statusMensagem = "Cancelado";
+                    statusClass = "warning";
+                    statusMessage = "Cancelado";
                     break;
 
             }
 
-            return $"<span class='badge badge-{statusClasse}'>{statusMensagem}</span>";
+            return $"<span class='badge badge-{statusClass}'>{statusMessage}</span>";
         }
     }
 }

@@ -13,24 +13,27 @@
 				<!-- Menu desktop -->
 				<div class="menu-desktop">
 					<ul class="main-menu">
-						<li class="active-menu">
+						<li data-link="">
 							<a asp-action="Index" asp-controller="Home">Home</a>
 						</li>
 
-						<li>
-							<a asp-action="Store" asp-controller="Home">Loja</a>
+						<li data-link="Loja">
+							<a asp-action="Loja" asp-controller="Loja">Loja</a>
 						</li>
 
-						<li>
-							<a asp-action="Index" asp-controller="Institucional">Blog</a>
+						<li data-link="Blog">
+							<a asp-action="Blog" asp-controller="Institucional">Blog</a>
 						</li>
 
-						<li>
-							<a asp-action="About" asp-controller="Institucional">Sobre</a>
+						<li data-link="Sobre">
+							<a asp-action="Sobre" asp-controller="Institucional">Sobre</a>
 						</li>
 
-						<li>
-							<a asp-action="Contact" asp-controller="Institucional">Contato</a>
+						<li data-link="Contato">
+							<a asp-action="Contato" asp-controller="Institucional">Contato</a>
+						</li>
+						<li data-link="Registro">
+							<a asp-action="Registro" asp-controller="Identidade">Registro</a>
 						</li>
 					</ul>
 				</div>	

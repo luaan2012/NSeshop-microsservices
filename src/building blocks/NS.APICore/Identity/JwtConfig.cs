@@ -24,7 +24,7 @@ namespace NS.APICore.Identity
             {
                 x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
-                x.SetJwksOptions(new JwkOptions(appSettings.AutenticacaoJwksUrl));
+                x.SetJwksOptions(new JwkOptions(appSettings.AutenticationJwksUrl));
             });
         }
 

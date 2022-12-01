@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using NS.APICore.User;
-using NS.WebApp.MVC.Extensions;
-using NSE.WebApp.MVC.Services;
-using NSE.WebApp.MVC.Services.Handlers;
+using NS.WebMVC.Extensions;
+using NS.WebMVC.Services;
+using NS.WebMVC.Services.Handlers;
+using Polly;
+using Polly.Extensions.Http;
+using Polly.Retry;
 
 namespace NS.WebMVC.Configuration
 {
@@ -16,26 +19,27 @@ namespace NS.WebMVC.Configuration
 
             #region HttpServices
 
+
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+            services.AddHttpClient<IAuthenticationsService, AuthenticationService>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<ICatalogoService, CatalogoService>()
+            services.AddHttpClient<ICatalogService, CatalogService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<IComprasBffService, ComprasBffService>()
+            services.AddHttpClient<IShopsBffService, ShopsBffService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<IClienteService, ClienteService>()
+            services.AddHttpClient<IClientService, ClientService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
                 .AddTransientHttpErrorPolicy(

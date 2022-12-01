@@ -4,16 +4,16 @@ namespace WebMVC.Controllers
 {
     public class InstitucionalController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Blog()
         {
             return View();
         }
-        public IActionResult About()
+        public IActionResult Sobre()
         {
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contato()
         {
             return View();
         }

@@ -1,4 +1,4 @@
-﻿namespace NS.WebApp.MVC.Models
+﻿namespace NS.WebMVC.Models
 {
     public class ProductViewModel
     {

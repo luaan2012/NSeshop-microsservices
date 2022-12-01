@@ -1,7 +1,6 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NS.WebMVC.Extensions
 {
     public class CustomHttpRequestException : Exception
     {

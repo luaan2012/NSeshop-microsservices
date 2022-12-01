@@ -1,19 +1,17 @@
-﻿using System.Net.Http;
+﻿using NS.Core.Communication;
+using NS.WebMVC.Extensions;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using NSE.Core.Communication;
-using NSE.WebApp.MVC.Extensions;
-using NSE.WebApp.MVC.Models;
 
-namespace NSE.WebApp.MVC.Services
+
+namespace NS.WebMVC.Services
 {
     public abstract class Service
     {
-        protected StringContent ObterConteudo(object dado)
+        protected StringContent GetContent(object data)
         {
             return new StringContent(
-                JsonSerializer.Serialize(dado),
+                JsonSerializer.Serialize(data),
                 Encoding.UTF8,
                 "application/json");
         }
@@ -28,7 +26,7 @@ namespace NSE.WebApp.MVC.Services
             return JsonSerializer.Deserialize<T>(await responseMessage.Content.ReadAsStringAsync(), options);
         }
 
-        protected bool TratarErrosResponse(HttpResponseMessage response)
+        protected bool HandleErrosResponse(HttpResponseMessage response)
         {
             switch ((int)response.StatusCode)
             {
@@ -46,7 +44,7 @@ namespace NSE.WebApp.MVC.Services
             return true;
         }
 
-        protected ResponseResult RetornoOk()
+        protected ResponseResult ReturnOk()
         {
             return new ResponseResult();
         }

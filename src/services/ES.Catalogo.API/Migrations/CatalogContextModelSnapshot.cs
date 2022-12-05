@@ -38,6 +38,9 @@ namespace NS.Catalogo.API.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(500)");
 
+                    b.Property<bool>("Highlighted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
@@ -45,6 +48,9 @@ namespace NS.Catalogo.API.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<int>("QuantityStock")
                         .HasColumnType("int");

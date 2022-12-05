@@ -9,7 +9,7 @@ namespace NS.WebMVC.Configuration
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/login";
+                    options.LoginPath = "/";
                     options.AccessDeniedPath = "/erro/403";
                 });
         }

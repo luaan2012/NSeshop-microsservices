@@ -37,7 +37,7 @@ namespace NS.Clientes.API.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(50)");
 
-            builder.ToTable("Anddress");
+            builder.ToTable("Address");
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿@AspNetCore 
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="~/vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="~/css/util.css">
 	<link rel="stylesheet" type="text/css" href="~/css/main.css">
+	<link rel="stylesheet" type="text/css" href="~/css/site.css">
 </head>
 
 <body class="animsition"> 
@@ -57,7 +56,7 @@
 	<script src="~/vendor/isotope/isotope.pkgd.min.js"></script>
 	<script src="~/vendor/sweetalert/sweetalert.min.js"></script>
 	<script src="~/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script src="~/js/main.js"></script>
+	<script src="~/js/main.js?@DateTime.Now"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

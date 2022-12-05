@@ -7,6 +7,8 @@ namespace NS.WebMVC.Services
     public interface ICatalogService
     {
         Task<PagedViewModel<ProductViewModel>> GetAll(int pageSize, int pageIndex, string query = null);
+        Task<IEnumerable<ProductViewModel>> GetAll();
+        Task<IEnumerable<ProductViewModel>> GetHighLighted();
         Task<ProductViewModel> GetById(Guid id);
     }
     public class CatalogService : Service, ICatalogService
@@ -23,16 +25,34 @@ namespace NS.WebMVC.Services
 
         public async Task<ProductViewModel> GetById(Guid id)
         {
-            var response = await _httpClient.GetAsync($"/catalogo/produtos/{id}");
+            var response = await _httpClient.GetAsync($"/catalog/products/{id}");
 
             HandleErrosResponse(response);
 
             return await DeserializarObjetoResponse<ProductViewModel>(response);
         }
 
+        public async Task<IEnumerable<ProductViewModel>> GetAll()
+        {
+            var response = await _httpClient.GetAsync($"/catalog/products/list");
+
+            HandleErrosResponse(response);
+
+            return await DeserializarObjetoResponse<IEnumerable<ProductViewModel>>(response);
+        }
+
+        public async Task<IEnumerable<ProductViewModel>> GetHighLighted()
+        {
+            var response = await _httpClient.GetAsync($"/catalog/products/highlighted");
+
+            HandleErrosResponse(response);
+
+            return await DeserializarObjetoResponse<IEnumerable<ProductViewModel>>(response);
+        }
+
         public async Task<PagedViewModel<ProductViewModel>> GetAll(int pageSize, int pageIndex, string query = null)
         {
-            var response = await _httpClient.GetAsync($"/catalogo/produtos?ps={pageSize}&page={pageIndex}&q={query}");
+            var response = await _httpClient.GetAsync($"/catalog/products?ps={pageSize}&page={pageIndex}&q={query}");
 
             HandleErrosResponse(response);
 

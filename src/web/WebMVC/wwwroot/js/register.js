@@ -66,5 +66,14 @@
         $(thisAlert).removeClass('alert-validate');
     }
 
+    $('.validate-input .input100').each(function () {
+        $(this).focus();
+    });
 
 })(jQuery);
+
+$(function () {
+    setTimeout(() => {
+        $('.login100-form-title').click();
+    }, 3200)
+});

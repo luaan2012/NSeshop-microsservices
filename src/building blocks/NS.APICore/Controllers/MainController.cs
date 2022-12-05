@@ -10,14 +10,14 @@ namespace NS.ApiCore.Controllers
     {
         protected ICollection<string> Errors = new List<string>();
 
-        protected IActionResult CustomResponse(object? result = null)
+        protected IActionResult CustomResponse(object result = null)
         {
             if (ValidOperation())
                 return Ok(result);
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {"Mensagens", Errors.ToArray() }
+                {"Messages", Errors.ToArray() }
             }));
         }
 

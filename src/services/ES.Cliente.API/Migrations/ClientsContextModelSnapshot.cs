@@ -63,7 +63,7 @@ namespace NS.Cliente.API.Migrations
                     b.HasIndex("ClientId")
                         .IsUnique();
 
-                    b.ToTable("Anddress", (string)null);
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("NS.Cliente.API.Models.Client", b =>

@@ -1,137 +1,162 @@
-﻿	<!-- Header desktop -->
-	<div class="container-menu-desktop">
-		<!-- Topbar -->
-			
-		<div class="wrap-menu-desktop">
-			<nav class="limiter-menu-desktop container">
-					
-				<!-- Logo desktop -->		
-				<a asp-action="Index" asp-controller="Home" class="logo">
-					<img src="~/images/logo-01.png" alt="IMG-LOGO">
-				</a>
+﻿    <!-- Header desktop -->
+<div class="container-menu-desktop">
+    <!-- Topbar -->
+    <div class="wrap-menu-desktop">
+        <nav class="limiter-menu-desktop container">
 
-				<!-- Menu desktop -->
-				<div class="menu-desktop">
-					<ul class="main-menu">
-						<li data-link="">
-							<a asp-action="Index" asp-controller="Home">Home</a>
-						</li>
+            <!-- Logo desktop -->
+            <a asp-action="Index" asp-controller="Home" class="logo">
+                <img src="~/images/logo-01.png" alt="IMG-LOGO">
+            </a>
 
-						<li data-link="Loja">
-							<a asp-action="Loja" asp-controller="Loja">Loja</a>
-						</li>
+            <!-- Menu desktop -->
+            <div class="menu-desktop">
+                <ul class="main-menu">
+                    <li data-link="">
+                        <a asp-action="Index" asp-controller="Home">Home</a>
+                    </li>
 
-						<li data-link="Blog">
-							<a asp-action="Blog" asp-controller="Institucional">Blog</a>
-						</li>
+                    @if (aspNet.EstaAutenticado())
+                    {
+                        <li data-link="loja">
+                            <a asp-action="Index" asp-controller="Loja">Loja</a>
+                        </li>
+                    }
 
-						<li data-link="Sobre">
-							<a asp-action="Sobre" asp-controller="Institucional">Sobre</a>
-						</li>
+                    <li data-link="blog">
+                        <a asp-action="Blog" asp-controller="Institutional">Blog</a>
+                    </li>
 
-						<li data-link="Contato">
-							<a asp-action="Contato" asp-controller="Institucional">Contato</a>
-						</li>
-						<li data-link="Registro">
-							<a asp-action="Registro" asp-controller="Identidade">Registro</a>
-						</li>
-					</ul>
-				</div>	
+                    <li data-link="sobre">
+                        <a asp-action="About" asp-controller="Institutional">Sobre</a>
+                    </li>
 
-				<!-- Icon header -->
-				<div class="wrap-icon-header flex-w flex-r-m">
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-						<i class="zmdi zmdi-search"></i>
-					</div>
+                    <li data-link="contato">
+                        <a asp-action="Contact" asp-controller="Institutional">Contato</a>
+                    </li>
 
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-						<i class="zmdi zmdi-shopping-cart"></i>
-					</div>
+                    @if (aspNet.EstaAutenticado())
+                    {
+                        <li data-link="Perfil">
+                            <a href="javascript:void(0)">Meu Perfil</a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">Meu Perfil</a></li>
+                                <li><a asp-action="logout" asp-controller="Identity">Sair</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
 
-					<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-						<i class="zmdi zmdi-favorite-outline"></i>
-					</a>
-				</div>
-			</nav>
-		</div>	
-	</div>
+            <!-- Icon header -->
+            <div class="wrap-icon-header flex-w flex-r-m">
+                @if (aspNet.EstaAutenticado())
+                {
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
 
-	<!-- Header Mobile -->
-	<div class="wrap-header-mobile">
-		<!-- Logo moblie -->		
-		<div class="logo-mobile">
-			<a href="index.html"><img src="~/images/icons/logo-01.png" alt="IMG-LOGO"></a>
-		</div>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
 
-		<!-- Icon header -->
-		<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-				<i class="zmdi zmdi-search"></i>
-			</div>
+                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                        <i class="zmdi zmdi-favorite-outline"></i>
+                    </a>
+                }
+                else
+                {
+                    <ul class="main-menu">
+                        <li data-link="Entrar">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalLoginForm">Entrar</a>
+                        </li>
 
-			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-				<i class="zmdi zmdi-shopping-cart"></i>
-			</div>
+                        <li data-link="Registro">
+                            <a asp-action="Register" asp-controller="Identity">Registro</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </nav>
+    </div>
+</div>
 
-			<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-				<i class="zmdi zmdi-favorite-outline"></i>
-			</a>
-		</div>
+<!-- Header Mobile -->
+<div class="wrap-header-mobile">
+    <!-- Logo moblie -->
+    <div class="logo-mobile">
+        <a href="index.html"><img src="~/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+    </div>
 
-		<!-- Button show menu -->
-		<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-			<span class="hamburger-box">
-				<span class="hamburger-inner"></span>
-			</span>
-		</div>
-	</div>
+    <!-- Icon header -->
+    <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+            <i class="zmdi zmdi-search"></i>
+        </div>
+
+        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+            <i class="zmdi zmdi-shopping-cart"></i>
+        </div>
+
+        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+            <i class="zmdi zmdi-favorite-outline"></i>
+        </a>
+    </div>
+
+    <!-- Button show menu -->
+    <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </div>
+</div>
 
 
-	<!-- Menu Mobile -->
-	<div class="menu-mobile">
+<!-- Menu Mobile -->
+<div class="menu-mobile">
 
-		<ul class="main-menu-m">
-			<li>
-				<a href="index.html">Home</a>
-				<span class="arrow-main-menu-m">
-					<i class="fa fa-angle-right" aria-hidden="true"></i>
-				</span>
-			</li>
+    <ul class="main-menu-m">
+        <li>
+            <a href="index.html">Home</a>
+            <span class="arrow-main-menu-m">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </span>
+        </li>
 
-			<li>
-				<a href="product.html">Loja</a>
-			</li>
+        <li>
+            <a href="product.html">Loja</a>
+        </li>
 
-			<li>
-				<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Carrinho</a>
-			</li>
+        <li>
+            <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Carrinho</a>
+        </li>
 
-			<li>
-				<a href="blog.html">Blog</a>
-			</li>
+        <li>
+            <a href="blog.html">Blog</a>
+        </li>
 
-			<li>
-				<a href="about.html">Sobre</a>
-			</li>
+        <li>
+            <a href="about.html">Sobre</a>
+        </li>
 
-			<li>
-				<a href="contact.html">Contatos</a>
-			</li>
-		</ul>
-	</div>
+        <li>
+            <a href="contact.html">Contatos</a>
+        </li>
+    </ul>
+</div>
 
-	<!-- Modal Search -->
-	<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-		<div class="container-search-header">
-			<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-				<img src="~/images/icons/icon-close2.png" alt="CLOSE">
-			</button>
+<!-- Modal Search -->
+<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+    <div class="container-search-header">
+        <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+            <img src="~/images/icons/icon-close2.png" alt="CLOSE">
+        </button>
 
-			<form class="wrap-search-header flex-w p-l-15">
-				<button class="flex-c-m trans-04">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-				<input class="plh3" type="text" name="search" placeholder="Procurar...">
-			</form>
-		</div>
-	</div>
+        <form class="wrap-search-header flex-w p-l-15">
+            <button class="flex-c-m trans-04">
+                <i class="zmdi zmdi-search"></i>
+            </button>
+            <input class="plh3" type="text" name="search" placeholder="Procurar...">
+        </form>
+    </div>
+</div>

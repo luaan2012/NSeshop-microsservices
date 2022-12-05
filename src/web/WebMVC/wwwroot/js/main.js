@@ -290,6 +290,10 @@
 
     item.addClass("active-menu");
 
+   
 })(jQuery);
 
+function openLogin() {
+    $('#modalLoginForm').modal('show');
+}
 

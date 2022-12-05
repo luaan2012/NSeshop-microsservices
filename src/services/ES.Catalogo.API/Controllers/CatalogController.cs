@@ -7,6 +7,7 @@ using NS.Catalogo.API.Models;
 
 namespace NS.Catalogo.API.Controllers
 {
+    [Authorize]
     public class CatalogController : MainController
     {
         private readonly IProductRepository _productRepository;
@@ -22,12 +23,19 @@ namespace NS.Catalogo.API.Controllers
             return await _productRepository.GetAll();
         }
 
+        [AllowAnonymous]   
+        [HttpGet("catalog/products/highlighted")]
+        public async Task<IEnumerable<Product>> GetHighLighted()
+        {
+            return await _productRepository.GetHighLighted();
+        }
+
         [HttpGet("catalog/products")]
         public async Task<PagedResult<Product>> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
         {
             return await _productRepository.GiveAll(ps, page, q);
         }
-        [Authorize]
+        
         [HttpGet("catalog/products/{id}")]
         public async Task<Product> DetailProduct(Guid id)
         {

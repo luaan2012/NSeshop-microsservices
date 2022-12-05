@@ -76,7 +76,7 @@ namespace NS.WebMVC.Extensions
                 }
 
                 _autenticationService.Logout();
-                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
+                context.Response.Redirect($"/?login=true&ReturnUrl={context.Request.Path}");
                 return;
             }
 

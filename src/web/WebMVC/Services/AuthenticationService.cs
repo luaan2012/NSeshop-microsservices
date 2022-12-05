@@ -3,9 +3,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
-using NS.APICore.Identity;
 using NS.APICore.User;
 using NS.Core.Communication;
+using NS.WebMVC.Extensions;
 using NS.WebMVC.Models;
 
 namespace NS.WebMVC.Services
@@ -36,7 +36,7 @@ namespace NS.WebMVC.Services
                                    IAspNetUser user, 
                                    IAuthenticationService authenticationService)
         {
-            httpClient.BaseAddress = new Uri(settings.Value.AutenticationJwksUrl);
+            httpClient.BaseAddress = new Uri(settings.Value.AuthenticationURL);
 
             _httpClient = httpClient;
             _user = user;
@@ -47,7 +47,7 @@ namespace NS.WebMVC.Services
         {
             var loginContent = GetContent(userLogin);
 
-            var response = await _httpClient.PostAsync("/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync("/api/auth/authentication", loginContent);
 
             if (!HandleErrosResponse(response))
             {
@@ -64,7 +64,7 @@ namespace NS.WebMVC.Services
         {
             var registerContent = GetContent(userRegister);
 
-            var response = await _httpClient.PostAsync("/api/identidade/nova-conta", registerContent);
+            var response = await _httpClient.PostAsync("/api/auth/new-account", registerContent);
 
             if (!HandleErrosResponse(response))
             {
@@ -81,7 +81,7 @@ namespace NS.WebMVC.Services
         {
             var refreshTokenContent = GetContent(refreshToken);
 
-            var response = await _httpClient.PostAsync("/api/identidade/refresh-token", refreshTokenContent);
+            var response = await _httpClient.PostAsync("/api/auth/refresh-token", refreshTokenContent);
 
             if (!HandleErrosResponse(response))
             {
@@ -134,7 +134,7 @@ namespace NS.WebMVC.Services
         public bool TokenExpiration()
         {
             var jwt = _user.ObterUserToken();
-            if (jwt is null) return false;
+            if (string.IsNullOrEmpty(jwt)) return false;
 
             var token = GetTokenFormated(jwt);
             return token.ValidTo.ToLocalTime() < DateTime.Now;

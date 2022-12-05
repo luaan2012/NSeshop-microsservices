@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NS.WebMVC.Services;
 
 namespace WebMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICatalogService _catalogService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await _catalogService.GetHighLighted();
+            return View(products);
         }
 
         public IActionResult Privacy()

@@ -67,6 +67,11 @@ namespace NS.Catalogo.API.Data.Repository
             return await _context.Products.ToListAsync();
         }
 
+        public async Task<List<Product>> GetHighLighted()
+        {
+            return await _context.Products.Where(x => x.Highlighted).ToListAsync();
+        }
+
         public void Add(Product product)
         {
             _context.Products.Add(product);

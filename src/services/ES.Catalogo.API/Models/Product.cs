@@ -1,4 +1,5 @@
-﻿using NS.Core.DomainObjects;
+﻿using NS.Catalogo.API.Models;
+using NS.Core.DomainObjects;
 
 namespace NS.Catalog.API.Models
 {
@@ -6,11 +7,13 @@ namespace NS.Catalog.API.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool Active { get; set; }
-        public decimal Value { get; set; }
-        public DateTime DateRegister { get; set; }
         public string Image { get; set; }
         public int QuantityStock { get; set; }
+        public decimal Value { get; set; }
+        public bool Active { get; set; }
+        public bool Highlighted { get; set; }
+        public ProductType ProductType { get; set; }
+        public DateTime DateRegister { get; set; }
 
         public void WithDrawStock(int quantity)
         {

@@ -1,18 +1,23 @@
-html {
-  font-size: 14px;
+.fa-lock {
+    float: left !important;
+    top: 25px !important;
+    left: 10px !important;
+    position: relative !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.fa-envelope {
+    float: left !important;
+    top: 25px !important;
+    left: 10px !important;
+    position: relative !important;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+#defaultForm-pass {
+    left: -83px;
+    padding-left: 33px;
 }
 
-body {
-  margin-bottom: 60px;
+#defaultForm-email{
+    left: -83px;
+    padding-left: 33px;
 }

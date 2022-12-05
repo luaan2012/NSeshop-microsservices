@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NS.Pagamentos.NerdPag", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FC0CE08A-DDFF-493F-8AB0-869A178C8D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "src\web\WebMVC\WebMVC.csproj", "{91C6A3F5-EE84-4CCB-BC9B-75DF372A033F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NS.WebMVC", "src\web\WebMVC\NS.WebMVC.csproj", "{91C6A3F5-EE84-4CCB-BC9B-75DF372A033F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

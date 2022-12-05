@@ -15,17 +15,13 @@ namespace NS.WebMVC.Configuration
 
         public static void UseMvcConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
-            }
-
-            //app.UseExceptionHandler("/erro/500");
-            //app.UseStatusCodePagesWithRedirects("/erro/{0}");
+            app.UseExceptionHandler("/erro/500");
+            app.UseStatusCodePagesWithRedirects("/erro/{0}");
             app.UseHsts();
 
             app.UseHttpsRedirection();

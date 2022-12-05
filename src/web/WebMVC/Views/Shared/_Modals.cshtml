@@ -96,7 +96,7 @@
                 </button>
             </div>
 
-            <form asp-controller="Identity" asp-action="Login" method="post">                
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" asp-controller="Identity" asp-action="Login" method="post">                
                 <div class="modal-body mx-3">
 
                     <small class="text-danger error-login">@TempData["error"]</small>

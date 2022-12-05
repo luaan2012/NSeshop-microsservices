@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Grpc.Core;
+using NS.APICore.User;
 using NS.WebMVC.Services;
 using Polly.CircuitBreaker;
 using Refit;
@@ -76,7 +77,7 @@ namespace NS.WebMVC.Extensions
                 }
 
                 _autenticationService.Logout();
-                context.Response.Redirect($"/?login=true&ReturnUrl={context.Request.Path}");
+                context.Response.Redirect($"/?login=true");
                 return;
             }
 

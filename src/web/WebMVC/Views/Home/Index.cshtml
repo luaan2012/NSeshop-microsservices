@@ -562,8 +562,10 @@
     (function($){
 
         let urlPage = new URLSearchParams(window.location.search).get('login')
+        let returnUrl = new URLSearchParams(window.location.search).get('ReturnUrl')
 
-        if(urlPage){
+
+        if(urlPage || returnUrl){
             openLogin()
             url = new URL(window.location.href);
             url.searchParams.delete("login");

@@ -14,8 +14,10 @@ namespace WebMVC.Controllers
             _catalogService = catalogService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             var products = await _catalogService.GetHighLighted();
             return View(products);
         }

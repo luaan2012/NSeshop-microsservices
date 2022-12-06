@@ -10,7 +10,7 @@ namespace NS.WebMVC.Controllers
         {
             var modelErro = new ErrorViewModel
             {
-                Message = "O sistema está temporariamente indisponível, isto pode ocorrer em momentos de sobrecarga de usuários.",
+                Message = "O sistema está temporariamente indisponível. <br/><br/>Isto pode ocorrer em momentos de sobrecarga de usuários.",
                 Tittle = "Sistema indisponível.",
                 ErroCode = 500
             };
@@ -33,7 +33,7 @@ namespace NS.WebMVC.Controllers
             else if (id == 404)
             {
                 modelErro.Message =
-                    "A página que está procurando não existe! <br />Em caso de dúvidas entre em contato com nosso suporte";
+                    "A página que está procurando não existe! <br/><br/>Em caso de dúvidas entre em contato com nosso suporte";
                 modelErro.Tittle = "Ops! Página não encontrada.";
                 modelErro.ErroCode = id;
             }

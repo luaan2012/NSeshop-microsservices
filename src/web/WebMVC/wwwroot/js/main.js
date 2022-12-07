@@ -138,18 +138,7 @@
             $topeContainer.isotope({filter: filterValue});
         });
         
-    });
-
-    function dataFilter(filter) {
-        var $topeContainer = $('.isotope-grid');
-        var $filter = $('.filter-tope-group');
-
-        $filter.each(function () {
-            if ($(this).attr('data-filter') == filter) {
-                $topeContainer.isotope({ filter: filterValue });
-            }
-        });
-    }
+    });    
 
     // init Isotope
     $(window).on('load', function () {

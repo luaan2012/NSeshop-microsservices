@@ -40,3 +40,14 @@ $('.js-modal1').on('click', function () {
         $('.num-product').val(1);
     }
 })
+
+function dataFilter(filter) {
+    var $topeContainer = $('.isotope-grid');
+    var $filter = $('.filter-tope-group');
+
+    $filter.each(function () {
+        if ($(this).attr('data-filter') == filter) {
+            $topeContainer.isotope({ filter: filterValue });
+        }
+    });
+}

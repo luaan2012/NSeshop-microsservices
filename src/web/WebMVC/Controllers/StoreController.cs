@@ -15,8 +15,10 @@ namespace WebMVC.Controllers
         }
 
         [Route("loja")]
-        public async Task<IActionResult> Index()
-        {            
+        public async Task<IActionResult> Index(Guid id)
+        {
+            TempData["openProduct"] = id;
+
             return View(await _catalogService.GetAll());
         }
         

@@ -294,6 +294,7 @@
 </div>
 
 @section scripts {
+
 <script>
     $('.js-addwish-b2').on('click', function(e) {
         e.preventDefault();
@@ -345,11 +346,16 @@
     
 
     $(".js-select2").each(function() {
-            $(this).select2({
-                minimumResultsForSearch: 20,
-                dropdownParent: $(this).next('.dropDownSelect2')
-            });
-        })
+        $(this).select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $(this).next('.dropDownSelect2')
+        });
+    })
+
+    let openProduct = '@TempData["openProduct"]';
+
+    if(openProduct)
+        openModal(openProduct)
 
 </script>
 }

@@ -75,5 +75,5 @@
 $(function () {
     setTimeout(() => {
         $('.login100-form-title').click();
-    }, 3200)
+    }, 1200)
 });

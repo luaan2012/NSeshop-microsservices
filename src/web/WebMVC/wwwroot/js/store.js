@@ -34,3 +34,9 @@ $('.js-hide-modal1').on('click', function () {
 function quantityStock(quantity) {
     return quantity > 0 ? `<small class="text-success">Apenas ${quantity} em estoque!</small>` : `<small class="text-danger">Produto esgotado!</small>`;
 }
+
+$('.js-modal1').on('click', function () {
+    if (!$('.js-modal1').hasClass('show-modal1')) {
+        $('.num-product').val(1);
+    }
+})

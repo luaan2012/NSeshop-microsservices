@@ -19,5 +19,16 @@ namespace WebMVC.Controllers
         {            
             return View(await _catalogService.GetAll());
         }
+        
+        [Route("loja/{id:guid}")]
+        public async Task<IActionResult> ProductDetails(Guid id)
+        {
+            var product = await _catalogService.GetById(id);
+
+            if (product is null)
+                return NotFound();
+
+            return Json(product);
+        }
     }
 }

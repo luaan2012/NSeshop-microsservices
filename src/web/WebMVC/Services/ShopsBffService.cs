@@ -36,7 +36,7 @@ namespace NS.WebMVC.Services
 
         public async Task<CartViewModel> GetCart()
         {
-            var response = await _httpClient.GetAsync("/compras/carrinho/");
+            var response = await _httpClient.GetAsync("/shops/cart/");
 
             HandleErrosResponse(response);
 
@@ -54,7 +54,7 @@ namespace NS.WebMVC.Services
         {
             var itemContent = GetContent(cart);
 
-            var response = await _httpClient.PostAsync("/compras/carrinho/items/", itemContent);
+            var response = await _httpClient.PostAsync("/shops/cart/items/", itemContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

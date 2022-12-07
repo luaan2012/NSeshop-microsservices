@@ -256,7 +256,7 @@
                         <div class="block2-pic hov-img0">
                             <img src="~/images/@product.Image" alt="IMG-PRODUCT">
 
-                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onclick="openModal('@product.Id')">
                                 Ver Detalhes
                             </a>
                         </div>
@@ -320,12 +320,16 @@
         });
     });
 
-    $('.js-addcart-detail').each(function() {
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        $(this).on('click', function() {
-            swal(nameProduct, "is added to cart !", "success");
-        });
+    $('.js-addcart-detail').on('click', function() {
+        $.post('/cart/add-item', {Id: $('#productId').val(), Quantity: $('.num-product').val() }, function(){
+        })
+        .done(function(){
+            var nameProduct = $('.js-name-detail').html();
+            swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
+        })
+        
     });
+    
 
     $(".js-select2").each(function() {
             $(this).select2({

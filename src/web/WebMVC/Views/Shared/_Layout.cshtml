@@ -36,7 +36,10 @@
 	<partial name="_Modals" />
 
 	<partial name="DetalheProduto" />
-
+	
+	@if(aspNet.EstaAutenticado()){
+		<vc:cart-modal></vc:cart-modal>
+	}
 
 	@RenderBody()
 

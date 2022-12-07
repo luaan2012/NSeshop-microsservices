@@ -13,6 +13,7 @@ namespace NS.WebMVC.Services
         Task<ResponseResult> AddItemCart(ItemCartViewModel cart);
         Task<ResponseResult> UpdateItemCart(Guid productId, ItemCartViewModel cart);
         Task<ResponseResult> RemoveItemCart(Guid productId);
+        Task<ResponseResult> RemoveCart();
         Task<ResponseResult> ApplyVoucheCart(string voucher);
 
         // Pedido
@@ -44,7 +45,7 @@ namespace NS.WebMVC.Services
         }
         public async Task<int> GetQuantitiesCart()
         {
-            var response = await _httpClient.GetAsync("/compras/carrinho-quantidade/");
+            var response = await _httpClient.GetAsync("/shops/cart-quantity");
 
             HandleErrosResponse(response);
 
@@ -78,6 +79,16 @@ namespace NS.WebMVC.Services
 
             return ReturnOk();
         }
+
+        public async Task<ResponseResult> RemoveCart()
+        {
+            var response = await _httpClient.DeleteAsync($"/shops/cart/removeCart");
+
+            if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
         public async Task<ResponseResult> ApplyVoucheCart(string voucher)
         {
             var itemContent = GetContent(voucher);

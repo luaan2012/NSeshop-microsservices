@@ -67,15 +67,28 @@ namespace NS.Carrinho.API.Controllers
             var carrinho = await GetCartClient();
 
             var itemCarrinho = await GetItemProductValid(produtoId, carrinho);
+
             if (itemCarrinho == null) return CustomResponse();
 
             ValidCart(carrinho);
+
             if (!ValidOperation()) return CustomResponse();
 
             carrinho.RemoverItem(itemCarrinho);
 
             _context.ItemCarts.Remove(itemCarrinho);
             _context.ClientCarts.Update(carrinho);
+
+            await PersistData();
+            return CustomResponse();
+        }
+
+        [HttpDelete("cart/removeCart")]
+        public async Task<IActionResult> RemoveCart()
+        {
+            var carrinho = await GetCartClient();
+
+            _context.ClientCarts.Remove(carrinho);
 
             await PersistData();
             return CustomResponse();

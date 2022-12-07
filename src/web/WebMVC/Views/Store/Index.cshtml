@@ -321,11 +321,24 @@
     });
 
     $('.js-addcart-detail').on('click', function() {
-        $.post('/cart/add-item', {Id: $('#productId').val(), Quantity: $('.num-product').val() }, function(){
+
+        let cartViewModel = {
+            ProductId : $('#productId').val(),
+            Name : $('#productName').val(),
+            Quantity : $('.num-product').val(),
+            Value : $('#productValue').val(),
+            Image : $('#productImage').val()
+        }
+
+        $.post('/cart/add-item', cartViewModel, function(){
         })
         .done(function(){
             var nameProduct = $('.js-name-detail').html();
             swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
+            $('.swal-button--confirm').click(function() {window.location.reload() })
+        })
+        .fail(function(data) {
+            swal("", data.responseJSON[0], "error");
         })
         
     });

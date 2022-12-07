@@ -28,14 +28,14 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpGet]
-        [Route("shoppings/cart")]
+        [Route("shops/cart")]
         public async Task<IActionResult> Index()
         {
             return CustomResponse(await _cartGrpcService.GetCart());
         }
 
         [HttpGet]
-        [Route("shoppings/cart-quantity")]
+        [Route("shops/cart-quantity")]
         public async Task<int> ObterQuantidadeCarrinho()
         {
             var quantity = await _cartGrpcService.GetCart();
@@ -43,7 +43,7 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpPost]
-        [Route("shoppings/cart/items")]
+        [Route("shops/cart/items")]
         public async Task<IActionResult> AddItemCart(ItemCartDTO itemProduct)
         {
             var product = await _catalogService.GetById(itemProduct.ProductId);
@@ -61,7 +61,7 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpPut]
-        [Route("shoppings/cart/items/{productId}")]
+        [Route("shops/cart/items/{productId}")]
         public async Task<IActionResult> UpdateItemCart(Guid productId, ItemCartDTO itemProduct)
         {
             var product = await _catalogService.GetById(productId);
@@ -75,7 +75,7 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpDelete]
-        [Route("shoppings/cart/items/{productId}")]
+        [Route("shops/cart/items/{productId}")]
         public async Task<IActionResult> RemoveItemCart(Guid productId)
         {
             var product = await _catalogService.GetById(productId);
@@ -91,8 +91,18 @@ namespace NS.BFF.Compras.Controllers
             return CustomResponse(response);
         }
 
+        [HttpDelete]
+        [Route("shops/cart/removeCart")]
+        public async Task<IActionResult> RemoveCart()
+        {
+
+            var response = await _cartService.RemoveCart();
+
+            return CustomResponse(response);
+        }
+
         [HttpPost]
-        [Route("shoppings/cart/apply-voucher")]
+        [Route("shops/cart/apply-voucher")]
         public async Task<IActionResult> ApplyVoucher([FromBody] string voucherCodigo)
         {
             var voucher = await _orderService.GetVoucherByCode(voucherCodigo);
@@ -110,6 +120,7 @@ namespace NS.BFF.Compras.Controllers
         private async Task ValidateItemCart(ItemProductDTO product, int quantity, bool addProduct = false)
         {
             if (product == null) AddErrorProcessing("Produto inexistente!");
+
             if (quantity < 1) AddErrorProcessing($"Escolha ao menos uma unidade do produto {product.Name}");
 
             var cart = await _cartService.GetCart();
@@ -117,7 +128,7 @@ namespace NS.BFF.Compras.Controllers
 
             if (itemCart != null && addProduct && itemCart.Quantity + quantity > product.QuantityStock)
             {
-                AddErrorProcessing($"O produto {product.Name} possui {product.QuantityStock} unidades em estoque, você selecionou {quantity}");
+                AddErrorProcessing($"O produto {product.Name} possui {product.QuantityStock} unidades em estoque, contando com o que você possui no carrinho, somam {product.QuantityStock + quantity}");
                 return;
             }
 

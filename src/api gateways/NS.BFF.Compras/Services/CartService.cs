@@ -11,6 +11,7 @@ namespace NS.BFF.Compras.Services
         Task<ResponseResult> AddItemCart(ItemCartDTO product);
         Task<ResponseResult> UpdateItemCart(Guid productId, ItemCartDTO cart);
         Task<ResponseResult> RemoveItemCart(Guid productId);
+        Task<ResponseResult> RemoveCart();
         Task<ResponseResult> ApplyVoucherCart(VoucherDTO voucher);
     }
 
@@ -57,7 +58,16 @@ namespace NS.BFF.Compras.Services
 
         public async Task<ResponseResult> RemoveItemCart(Guid productId)
         {
-            var response = await _httpClient.DeleteAsync($"/carrinho/{productId}");
+            var response = await _httpClient.DeleteAsync($"/cart/{productId}");
+
+            if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> RemoveCart()
+        {
+            var response = await _httpClient.DeleteAsync($"/cart/removeCart");
 
             if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

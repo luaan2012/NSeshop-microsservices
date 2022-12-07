@@ -677,7 +677,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .logo-mobile img {
   max-width: calc(100% - 20px);
-  max-height: 100%;
+  max-height: 280%;
   position:absolute;
   top: 0; 
   left: 0; 

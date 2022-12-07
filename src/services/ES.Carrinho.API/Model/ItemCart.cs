@@ -63,9 +63,9 @@ namespace NS.Carrinho.API.Model
                     .GreaterThan(0)
                     .WithMessage(item => $"A quantidade miníma para o {item.Name} é 1");
 
-                RuleFor(c => c.Quantity)
-                    .LessThanOrEqualTo(ClientCart.MAX_QUANTIDADE_ITEM)
-                    .WithMessage(item => $"A quantidade máxima do {item.Name} é {ClientCart.MAX_QUANTIDADE_ITEM}");
+                //RuleFor(c => c.Quantity)
+                //    .LessThanOrEqualTo(ClientCart.MAX_QUANTIDADE_ITEM)
+                //    .WithMessage(item => $"A quantidade máxima do {item.Name} é {ClientCart.MAX_QUANTIDADE_ITEM}");
 
                 RuleFor(c => c.Value)
                     .GreaterThan(0)

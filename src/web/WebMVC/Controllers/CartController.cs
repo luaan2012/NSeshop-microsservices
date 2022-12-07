@@ -20,13 +20,24 @@ namespace NS.WebMVC.Controllers
 
         [HttpPost]
         [Route("cart/add-item")]
-        public async Task<IActionResult> AdicionarItemCarrinho(Guid id, int quantity)
+        public async Task<IActionResult> AddItemCart(ItemCartViewModel itemCart)
         {
-            //var resposta = await _shopsBffService.AddItemCart(itemCart);
+            var resposta = await _shopsBffService.AddItemCart(itemCart);
 
-            //if (ResponseHasError(resposta)) return View("Index", await _shopsBffService.GetCart());
+            if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
 
-            return RedirectToAction("Index");
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("cart/RemoveCart")]
+        public async Task<IActionResult> RemoveCart()
+        {
+            var resposta = await _shopsBffService.RemoveCart();
+
+            if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
+
+            return RedirectToAction("Index", "Store");
         }
     }
 }

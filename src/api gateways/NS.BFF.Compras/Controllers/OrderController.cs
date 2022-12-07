@@ -29,7 +29,7 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpPost]
-        [Route("shoppings/order")]
+        [Route("shops/order")]
         public async Task<IActionResult> AddOrder(OrderDTO pedido)
         {
             var cart = await _cartService.GetCart();
@@ -43,7 +43,7 @@ namespace NS.BFF.Compras.Controllers
             return CustomResponse(await _orderService.FinalizeOrder(pedido));
         }
 
-        [HttpGet("shoppings/order/last")]
+        [HttpGet("shops/order/last")]
         public async Task<IActionResult> LastOrder()
         {
             var order = await _orderService.GetLastOrder();
@@ -56,7 +56,7 @@ namespace NS.BFF.Compras.Controllers
             return CustomResponse(order);
         }
 
-        [HttpGet("shopping/order/list-client")]
+        [HttpGet("shops/order/list-client")]
         public async Task<IActionResult> ListByClient()
         {
             var orders = await _orderService.GetListByClient();

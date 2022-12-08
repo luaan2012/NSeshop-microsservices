@@ -1,8 +1,8 @@
-﻿@*@model CartViewModel
+﻿@model WishListViewModel
 
 <!-- Cart -->
-<div class="wrap-header-cart js-panel-cart header-v4">
-    <div class="s-full js-hide-cart"></div>
+<div class="wrap-header-cart js-panel-wish header-v4">
+    <div class="s-full js-hide-wish"></div>
 
     <div class="header-cart flex-col-l p-l-65 p-r-25">
         <div class="header-cart-title flex-w flex-sb-m p-b-8">
@@ -10,7 +10,7 @@
                 Sua Lista de desejos
             </span>
 
-            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-wish">
                 <i class="zmdi zmdi-close"></i>
             </div>
         </div>
@@ -31,31 +31,24 @@
                                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                         @product.Name
                                     </a>
-
-                                    <span class="header-cart-item-info">
-                                        @this.UnitsByProductValueTotal(product.Quantity, @product.Value)
-                                    </span>
                                 </div>
                             </li>
                         }
                 </ul>
 
                 <div class="w-full">
-                    <div class="header-cart-total w-full p-tb-40">
-                        Total: @this.FormatCoin(Model.ValueTotal)
-                    </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <form asp-action="RemoveCart" asp-controller="Cart" method="post" id="removeCart">
-                            <a href="javascript:void(0)" onClick="document.getElementById('removeCart').submit();" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        <form asp-action="RemoveWishList" asp-controller="WishList" method="post" id="removeWishList">
+                            <a href="javascript:void(0)" onClick="document.getElementById('removeWishList').submit();" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                                 Limpar
                             </a>
                         </form>
-                    
 
                         <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                            Comprar
+                            Ver Loja
                         </a>
+
                     </div>
                 </div>
         </div>
@@ -65,4 +58,4 @@
            <img src="~/images/emptyCart.png" style="width:29vh;height:19vh"/>
         }
     </div>
-</div>*@
+</div>

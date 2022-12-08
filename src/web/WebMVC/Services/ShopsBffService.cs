@@ -150,7 +150,7 @@ namespace NS.WebMVC.Services
 
         public async Task<ResponseResult> RemoveWishList()
         {
-            var response = await _httpClient.DeleteAsync($"/shops/wishlist/removeCart");
+            var response = await _httpClient.DeleteAsync($"/shops/wishlist/removeWishList");
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

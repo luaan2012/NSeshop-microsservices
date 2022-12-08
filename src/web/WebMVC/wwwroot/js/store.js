@@ -19,6 +19,8 @@
         var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         $(this).on('click', function () {
 
+            var $wishList = $(this);
+
             itemWishListViewModel = {
                 ProductId: $(this).attr('data-id'),
                 Name: $(this).attr('data-name'),
@@ -26,14 +28,25 @@
                 Quantity : 1
             }
 
-            $.post('wishlist/add-item', itemWishListViewModel, function () {
-            }).done(function (data) {
-                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
-                $(this).addClass('js-addedwish-b2');
-                $(this).off('click');
-            }).fail(function (data) {
-                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "failure");
-            })                    
+            if ($(this).hasClass('js-addedwish-b2')) {
+                $.post('wishlist/remove-itemWishList', { id: $(this).attr('data-id') }, function () {
+                }).done(function () {
+                    swal(nameProduct, "Foi removido da sua lista de desejo!", "success");
+                    $wishList.removeClass('js-addedwish-b2');
+                    handleWishList(-1);
+                }).fail(function (data) {
+                    swal("", data.responseJSON[0], "error");
+                })
+            } else {
+                $.post('wishlist/add-item', itemWishListViewModel, function () {
+                }).done(function () {
+                    swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
+                    $wishList.addClass('js-addedwish-b2');
+                    handleWishList(1);
+                }).fail(function (data) {
+                    swal("", data.responseJSON[0], "error");
+                })
+            }                  
         });
     });
 
@@ -42,6 +55,8 @@
 
         $(this).on('click', function () {
 
+            var $wishList = $(this);
+
             itemWishListViewModel = {
                 ProductId: $(this).attr('data-id'),
                 Name: $(this).attr('data-name'),
@@ -49,15 +64,11 @@
                 Quantity: 1
             }
 
-            $.post('wishlist/add-item', itemWishListViewModel, function () {
-            }).done(function (data) {
-                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
-                $(this).addClass('js-addedwish-b2');
-                $(this).off('click');
-            }).fail(function (data) {
-                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "failure");
-            })        
-            
+            if ($(this).hasClass('js-addedwish-b2')) {
+                wishList('wishlist/remove-itemWishList', { id: $(this).attr('data-id') }, $wishList, false, nameProduct);
+            } else {
+                wishList('wishlist/add-item', { id: $(this).attr('data-id') }, $wishList, true, nameProduct);
+            }
         });
     });
 
@@ -76,7 +87,8 @@
             .done(function () {
                 var nameProduct = $('.js-name-detail').html();
                 swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
-                $('.swal-button--confirm').click(function () { window.location.reload() })
+                //$('.swal-button--confirm').click(function () { window.location.reload() })
+                handleCart(intParse(cartViewModel.Quantity));
             })
             .fail(function (data) {
                 swal("", data.responseJSON[0], "error");
@@ -125,23 +137,41 @@ function openLogin() {
 function openModal(id) {
 
     $.get('/loja/' + id, function () {
+    }).done(function (data) {
+
+        $('.js-name-detail').html(data.name);
+        $('.price').html('R$ ' + data.value.toFixed(2));
+        $('.description').html(data.description);
+        $('.productStock').html(quantityStock(data.quantityStock));
+        $('.item1').find('img').attr('src', 'images/' + data.image);
+        $('.item1').parent().attr('data-thumb', 'images/' + data.image);
+
+        $('#productId').val(data.id);
+        $('#productName').val(data.name);
+        $('#productValue').val(data.value);
+        $('#productImage').val(data.image);
+
+
+        $('.js-modal1').addClass('show-modal1');
+    });
+}
+
+function wishList(url, param, element, verb, nameProduct) {
+    $.post(url, param, function () {
+    }).done(function () {
+        swal(nameProduct, verb ? "Foi adicionado a sua lista de desejo!" : "Foi removido da sua lista de desejo!", "success");
+        element.removeClass('js-addedwish-b2');
+    }).fail(function (data) {
+        swal("", data.responseJSON[0], "error");
     })
-        .done(function (data) {
+}
 
-            $('.js-name-detail').html(data.name);
-            $('.price').html('R$ ' + data.value.toFixed(2));
-            $('.description').html(data.description);
-            $('.productStock').html(quantityStock(data.quantityStock));
-            $('.item1').find('img').attr('src', 'images/' + data.image);
-            $('.item1').parent().attr('data-thumb', 'images/' + data.image);
+function handleWishList(quantity) {
+    var noti = parseInt($('.js-show-wishList').attr('data-notify'));
+    $('.js-show-wishList').attr('data-notify', quantity + noti)
+}
 
-
-            $('#productId').val(data.id);
-            $('#productName').val(data.name);
-            $('#productValue').val(data.value);
-            $('#productImage').val(data.image);
-
-
-            $('.js-modal1').addClass('show-modal1');
-        });
+function handleCart(quantity) {
+    var noti = parseInt($('.js-show-cart').attr('data-notify'));
+    $('.js-show-cart').attr('data-notify', quantity + noti)
 }

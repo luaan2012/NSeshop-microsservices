@@ -30,10 +30,21 @@ namespace NS.WebMVC.Controllers
         }
 
         [HttpPost]
-        [Route("wishlist/RemoveCart")]
+        [Route("wishlist/remove-itemWishList")]
+        public async Task<IActionResult> RemoveItemWishList(Guid id)
+        {
+            var resposta = await _shopsBffService.RemoveItemWishList(id);
+
+            if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("wishlist/RemoveWishList")]
         public async Task<IActionResult> RemoveWishList()
         {
-            var resposta = await _shopsBffService.RemoveCart();
+            var resposta = await _shopsBffService.RemoveWishList();
 
             if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
 

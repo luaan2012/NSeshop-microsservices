@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProductViewModel>
 @{
     ViewData["Title"] = "Home";
-    var login = aspNet.EstaAutenticado() ? "window.location = '/loja'" : "openLogin()";
+    var login = aspNet.EstaAutenticado() ? "window.location = '/loja/" : "openLogin()";
 }
 
 <!-- Slider -->
@@ -93,7 +93,7 @@
                 <div class="block1 wrap-pic-w">
                     <img src="~/images/consoles2.jpg" alt="IMG-BANNER">
 
-                    <a href="javascript:void(0)" onclick="@login" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="javascript:void(0)" onclick="@(aspNet.EstaAutenticado() ? "window.location='/loja?search=.GamesConsoles'" : "openLogin()" )" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
                             <span class="block1-name ltext-102 trans-04 p-b-8">
                                 Consoles
@@ -118,7 +118,7 @@
                 <div class="block1 wrap-pic-w">
                     <img src="~/images/ebook.jpg" alt="IMG-BANNER">
 
-                    <a href="javascript:void(0)" onclick="@login" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="javascript:void(0)" onclick="@(aspNet.EstaAutenticado() ? "window.location='/loja?search=.Books'" : "openLogin()" )" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
                             <span class="block1-name ltext-102 trans-04 p-b-8">
                                 Livros
@@ -143,7 +143,7 @@
                 <div class="block1 wrap-pic-w">
                     <img src="~/images/acessorios.jpg" alt="IMG-BANNER">
 
-                    <a href="javascript:void(0)" onclick="@login" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="javascript:void(0)" onclick="@(aspNet.EstaAutenticado() ? "window.location='/loja?search=.Acessories'" : "openLogin()" )" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
                             <span class="block1-name ltext-102 trans-04 p-b-8">
                                 Acessorios
@@ -211,7 +211,7 @@
                                         <div class="block2-pic hov-img0">
                                             <img src="~/images/@product.Image" alt="IMG-PRODUCT">
 
-                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post" id="productOpen">
+                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post">
                                                <button type="submit" href="javascript:void(0)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                                     Ver Detalhes
                                                 </button>
@@ -257,7 +257,7 @@
                                         <div class="block2-pic hov-img0">
                                             <img src="~/images/@product.Image" alt="IMG-PRODUCT">
 
-                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post" id="productOpen">
+                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post">
                                                <button type="submit" href="javascript:void(0)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                                     Ver Detalhes
                                                 </button>
@@ -303,7 +303,7 @@
                                         <div class="block2-pic hov-img0">
                                             <img src="~/images/@product.Image" alt="IMG-PRODUCT">
 
-                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post" id="productOpen">
+                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post">
                                                <button type="submit" href="javascript:void(0)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                                     Ver Detalhes
                                                 </button>
@@ -349,7 +349,7 @@
                                         <div class="block2-pic hov-img0">
                                             <img src="~/images/@product.Image" alt="IMG-PRODUCT">
 
-                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post" id="productOpen">
+                                            <form asp-action="Index" asp-controller="Store" asp-route-id="@product.Id" method="post">
                                                <button type="submit" href="javascript:void(0)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                                     Ver Detalhes
                                                 </button>

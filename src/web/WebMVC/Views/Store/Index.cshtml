@@ -294,68 +294,15 @@
 </div>
 
 @section scripts {
+    <script>
+        let openProduct = '@TempData["openProduct"]';
 
-<script>
-    $('.js-addwish-b2').on('click', function(e) {
-        e.preventDefault();
-    });
-
-    $('.js-addwish-b2').each(function() {
-        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-        $(this).on('click', function() {
-            swal(nameProduct, "is added to wishlist !", "success");
-
-            $(this).addClass('js-addedwish-b2');
-            $(this).off('click');
-        });
-    });
-
-    $('.js-addwish-detail').each(function() {
-        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-        $(this).on('click', function() {
-            swal(nameProduct, "is added to wishlist !", "success");
-
-            $(this).addClass('js-addedwish-detail');
-            $(this).off('click');
-        });
-    });
-
-    $('.js-addcart-detail').on('click', function() {
-
-        let cartViewModel = {
-            ProductId : $('#productId').val(),
-            Name : $('#productName').val(),
-            Quantity : $('.num-product').val(),
-            Value : $('#productValue').val(),
-            Image : $('#productImage').val()
-        }
-
-        $.post('/cart/add-item', cartViewModel, function(){
-        })
-        .done(function(){
-            var nameProduct = $('.js-name-detail').html();
-            swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
-            $('.swal-button--confirm').click(function() {window.location.reload() })
-        })
-        .fail(function(data) {
-            swal("", data.responseJSON[0], "error");
-        })
-        
-    });
+        if(openProduct && openProduct != '00000000-0000-0000-0000-000000000000')
+            openModal(openProduct);
     
+        let filterCategory = '@TempData["searchProduct"]'
 
-    $(".js-select2").each(function() {
-        $(this).select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $(this).next('.dropDownSelect2')
-        });
-    })
-
-    let openProduct = '@TempData["openProduct"]';
-
-    if(openProduct)
-        openModal(openProduct)
-
-</script>
+        if(filterCategory)
+            dataFilter(filterCategory);
+    </script>
 }

@@ -42,12 +42,83 @@ $('.js-modal1').on('click', function () {
 })
 
 function dataFilter(filter) {
-    var $topeContainer = $('.isotope-grid');
-    var $filter = $('.filter-tope-group');
+   var $filter = $('.filter-tope-group');
 
-    $filter.each(function () {
+   $filter.find('button').each(function () {
         if ($(this).attr('data-filter') == filter) {
-            $topeContainer.isotope({ filter: filterValue });
+            $(this).click();
         }
     });
 }
+
+$('.js-addwish-b2').on('click', function (e) {
+    e.preventDefault();
+});
+
+$('.js-addwish-b2').each(function () {
+    var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+    $(this).on('click', function () {
+        swal(nameProduct, "is added to wishlist !", "success");
+
+        $(this).addClass('js-addedwish-b2');
+        $(this).off('click');
+    });
+});
+
+$('.js-addwish-detail').each(function () {
+    var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+    $(this).on('click', function () {
+        swal(nameProduct, "is added to wishlist !", "success");
+
+        $(this).addClass('js-addedwish-detail');
+        $(this).off('click');
+    });
+});
+
+$('.js-addcart-detail').on('click', function () {
+
+    let cartViewModel = {
+        ProductId: $('#productId').val(),
+        Name: $('#productName').val(),
+        Quantity: $('.num-product').val(),
+        Value: $('#productValue').val(),
+        Image: $('#productImage').val()
+    }
+
+    $.post('/cart/add-item', cartViewModel, function () {
+    })
+        .done(function () {
+            var nameProduct = $('.js-name-detail').html();
+            swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
+            $('.swal-button--confirm').click(function () { window.location.reload() })
+        })
+        .fail(function (data) {
+            swal("", data.responseJSON[0], "error");
+        })
+
+});
+
+
+$(".js-select2").each(function () {
+    $(this).select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $(this).next('.dropDownSelect2')
+    });
+})
+
+$(function () {
+
+    let urlPage = new URLSearchParams(window.location.search).get('id');
+    let urlSearch = new URLSearchParams(window.location.search).get('search');
+
+
+    if (urlPage || urlSearch) {
+
+        url = new URL(window.location.href);
+        url.searchParams.delete("id");
+        url.searchParams.delete("search");
+        window.history.pushState('', '', url);
+    }
+});
+

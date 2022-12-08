@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ProductViewModel>
 @{
+    var wishList = ViewBag.WishList as WishListViewModel;
     ViewData["Title"] = "Loja";
 }
 
@@ -250,6 +251,8 @@
         <div class="row isotope-grid">
             @foreach (var product in Model)
             {
+                var classWish = wishList.Items.Any(x => x.ProductId == product.Id) ? "js-addedwish-b2" : "";                
+
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @product.ProductType">
                     <!-- Block2 -->
                 <div class="block2">
@@ -273,7 +276,7 @@
                             </div>
 
                             <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 @classWish" data-id="@product.Id" data-name="@product.Name" data-image="@product.Image">
                                     <img class="icon-heart1 dis-block trans-04" src="~/images/icons/icon-heart-01.png" alt="ICON">
                                     <img class="icon-heart2 dis-block trans-04 ab-t-l" src="~/images/icons/icon-heart-02.png" alt="ICON">
                                 </a>

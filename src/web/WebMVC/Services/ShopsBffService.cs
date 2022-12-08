@@ -16,6 +16,13 @@ namespace NS.WebMVC.Services
         Task<ResponseResult> RemoveCart();
         Task<ResponseResult> ApplyVoucheCart(string voucher);
 
+        // Carrinho
+        Task<WishListViewModel> GetWishList();
+        Task<int> GetQuantitiesWishList();
+        Task<ResponseResult> AddItemWishList(ItemWishListViewModel cart);
+        Task<ResponseResult> RemoveItemWishList(Guid productId);
+        Task<ResponseResult> RemoveWishList();
+
         // Pedido
         Task<ResponseResult> FinisheOrder(OrderTransactionViewModel orderTransaction);
         Task<OrderViewModel> GetLastOrder();
@@ -102,6 +109,55 @@ namespace NS.WebMVC.Services
 
         #endregion
 
+        #region [WishList]
+        public async Task<WishListViewModel> GetWishList()
+        {
+            var response = await _httpClient.GetAsync("/shops/wishlist");
+
+            HandleErrosResponse(response);
+
+            return await DeserializarObjetoResponse<WishListViewModel>(response);
+        }
+
+        public async Task<int> GetQuantitiesWishList()
+        {
+           var response = await _httpClient.GetAsync("/shops/wishlist-quantity");
+
+            HandleErrosResponse(response);
+
+            return await DeserializarObjetoResponse<int>(response);
+        }
+
+        public async Task<ResponseResult> AddItemWishList(ItemWishListViewModel cart)
+        {
+            var itemContent = GetContent(cart);
+
+            var response = await _httpClient.PostAsync("/shops/wishlist/items/", itemContent);
+
+            if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> RemoveItemWishList(Guid productId)
+        {
+            var response = await _httpClient.DeleteAsync($"/shops/wishlist/items/{productId}");
+
+            if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> RemoveWishList()
+        {
+            var response = await _httpClient.DeleteAsync($"/shops/wishlist/removeCart");
+
+            if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+        #endregion
+
         #region Order
 
         public async Task<ResponseResult> FinisheOrder(OrderTransactionViewModel orderTransaction)
@@ -159,8 +215,7 @@ namespace NS.WebMVC.Services
             }
 
             return order;
-        }
-
+        }        
         #endregion
     }
 }

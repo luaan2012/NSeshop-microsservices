@@ -8,9 +8,11 @@ namespace WebMVC.Controllers
     public class StoreController : Controller       
     {
         private readonly ICatalogService _catalogService;
+        private readonly IShopsBffService _shopsService;
 
-        public StoreController(ICatalogService catalogService)
+        public StoreController(IShopsBffService shopsService, ICatalogService catalogService)
         {
+            _shopsService = shopsService;
             _catalogService = catalogService;
         }
 
@@ -20,6 +22,8 @@ namespace WebMVC.Controllers
             TempData["openProduct"] = id;
 
             TempData["searchProduct"] = search;
+
+            ViewBag.WishList = await _shopsService.GetWishList();
 
             return View(await _catalogService.GetAll());
         }

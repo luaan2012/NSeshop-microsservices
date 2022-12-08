@@ -18,10 +18,22 @@
     $('.js-addwish-b2').each(function () {
         var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
 
-            $(this).addClass('js-addedwish-b2');
-            $(this).off('click');
+            itemWishListViewModel = {
+                ProductId: $(this).attr('data-id'),
+                Name: $(this).attr('data-name'),
+                Image: $(this).attr('data-image'),
+                Quantity : 1
+            }
+
+            $.post('wishlist/add-item', itemWishListViewModel, function () {
+            }).done(function (data) {
+                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+            }).fail(function (data) {
+                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "failure");
+            })                    
         });
     });
 
@@ -29,10 +41,23 @@
         var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
         $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
 
-            $(this).addClass('js-addedwish-detail');
-            $(this).off('click');
+            itemWishListViewModel = {
+                ProductId: $(this).attr('data-id'),
+                Name: $(this).attr('data-name'),
+                Image: $(this).attr('data-image'),
+                Quantity: 1
+            }
+
+            $.post('wishlist/add-item', itemWishListViewModel, function () {
+            }).done(function (data) {
+                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+            }).fail(function (data) {
+                swal(nameProduct, "Foi adicionado a sua lista de desejo!", "failure");
+            })        
+            
         });
     });
 

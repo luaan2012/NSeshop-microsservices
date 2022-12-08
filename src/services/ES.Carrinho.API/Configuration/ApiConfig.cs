@@ -13,6 +13,9 @@ namespace NS.Carrinho.API.Configuration
             services.AddDbContext<CartContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<WishListContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers();
 
             services.AddGrpc();

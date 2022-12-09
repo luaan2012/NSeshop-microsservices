@@ -42,7 +42,7 @@
                 }).done(function () {
                     swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
                     $wishList.addClass('js-addedwish-b2');
-                    handleWishList(1);
+                    $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
                     swal("", data.responseJSON[0], "error");
                 })
@@ -58,16 +58,30 @@
             var $wishList = $(this);
 
             itemWishListViewModel = {
-                ProductId: $(this).attr('data-id'),
-                Name: $(this).attr('data-name'),
-                Image: $(this).attr('data-image'),
+                ProductId: $('#productId').val(),
+                Name: $('#productName').val(),
+                Image: $('#productImage').val(),
                 Quantity: 1
             }
 
             if ($(this).hasClass('js-addedwish-b2')) {
-                wishList('wishlist/remove-itemWishList', { id: $(this).attr('data-id') }, $wishList, false, nameProduct);
+                $.post('wishlist/remove-itemWishList', { id: $(this).attr('data-id') }, function () {
+                }).done(function () {
+                    swal(nameProduct, "Foi removido da sua lista de desejo!", "success");
+                    $wishList.removeClass('js-addedwish-b2');
+                    handleWishList(-1);
+                }).fail(function (data) {
+                    swal("", data.responseJSON[0], "error");
+                })
             } else {
-                wishList('wishlist/add-item', { id: $(this).attr('data-id') }, $wishList, true, nameProduct);
+                $.post('wishlist/add-item', itemWishListViewModel, function () {
+                }).done(function () {
+                    swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
+                    $wishList.addClass('js-addedwish-b2');
+                    $('.swal-button--confirm').click(function () { window.location.reload() })
+                }).fail(function (data) {
+                    swal("", data.responseJSON[0], "error");
+                })
             }
         });
     });
@@ -83,16 +97,14 @@
         }
 
         $.post('/cart/add-item', cartViewModel, function () {
+        }).done(function () {
+            var nameProduct = $('.js-name-detail').html();
+            swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
+            $('.swal-button--confirm').click(function () { window.location.reload() })
         })
-            .done(function () {
-                var nameProduct = $('.js-name-detail').html();
-                swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
-                //$('.swal-button--confirm').click(function () { window.location.reload() })
-                handleCart(intParse(cartViewModel.Quantity));
-            })
-            .fail(function (data) {
-                swal("", data.responseJSON[0], "error");
-            })
+        .fail(function (data) {
+            swal("", data.responseJSON[0], "error");
+        })
     });
 
 
@@ -166,12 +178,21 @@ function wishList(url, param, element, verb, nameProduct) {
     })
 }
 
-function handleWishList(quantity) {
-    var noti = parseInt($('.js-show-wishList').attr('data-notify'));
-    $('.js-show-wishList').attr('data-notify', quantity + noti)
-}
+function searchProduct(name) {
 
-function handleCart(quantity) {
-    var noti = parseInt($('.js-show-cart').attr('data-notify'));
-    $('.js-show-cart').attr('data-notify', quantity + noti)
+    var $topeContainer = $('.isotope-grid');
+
+    var $topeItem = $('.isotope-item');
+
+    var reg = new RegExp(name, "i");
+
+    if (name) {
+        $topeItem.hide().filter(function () {
+            return $(this).find('.js-name-b2').text().match(reg);
+        }).show();
+        $topeContainer.isotope('layout')
+    } else {
+        $topeItem.show();
+        $topeContainer.isotope('layout')
+    }
 }

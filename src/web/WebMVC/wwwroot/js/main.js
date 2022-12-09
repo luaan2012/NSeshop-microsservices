@@ -138,7 +138,8 @@
             $topeContainer.isotope({filter: filterValue});
         });
         
-    });    
+    });
+    
 
     // init Isotope
     $(window).on('load', function () {

@@ -37,13 +37,17 @@ namespace NS.Catalogo.API.Controllers
         }
         
         [HttpGet("catalog/products/{id}")]
-        public async Task<Product> DetailProduct(Guid id)
+        public async Task<IActionResult> DetailProduct(Guid id)
         {
-            return await _productRepository.GetById(id);
+            var product = await _productRepository.GetById(id);
+
+            if (product is null) AddErrorProcessing("Produto não encontrado");
+
+            return CustomResponse(product);
         }
 
         [HttpGet("catalog/products/list/{ids}")]
-        public async Task<IEnumerable<Product>> GiveProductById(string ids)
+        public async Task<IEnumerable<Product>> GiveProductsById(string ids)
         {
             return await _productRepository.GetProductsById(ids);
         }

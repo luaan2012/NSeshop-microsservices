@@ -46,7 +46,7 @@ namespace NS.Carrinho.API.Model
             decimal desconto = 0;
             var valor = ValueTotal;
 
-            if (Voucher.DiscountType == TypeDiscountVoucher.Percentage)
+            if (Voucher.TypeDiscount == TypeDiscountVoucher.Percentage)
             {
                 if (Voucher.Percentage.HasValue)
                 {
@@ -56,9 +56,9 @@ namespace NS.Carrinho.API.Model
             }
             else
             {
-                if (Voucher.DiscountValue.HasValue)
+                if (Voucher.ValueDiscount.HasValue)
                 {
-                    desconto = Voucher.DiscountValue.Value;
+                    desconto = Voucher.ValueDiscount.Value;
                     valor -= desconto;
                 }
             }

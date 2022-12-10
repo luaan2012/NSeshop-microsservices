@@ -49,7 +49,7 @@ namespace NS.BFF.Compras.Services
         {
             var itemContent = GetContent(cart);
 
-            var response = await _httpClient.PutAsync($"/cart/{cart.ProductId}", itemContent);
+            var response = await _httpClient.PutAsync($"/cart/{productId}", itemContent);
 
             if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -78,7 +78,7 @@ namespace NS.BFF.Compras.Services
         {
             var itemContent = GetContent(voucher);
 
-            var response = await _httpClient.PostAsync("/carrinho/aplicar-voucher/", itemContent);
+            var response = await _httpClient.PostAsync("/cart/apply-voucher/", itemContent);
 
             if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

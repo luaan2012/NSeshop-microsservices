@@ -40,7 +40,7 @@ namespace NS.WebMVC.Services
             _httpClient.BaseAddress = new Uri(settings.Value.ShopsBffUrl);
         }
 
-        #region Carrinho
+        #region [Carrinho]
 
         public async Task<CartViewModel> GetCart()
         {
@@ -72,7 +72,7 @@ namespace NS.WebMVC.Services
         {
             var itemContent = GetContent(item);
 
-            var response = await _httpClient.PutAsync($"/compras/carrinho/items/{productId}", itemContent);
+            var response = await _httpClient.PutAsync($"/shops/cart/items/{productId}", itemContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -80,7 +80,7 @@ namespace NS.WebMVC.Services
         }
         public async Task<ResponseResult> RemoveItemCart(Guid productId)
         {
-            var response = await _httpClient.DeleteAsync($"/compras/carrinho/items/{productId}");
+            var response = await _httpClient.DeleteAsync($"/shops/cart/items/{productId}");
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -100,7 +100,7 @@ namespace NS.WebMVC.Services
         {
             var itemContent = GetContent(voucher);
 
-            var response = await _httpClient.PostAsync("/compras/carrinho/aplicar-voucher/", itemContent);
+            var response = await _httpClient.PostAsync("/shops/cart/apply-voucher/", itemContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -158,7 +158,7 @@ namespace NS.WebMVC.Services
         }
         #endregion
 
-        #region Order
+        #region [Order]
 
         public async Task<ResponseResult> FinisheOrder(OrderTransactionViewModel orderTransaction)
         {

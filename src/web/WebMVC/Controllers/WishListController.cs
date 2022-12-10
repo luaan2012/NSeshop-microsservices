@@ -30,12 +30,14 @@ namespace NS.WebMVC.Controllers
         }
 
         [HttpPost]
-        [Route("wishlist/remove-itemWishList")]
+        [Route("wishlist/itemWishList")]
         public async Task<IActionResult> RemoveItemWishList(Guid id)
         {
             var resposta = await _shopsBffService.RemoveItemWishList(id);
 
             if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
+
+            TempData["openWishList"] = true;
 
             return Ok();
         }

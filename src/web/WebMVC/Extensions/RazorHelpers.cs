@@ -56,6 +56,11 @@ namespace NS.WebMVC.Extensions
             return $"{units}x {FormatCoin(value)} = Total: {FormatCoin(value * units)}";
         }
 
+        public static string ValueTotalByUnity(this RazorPage page, int units, decimal value)
+        {
+            return $"{FormatCoin(value * units)}";
+        }
+
         public static string ShowStatus(this RazorPage page, int status)
         {
             var statusMessage = "";

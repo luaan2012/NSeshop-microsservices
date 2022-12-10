@@ -18,7 +18,7 @@ namespace NS.Pedidos.Infra.Data.Mappings
             builder.HasOne(c => c.Order)
                 .WithMany(c => c.OrderItems);
 
-            builder.ToTable("PedidoItems");
+            builder.ToTable("OrderItems");
         }
     }
 }

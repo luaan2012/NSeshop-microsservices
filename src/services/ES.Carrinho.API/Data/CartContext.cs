@@ -35,13 +35,13 @@ namespace NS.Carrinho.API.Data
                         .HasColumnName("VoucherCodigo")
                         .HasColumnType("varchar(50)");
 
-                    v.Property(vc => vc.DiscountType)
+                    v.Property(vc => vc.TypeDiscount)
                         .HasColumnName("DiscountType");
 
                     v.Property(vc => vc.Percentage)
                         .HasColumnName("Percentage");
 
-                    v.Property(vc => vc.DiscountValue)
+                    v.Property(vc => vc.ValueDiscount)
                         .HasColumnName("DiscountValue");
                 });
 

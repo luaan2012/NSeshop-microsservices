@@ -23,7 +23,7 @@
                         @foreach (var product in Model.Items)
                         {
                             <li class="header-cart-item flex-w flex-t m-b-12">
-                                <div class="header-cart-item-img">
+                                <div class="header-cart-item-img" onclick="removeItemCart('@product.ProductId')">
                                     <img src="~/images/@product.Image" alt="IMG">
                                 </div>
 
@@ -53,8 +53,8 @@
                         </form>
                     
 
-                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                            Comprar
+                        <a asp-controller="Cart" asp-action="Index" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                            Carrinho
                         </a>
                     </div>
                 </div>

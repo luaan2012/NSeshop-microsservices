@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NS.Carrinho.API.Data;
 
@@ -11,9 +12,10 @@ using NS.Carrinho.API.Data;
 namespace NS.Carrinho.API.Migrations
 {
     [DbContext(typeof(CartContext))]
-    partial class CartContextModelSnapshot : ModelSnapshot
+    [Migration("20221210001532_upd")]
+    partial class upd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -23,8 +23,6 @@
 
             itemWishListViewModel = {
                 ProductId: $(this).attr('data-id'),
-                Name: $(this).attr('data-name'),
-                Image: $(this).attr('data-image'),
                 Quantity : 1
             }
 
@@ -35,7 +33,8 @@
                     $wishList.removeClass('js-addedwish-b2');
                     handleWishList(-1);
                 }).fail(function (data) {
-                    swal("", data.responseJSON[0], "error");
+                    if (data.responseJSON)
+                        swal("", data.responseJSON[0], "error");
                 })
             } else {
                 $.post('wishlist/add-item', itemWishListViewModel, function () {
@@ -44,7 +43,8 @@
                     $wishList.addClass('js-addedwish-b2');
                     $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
-                    swal("", data.responseJSON[0], "error");
+                    if (data.responseJSON)
+                        swal("", data.responseJSON[0], "error");
                 })
             }                  
         });
@@ -59,8 +59,6 @@
 
             itemWishListViewModel = {
                 ProductId: $('#productId').val(),
-                Name: $('#productName').val(),
-                Image: $('#productImage').val(),
                 Quantity: 1
             }
 
@@ -71,7 +69,8 @@
                     $wishList.removeClass('js-addedwish-b2');
                     handleWishList(-1);
                 }).fail(function (data) {
-                    swal("", data.responseJSON[0], "error");
+                    if (data.responseJSON)
+                        swal("", data.responseJSON[0], "error");
                 })
             } else {
                 $.post('wishlist/add-item', itemWishListViewModel, function () {
@@ -80,7 +79,8 @@
                     $wishList.addClass('js-addedwish-b2');
                     $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
-                    swal("", data.responseJSON[0], "error");
+                    if (data.responseJSON)
+                        swal("", data.responseJSON[0], "error");
                 })
             }
         });
@@ -90,10 +90,7 @@
 
         let cartViewModel = {
             ProductId: $('#productId').val(),
-            Name: $('#productName').val(),
             Quantity: $('.num-product').val(),
-            Value: $('#productValue').val(),
-            Image: $('#productImage').val()
         }
 
         $.post('/cart/add-item', cartViewModel, function () {
@@ -103,7 +100,8 @@
             $('.swal-button--confirm').click(function () { window.location.reload() })
         })
         .fail(function (data) {
-            swal("", data.responseJSON[0], "error");
+            if (data.responseJSON)
+                swal("", data.responseJSON[0], "error");
         })
     });
 
@@ -159,10 +157,6 @@ function openModal(id) {
         $('.item1').parent().attr('data-thumb', 'images/' + data.image);
 
         $('#productId').val(data.id);
-        $('#productName').val(data.name);
-        $('#productValue').val(data.value);
-        $('#productImage').val(data.image);
-
 
         $('.js-modal1').addClass('show-modal1');
     });
@@ -174,7 +168,8 @@ function wishList(url, param, element, verb, nameProduct) {
         swal(nameProduct, verb ? "Foi adicionado a sua lista de desejo!" : "Foi removido da sua lista de desejo!", "success");
         element.removeClass('js-addedwish-b2');
     }).fail(function (data) {
-        swal("", data.responseJSON[0], "error");
+        if (data.responseJSON)
+            swal("", data.responseJSON[0], "error");
     })
 }
 
@@ -188,11 +183,40 @@ function searchProduct(name) {
 
     if (name) {
         $topeItem.hide().filter(function () {
-            return $(this).find('.js-name-b2').text().match(reg);
+            return removeAcento($(this).find('.js-name-b2').text()).match(reg);
         }).show();
         $topeContainer.isotope('layout')
     } else {
         $topeItem.show();
         $topeContainer.isotope('layout')
     }
+}
+
+function removeAcento(text) {
+    text = text.toLowerCase();
+    text = text.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+    text = text.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+    text = text.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+    text = text.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+    text = text.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+    text = text.replace(new RegExp('[Ç]', 'gi'), 'c');
+    return text;
+}
+
+function removeItemCart(id) {
+    $.post('cart/removeItem', { Id: id }, function () {
+    }).done(function () { window.location.reload() })
+        .fail(function (data) {
+            if (data.responseJSON)
+                swal("", data.responseJSON[0], "error");
+        })
+}
+
+function removeItemWishList(id) {
+    $.post('wishList/itemWishList', { Id: id }, function () {
+    }).done(function () { window.location.reload() })
+        .fail(function (data) {
+            if (data.responseJSON)
+                swal("", data.responseJSON[0], "error");
+        })
 }

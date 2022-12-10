@@ -43,41 +43,44 @@ namespace NS.Carrinho.API.Controllers
         }
 
         [HttpPut("cart/{productId}")]
-        public async Task<IActionResult> UpdateItemCart(Guid produtoId, ItemCart item)
+        public async Task<IActionResult> UpdateItemCart(Guid productId, ItemCart item)
         {
-            var carrinho = await GetCartClient();
-            var itemCarrinho = await GetItemProductValid(produtoId, carrinho, item);
+            var cart = await GetCartClient();
+
+            var itemCarrinho = await GetItemProductValid(productId, cart, item);
+
             if (itemCarrinho == null) return CustomResponse();
 
-            carrinho.UpdateUnity(itemCarrinho, item.Quantity);
+            cart.UpdateUnity(itemCarrinho, item.Quantity);
 
-            ValidCart(carrinho);
+            ValidCart(cart);
+
             if (!ValidOperation()) return CustomResponse();
 
             _context.ItemCarts.Update(itemCarrinho);
-            _context.ClientCarts.Update(carrinho);
+            _context.ClientCarts.Update(cart);
 
             await PersistData();
             return CustomResponse();
         }
 
         [HttpDelete("cart/{productId}")]
-        public async Task<IActionResult> RemoveItemCart(Guid produtoId)
+        public async Task<IActionResult> RemoveItemCart(Guid productId)
         {
-            var carrinho = await GetCartClient();
+            var cart = await GetCartClient();
 
-            var itemCarrinho = await GetItemProductValid(produtoId, carrinho);
+            var itemCart = await GetItemProductValid(productId, cart);
 
-            if (itemCarrinho == null) return CustomResponse();
+            if (itemCart == null) return CustomResponse();
 
-            ValidCart(carrinho);
+            ValidCart(cart);
 
             if (!ValidOperation()) return CustomResponse();
 
-            carrinho.RemoverItem(itemCarrinho);
+            cart.RemoverItem(itemCart);
 
-            _context.ItemCarts.Remove(itemCarrinho);
-            _context.ClientCarts.Update(carrinho);
+            _context.ItemCarts.Remove(itemCart);
+            _context.ClientCarts.Update(cart);
 
             await PersistData();
             return CustomResponse();
@@ -86,9 +89,9 @@ namespace NS.Carrinho.API.Controllers
         [HttpDelete("cart/removeCart")]
         public async Task<IActionResult> RemoveCart()
         {
-            var carrinho = await GetCartClient();
+            var cart = await GetCartClient();
 
-            _context.ClientCarts.Remove(carrinho);
+            _context.ClientCarts.Remove(cart);
 
             await PersistData();
             return CustomResponse();
@@ -98,11 +101,11 @@ namespace NS.Carrinho.API.Controllers
         [Route("cart/apply-voucher")]
         public async Task<IActionResult> ApplyVoucher(Voucher voucher)
         {
-            var carrinho = await GetCartClient();
+            var cart = await GetCartClient();
 
-            carrinho.ApplyVoucher(voucher);
+            cart.ApplyVoucher(voucher);
 
-            _context.ClientCarts.Update(carrinho);
+            _context.ClientCarts.Update(cart);
 
             await PersistData();
             return CustomResponse();
@@ -116,11 +119,11 @@ namespace NS.Carrinho.API.Controllers
         }
         private void ManipulateNewcart(ItemCart item)
         {
-            var carrinho = new ClientCart(_user.ObterUserId());
-            carrinho.AddItem(item);
+            var cart = new ClientCart(_user.ObterUserId());
+            cart.AddItem(item);
 
-            ValidCart(carrinho);
-            _context.ClientCarts.Add(carrinho);
+            ValidCart(cart);
+            _context.ClientCarts.Add(cart);
         }
         private void ManipulateExistingCart(ClientCart cart, ItemCart item)
         {

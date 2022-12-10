@@ -57,9 +57,9 @@ namespace NS.BFF.Compras.Services
             return await DeserializarObjetoResponse<IEnumerable<OrderDTO>>(response);
         }
 
-        public async Task<VoucherDTO> GetVoucherByCode(string codigo)
+        public async Task<VoucherDTO> GetVoucherByCode(string code)
         {
-            var response = await _httpClient.GetAsync($"/voucher/{codigo}/");
+            var response = await _httpClient.GetAsync($"/voucher/{code}/");
 
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
 

@@ -16,6 +16,19 @@ namespace WebMVC.Controllers
             _catalogService = catalogService;
         }
 
+        //[HttpGet]
+        //[Route("loja")]
+        //public async Task<IActionResult> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
+        //{
+        //    var products = await _catalogService.GetAll(ps, page, q);
+
+        //    ViewBag.Pesquisa = q;
+
+        //    products.ReferenceAction = "Index";
+
+        //    return View(products);
+        //}
+
         [Route("loja")]
         public async Task<IActionResult> Index(Guid id, string search)
         {

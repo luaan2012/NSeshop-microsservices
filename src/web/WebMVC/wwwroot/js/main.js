@@ -133,9 +133,22 @@
 
     // filter items on button click
     $filter.each(function () {
-        $filter.on('click', 'button', function () {
+        $filter.on('click', 'button', function () {            
+
+            $(".isotope-item").removeClass('d-none');
+
             var filterValue = $(this).attr('data-filter');
-            $topeContainer.isotope({filter: filterValue});
+
+            $topeContainer.isotope({ filter: filterValue });
+
+            $topeContainer.isotope('layout')
+
+
+            if ($(this).attr('data-filter') == '*') 
+                $('#loadMore').show();
+            else 
+                $('#loadMore').hide();
+            
         });
         
     });
@@ -177,11 +190,13 @@
         if($('.js-show-search').hasClass('show-search')) {
             $('.js-show-search').removeClass('show-search');
             $('.panel-search').slideUp(400);
-        }    
+        }   
     });
 
     $('.js-show-search').on('click',function(){
         $(this).toggleClass('show-search');
+        searchProduct('')
+
         $('.panel-search').slideToggle(400);
 
         if($('.js-show-filter').hasClass('show-filter')) {

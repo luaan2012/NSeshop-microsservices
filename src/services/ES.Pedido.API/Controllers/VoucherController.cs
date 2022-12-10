@@ -17,7 +17,7 @@ namespace NS.Pedidos.API.Controllers
             _voucherQueries = voucherQueries;
         }
 
-        [HttpGet("voucher/{codigo}")]
+        [HttpGet("voucher/{code}")]
         [ProducesResponseType(typeof(VoucherDTO), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> ObterPorCodigo(string code)

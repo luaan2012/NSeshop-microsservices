@@ -10,16 +10,16 @@ namespace NS.BFF.Compras.Services.gRPC
 
     public class CartGrpcService : ICartGrpcService
     {
-        private readonly ShoppingCart.ShoppingCartClient _carrinhoComprasClient;
+        private readonly ShoppingCart.ShoppingCartClient _cartShopsClient;
 
         public CartGrpcService(ShoppingCart.ShoppingCartClient carrinhoComprasClient)
         {
-            _carrinhoComprasClient = carrinhoComprasClient;
+            _cartShopsClient = carrinhoComprasClient;
         }
 
         public async Task<CartDTO> GetCart()
         {
-            var response = await _carrinhoComprasClient.GetCartAsync(new GetCartRequest());
+            var response = await _cartShopsClient.GetCartAsync(new GetCartRequest());
             return MapCartClientToProtoResponse(response);
         }
 

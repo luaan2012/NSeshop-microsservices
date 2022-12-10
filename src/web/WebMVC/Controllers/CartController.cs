@@ -13,18 +13,42 @@ namespace NS.WebMVC.Controllers
             _shopsBffService = shopsBffService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _shopsBffService.GetCart());
         }
 
         [HttpPost]
         [Route("cart/add-item")]
         public async Task<IActionResult> AddItemCart(ItemCartViewModel itemCart)
         {
-            var resposta = await _shopsBffService.AddItemCart(itemCart);
+            var response = await _shopsBffService.AddItemCart(itemCart);
 
-            if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("cart/update-item")]
+        public async Task<IActionResult> UpdateItemCart(Guid id, int quantity)
+        {
+            var response = await _shopsBffService.UpdateItemCart(id, new ItemCartViewModel { ProductId = id, Quantity = quantity});
+
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("cart/removeItem")]
+        public async Task<IActionResult> RemoveCart(Guid id)
+        {
+            var response = await _shopsBffService.RemoveItemCart(id);
+
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            TempData["openCart"] = true;
 
             return Ok();
         }
@@ -33,11 +57,22 @@ namespace NS.WebMVC.Controllers
         [Route("cart/RemoveCart")]
         public async Task<IActionResult> RemoveCart()
         {
-            var resposta = await _shopsBffService.RemoveCart();
+            var response = await _shopsBffService.RemoveCart();
 
-            if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
 
             return RedirectToAction("Index", "Store");
+        }
+
+        [HttpPost]
+        [Route("cart/apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(string voucherCode)
+        {
+            var response = await _shopsBffService.ApplyVoucheCart(voucherCode);
+
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            return RedirectToAction("Index");
         }
     }
 }

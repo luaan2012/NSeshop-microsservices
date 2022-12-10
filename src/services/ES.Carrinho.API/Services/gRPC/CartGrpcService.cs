@@ -57,9 +57,9 @@ namespace NS.Carrinho.API.Services.gRPC
                 carrinhoProto.Voucher = new VoucherResponse
                 {
                     Code = carrinho.Voucher.Code,
-                    Percentage = (double?)carrinho.Voucher.Percentage ?? 0,
-                    Valuediscount = (double?)carrinho.Voucher.DiscountValue ?? 0,
-                    Typediscount = (int)carrinho.Voucher.DiscountType
+                    Percentage = (double?)carrinho?.Voucher?.Percentage ?? 0,
+                    Valuediscount = (double?)carrinho?.Voucher?.ValueDiscount ?? 0,
+                    Typediscount = (int?)carrinho?.Voucher?.TypeDiscount ?? 0
                 };
             }
 

@@ -23,7 +23,7 @@
                         @foreach (var product in Model.Items)
                         {
                             <li class="header-cart-item flex-w flex-t m-b-12">
-                                <div class="header-cart-item-img">
+                                <div class="header-cart-item-img" onclick="removeItemWishList('@product.ProductId')">
                                     <img src="~/images/@product.Image" alt="IMG">
                                 </div>
 

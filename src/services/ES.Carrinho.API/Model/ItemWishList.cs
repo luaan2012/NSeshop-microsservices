@@ -55,7 +55,7 @@ namespace NS.Carrinho.API.Model
 
                 RuleFor(c => c.Quantity)
                     .LessThanOrEqualTo(ItemWishList.MAX_QUANTIDADE_ITEM)
-                    .WithMessage(item => $"A quantidade máxima do {item.Name} é {ItemWishList.MAX_QUANTIDADE_ITEM}");
+                    .WithMessage(item => $"Esse item já está na sua lista de desejos");
             }
         }
     }

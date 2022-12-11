@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NS.WebMVC.Models;
 using NS.WebMVC.Services;
 
 namespace NS.WebMVC.Controllers
 {
+    [Authorize]
     public class CartController : MainController
     {
         private readonly IShopsBffService _shopsBffService;
@@ -69,6 +71,17 @@ namespace NS.WebMVC.Controllers
         public async Task<IActionResult> ApplyVoucher(string voucherCode)
         {
             var response = await _shopsBffService.ApplyVoucheCart(voucherCode);
+
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Route("cart/remove-voucher")]
+        public async Task<IActionResult> RemoveVoucher(string voucherCode)
+        {
+            var response = await _shopsBffService.RemoveVoucheCart(voucherCode);
 
             if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
 

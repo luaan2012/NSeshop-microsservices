@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NS.WebMVC.Models;
 using NS.WebMVC.Services;
 
 namespace NS.WebMVC.Controllers
 {
+    [Authorize]
     public class WishListController : MainController
     {
         private readonly IShopsBffService _shopsBffService;
@@ -31,13 +33,13 @@ namespace NS.WebMVC.Controllers
 
         [HttpPost]
         [Route("wishlist/itemWishList")]
-        public async Task<IActionResult> RemoveItemWishList(Guid id)
+        public async Task<IActionResult> RemoveItemWishList(Guid id, string openWishList)
         {
             var resposta = await _shopsBffService.RemoveItemWishList(id);
 
             if (ResponseHasError(resposta)) return BadRequest(resposta.Errors.Messages);
 
-            TempData["openWishList"] = true;
+            TempData["openWishList"] = openWishList;
 
             return Ok();
         }

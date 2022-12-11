@@ -117,6 +117,23 @@ namespace NS.BFF.Compras.Controllers
             return CustomResponse(response);
         }
 
+        [HttpPost]
+        [Route("shops/cart/remove-voucher")]
+        public async Task<IActionResult> RemoveVoucher([FromBody] string voucherCodigo)
+        {
+            var voucher = await _orderService.GetVoucherByCode(voucherCodigo);
+
+            if (voucher is null)
+            {
+                AddErrorProcessing("Voucher inválido ou não encontrado!");
+                return CustomResponse();
+            }
+
+            var response = await _cartService.RemoveVoucherCart(voucher);
+
+            return CustomResponse(response);
+        }
+
         private async Task ValidateItemCart(ItemProductDTO product, int quantity, bool addProduct = false)
         {
             if (product == null) AddErrorProcessing("Produto inexistente!");

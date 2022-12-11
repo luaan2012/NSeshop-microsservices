@@ -8,10 +8,12 @@ namespace WebMVC.Controllers
     public class IdentityController : MainController
     {
         private readonly IAuthenticationsService _authenticationsService;
+        private readonly IClientService _clientService;
 
-        public IdentityController(IAuthenticationsService authenticationsService)
+        public IdentityController(IAuthenticationsService authenticationsService, IClientService clientService)
         {
             _authenticationsService = authenticationsService;
+            _clientService = clientService;
         }
 
         [HttpGet]
@@ -40,6 +42,13 @@ namespace WebMVC.Controllers
             await _authenticationsService.SignIn(response);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Teste()
+        {
+            return Ok("teste");
         }
 
         [HttpPost]

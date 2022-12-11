@@ -7,8 +7,8 @@
     $(".animsition").animsition({
         inClass: 'fade-in',
         outClass: 'fade-out',
-        inDuration: 1500,
-        outDuration: 800,
+        inDuration: 2500,
+        outDuration: 500,
         linkElement: '.animsition-link',
         loading: true,
         loadingParentElement: 'html',

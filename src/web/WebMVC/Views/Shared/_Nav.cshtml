@@ -90,7 +90,7 @@
     {
         <div class="wrap-icon-header flex-w flex-r-m m-r-15">
 
-            if (Context.Request.Path.Value != "/Cart")
+            @if (Context.Request.Path.Value != "/Cart")
             {
                 <vc:cart-mobile></vc:cart-mobile>                
             }

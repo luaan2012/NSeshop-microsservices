@@ -24,7 +24,7 @@ namespace NS.WebMVC.Services
 
         public async Task<AddressViewModel> GetAddress()
         {
-            var response = await _httpClient.GetAsync("/cliente/endereco/");
+            var response = await _httpClient.GetAsync("/client/address/");
 
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
 
@@ -37,7 +37,7 @@ namespace NS.WebMVC.Services
         {
             var addressContent = GetContent(address);
 
-            var response = await _httpClient.PostAsync("/cliente/endereco/", addressContent);
+            var response = await _httpClient.PostAsync("/client/address/", addressContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

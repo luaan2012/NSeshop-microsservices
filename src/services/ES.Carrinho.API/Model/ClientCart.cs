@@ -33,6 +33,14 @@ namespace NS.Carrinho.API.Model
             CalculateCartValue();
         }
 
+        public void RemoveVoucher(Voucher voucher)
+        {
+            Voucher = null;
+            UsedVoucher = false;
+            Discount = 0;
+            CalculateCartValue();
+        }
+
         internal void CalculateCartValue()
         {
             ValueTotal = Items.Sum(p => p.CalculateValue());
@@ -43,28 +51,28 @@ namespace NS.Carrinho.API.Model
         {
             if (!UsedVoucher) return;
 
-            decimal desconto = 0;
-            var valor = ValueTotal;
+            decimal discount = 0;
+            var value = ValueTotal;
 
             if (Voucher.TypeDiscount == TypeDiscountVoucher.Percentage)
             {
                 if (Voucher.Percentage.HasValue)
                 {
-                    desconto = (valor * Voucher.Percentage.Value) / 100;
-                    valor -= desconto;
+                    discount = (value * Voucher.Percentage.Value) / 100;
+                    value -= discount;
                 }
             }
             else
             {
                 if (Voucher.ValueDiscount.HasValue)
                 {
-                    desconto = Voucher.ValueDiscount.Value;
-                    valor -= desconto;
+                    discount = Voucher.ValueDiscount.Value;
+                    value -= discount;
                 }
             }
 
-            ValueTotal = valor < 0 ? 0 : valor;
-            Discount = desconto;
+            ValueTotal = value < 0 ? 0 : value;
+            Discount = discount;
         }
 
         internal bool CartExistingItem(ItemCart item)

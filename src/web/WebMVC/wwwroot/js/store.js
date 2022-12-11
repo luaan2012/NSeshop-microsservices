@@ -16,7 +16,10 @@
     });
 
     $('.js-addwish-b2').each(function () {
+
+
         var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+
         $(this).on('click', function () {
 
             var $wishList = $(this);
@@ -26,34 +29,46 @@
                 Quantity : 1
             }
 
+            $("#overlay").fadeIn(300);
+
             if ($(this).hasClass('js-addedwish-b2')) {
-                $.post('wishlist/remove-itemWishList', { id: $(this).attr('data-id') }, function () {
+                
+                $.post('wishlist/itemWishList', { id: $(this).attr('data-id') }, function () {
                 }).done(function () {
                     swal(nameProduct, "Foi removido da sua lista de desejo!", "success");
                     $wishList.removeClass('js-addedwish-b2');
-                    handleWishList(-1);
+                    $("#overlay").fadeOut(300);
+                    $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
-                    if (data.responseJSON)
+                    if (data.responseJSON) {
                         swal("", data.responseJSON[0], "error");
+                        $("#overlay").fadeOut(300);
+                    }
                 })
             } else {
                 $.post('wishlist/add-item', itemWishListViewModel, function () {
                 }).done(function () {
                     swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
                     $wishList.addClass('js-addedwish-b2');
+                    $("#overlay").fadeOut(300);
                     $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
-                    if (data.responseJSON)
+                    if (data.responseJSON) {
                         swal("", data.responseJSON[0], "error");
+                        $("#overlay").fadeOut(300);
+                    }
                 })
             }                  
         });
     });
 
     $('.js-addwish-detail').each(function () {
+
         var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
         $(this).on('click', function () {
+
+            $("#overlay").fadeIn(300);
 
             var $wishList = $(this);
 
@@ -67,26 +82,34 @@
                 }).done(function () {
                     swal(nameProduct, "Foi removido da sua lista de desejo!", "success");
                     $wishList.removeClass('js-addedwish-b2');
-                    handleWishList(-1);
+                    $("#overlay").fadeOut(300);
                 }).fail(function (data) {
-                    if (data.responseJSON)
+                    if (data.responseJSON) {
                         swal("", data.responseJSON[0], "error");
+                        $("#overlay").fadeOut(300);
+                    }
+
                 })
             } else {
                 $.post('wishlist/add-item', itemWishListViewModel, function () {
                 }).done(function () {
                     swal(nameProduct, "Foi adicionado a sua lista de desejo!", "success");
                     $wishList.addClass('js-addedwish-b2');
+                    $("#overlay").fadeOut(300);
                     $('.swal-button--confirm').click(function () { window.location.reload() })
                 }).fail(function (data) {
-                    if (data.responseJSON)
+                    if (data.responseJSON) {
                         swal("", data.responseJSON[0], "error");
+                        $("#overlay").fadeOut(300);
+                    }
                 })
             }
         });
     });
 
     $('.js-addcart-detail').on('click', function () {
+
+        $("#overlay").fadeIn(300);
 
         let cartViewModel = {
             ProductId: $('#productId').val(),
@@ -97,11 +120,14 @@
         }).done(function () {
             var nameProduct = $('.js-name-detail').html();
             swal(nameProduct, "Foi adicionado ao seu carrinho!", "success");
+            $("#overlay").fadeOut(300);
             $('.swal-button--confirm').click(function () { window.location.reload() })
         })
         .fail(function (data) {
-            if (data.responseJSON)
+            if (data.responseJSON) {
                 swal("", data.responseJSON[0], "error");
+                $("#overlay").fadeOut(300);
+            }
         })
     });
 
@@ -146,6 +172,8 @@ function openLogin() {
 
 function openModal(id) {
 
+    $("#overlay").fadeIn(300);
+
     $.get('/loja/' + id, function () {
     }).done(function (data) {
 
@@ -159,18 +187,10 @@ function openModal(id) {
         $('#productId').val(data.id);
 
         $('.js-modal1').addClass('show-modal1');
-    });
-}
 
-function wishList(url, param, element, verb, nameProduct) {
-    $.post(url, param, function () {
-    }).done(function () {
-        swal(nameProduct, verb ? "Foi adicionado a sua lista de desejo!" : "Foi removido da sua lista de desejo!", "success");
-        element.removeClass('js-addedwish-b2');
-    }).fail(function (data) {
-        if (data.responseJSON)
-            swal("", data.responseJSON[0], "error");
-    })
+        $("#overlay").fadeOut(300);
+
+    }).fail(function(){ $("#overlay").fadeOut(300); })
 }
 
 function searchProduct(name) {
@@ -204,19 +224,27 @@ function removeAcento(text) {
 }
 
 function removeItemCart(id) {
+    $("#overlay").fadeIn(300);
+
     $.post('cart/removeItem', { Id: id }, function () {
-    }).done(function () { window.location.reload() })
+    }).done(function () { $("#overlay").fadeOut(300);  window.location.reload() })
         .fail(function (data) {
-            if (data.responseJSON)
+            if (data.responseJSON) {
                 swal("", data.responseJSON[0], "error");
+                $("#overlay").fadeOut(300);
+            }
         })
 }
 
 function removeItemWishList(id) {
-    $.post('wishList/itemWishList', { Id: id }, function () {
-    }).done(function () { window.location.reload() })
+    $("#overlay").fadeIn(300);
+
+    $.post('wishList/itemWishList', { Id: id, OpenWishList: 'Sim' }, function () {
+    }).done(function () { $("#overlay").fadeOut(300); window.location.reload() })
         .fail(function (data) {
-            if (data.responseJSON)
+            if (data.responseJSON) {
                 swal("", data.responseJSON[0], "error");
+                $("#overlay").fadeOut(300);
+            }
         })
 }

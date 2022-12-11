@@ -111,6 +111,20 @@ namespace NS.Carrinho.API.Controllers
             return CustomResponse();
         }
 
+        [HttpPost]
+        [Route("cart/remove-voucher")]
+        public async Task<IActionResult> RemoveVoucher(Voucher voucher)
+        {
+            var cart = await GetCartClient();
+
+            cart.RemoveVoucher(voucher);
+
+            _context.ClientCarts.Update(cart);
+
+            await PersistData();
+            return CustomResponse();
+        }
+
         private async Task<ClientCart> GetCartClient()
         {
             return await _context.ClientCarts

@@ -13,6 +13,8 @@ namespace NS.BFF.Compras.Services
         Task<ResponseResult> RemoveItemCart(Guid productId);
         Task<ResponseResult> RemoveCart();
         Task<ResponseResult> ApplyVoucherCart(VoucherDTO voucher);
+        Task<ResponseResult> RemoveVoucherCart(VoucherDTO voucher);
+
     }
 
     public class CartService : Service, ICartService
@@ -79,6 +81,17 @@ namespace NS.BFF.Compras.Services
             var itemContent = GetContent(voucher);
 
             var response = await _httpClient.PostAsync("/cart/apply-voucher/", itemContent);
+
+            if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> RemoveVoucherCart(VoucherDTO voucher)
+        {
+            var itemContent = GetContent(voucher);
+
+            var response = await _httpClient.PostAsync("/cart/remove-voucher/", itemContent);
 
             if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

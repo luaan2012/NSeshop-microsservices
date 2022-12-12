@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NS.ApiCore.Controllers;
 using NS.APICore.User;
 using NS.Clientes.API.Application.Commands;
@@ -8,7 +7,6 @@ using NS.Core.Mediator;
 
 namespace NS.Clientes.API.Controllers
 {
-    [Authorize]
     public class ClientController : MainController
     {
         private readonly IClientRepository _clientRepository;

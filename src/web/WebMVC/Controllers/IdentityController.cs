@@ -45,13 +45,6 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Teste()
-        {
-            return Ok("teste");
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Login(UserLogin userLogin, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

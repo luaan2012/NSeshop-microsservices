@@ -9,14 +9,18 @@ namespace NS.WebMVC.Controllers
     public class CartController : MainController
     {
         private readonly IShopsBffService _shopsBffService;
+        private readonly IClientService _clientService;
 
-        public CartController(IShopsBffService shopsBffService)
+        public CartController(IShopsBffService shopsBffService, IClientService clientService)
         {
             _shopsBffService = shopsBffService;
+            _clientService = clientService;
         }
 
         public async Task<IActionResult> Index()
         {
+            TempData["address"] = await _clientService.GetAddress();
+
             return View(await _shopsBffService.GetCart());
         }
 

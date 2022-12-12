@@ -6,13 +6,13 @@ namespace NS.Clientes.API.Application.Commands
     public class AddAddressCommand : Command
     {
         public Guid ClientId { get; set; }
-        public string PublicPlace { get; private set; }
-        public string Number { get; private set; }
-        public string Complement { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string Cep { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
+        public string PublicPlace { get; set; }
+        public string Number { get; set; }
+        public string Complement { get; set; }
+        public string Neighborhood { get; set; }
+        public string Cep { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
 
         public AddAddressCommand()
         {
@@ -34,13 +34,13 @@ namespace NS.Clientes.API.Application.Commands
 
         public override bool IsValid()
         {
-            ValidationResult = new EnderecoValidation().Validate(this);
+            ValidationResult = new AddressValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
-        public class EnderecoValidation : AbstractValidator<AddAddressCommand>
+        public class AddressValidation : AbstractValidator<AddAddressCommand>
         {
-            public EnderecoValidation()
+            public AddressValidation()
             {
                 RuleFor(c => c.PublicPlace)
                     .NotEmpty()

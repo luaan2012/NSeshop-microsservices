@@ -1,5 +1,8 @@
 ﻿@using NS.Core.Communication
 @model CartViewModel
+@{
+    var address = TempData["address"] as AddressViewModel;
+}
 
 <!-- breadcrumb -->
 <div class="container">
@@ -61,10 +64,10 @@
                             }
 
                         </table>
-                    </div>                    
+                    </div>
 
-                    <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">                        
-                    
+                    <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+
                         @if (Model.VoucherUsed)
                         {
                             <small class="text-success">Voucher usado: @Model.Voucher.Code <i class="fa-sharp fa-solid fa-xmark" style="cursor:pointer" onclick="removeVoucher('@Model.Voucher.Code')"></i></small>
@@ -111,19 +114,39 @@
 
                         <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 
-                            <p class="stext-111 cl6 p-t-2">
-                                Travessa sonata aurora, 130, SP									
-						    </p>
+                            @if (address is not null)
+                            {
+                                <p class="stext-111 cl6 p-t-2">
+                                    @address.ToString()
+                                </p>
 
-                            <div class="p-t-15">
+                                <div class="p-t-15">
 
-                                <div class="flex-w">
-                                    <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer" data-toggle="modal" data-target="#registerModal">
-                                        Editar
+                                    <div class="flex-w">
+                                        <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer" data-toggle="modal" data-target="#registerModal">
+                                            Editar
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="stext-111 cl6 p-t-2">
+                                    Você não possui endereço
+                                </p>
+
+                                <div class="p-t-15">
+
+                                    <div class="flex-w">
+                                        <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer" data-toggle="modal" data-target="#registerModal">
+                                            Adicionar
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
                         </div>
                     </div>
 
@@ -135,7 +158,7 @@
                         </div>
 
                         <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                           <span class="mtext-110 cl2">
+                            <span class="mtext-110 cl2">
                                 R$ 50.00
                             </span>
                         </div>
@@ -144,12 +167,12 @@
                     <div class="flex-w flex-t p-t-27 p-b-33">
                         <div class="size-208">
                             <span class="mtext-101 cl2">
-                                Total:
+                                Total desconto:
                             </span>
                         </div>
 
                         <div class="size-209 p-t-1">
-                            <span class="mtext-110 cl2">
+                            <span class="mtext-110 cl2 text-success">
                                 @this.FormatCoin(Model.ValueTotal)
                             </span>
                         </div>

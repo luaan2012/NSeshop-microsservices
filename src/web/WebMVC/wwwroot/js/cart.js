@@ -55,10 +55,15 @@ function removeVoucher(voucherCode) {
         })
 }
 
-function registerModal(cep) {
+function registerModal(cep, edit) {
     
     if (cep.toString().length < 8) 
         return
+
+    if (edit)
+        $('#cepRegister').val(cep);
+
+    $('#registerModal').modal('show');
     
     $("#overlay").fadeIn(300);
 
@@ -115,5 +120,4 @@ $('.sendRegister').click(function () {
 
         //swal("", "Endereço registrado com sucesso!", "success");
     })
-
-})
+});

@@ -35,5 +35,13 @@ namespace NS.Clientes.API.Controllers
             address.ClientId = _user.ObterUserId();
             return CustomResponse(await _mediator.SendCommand(address));
         }
+
+        [HttpPost]
+        [Route("client/edit-address")]
+        public async Task<IActionResult> EditAddress(EditAddressCommand address)
+        {
+            address.ClientId = _user.ObterUserId();
+            return CustomResponse(await _mediator.SendCommand(address));
+        }
     }
 }

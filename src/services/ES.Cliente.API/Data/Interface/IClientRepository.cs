@@ -11,6 +11,7 @@ namespace NS.Clientes.API.Data.Interface
         Task<Client> GiveByCpf(string cpf);
 
         void AddAddress(Address address);
+        void EditAddress(Address address);
         Task<Address> GiveAddressById(Guid id);
     }
 }

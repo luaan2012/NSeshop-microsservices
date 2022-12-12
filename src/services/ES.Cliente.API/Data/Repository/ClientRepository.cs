@@ -41,6 +41,11 @@ namespace NS.Clientes.API.Data.Repository
             _context.Addresses.Add(address);
         }
 
+        public void EditAddress(Address editAddress)
+        {
+            _context.Addresses.Update(editAddress);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

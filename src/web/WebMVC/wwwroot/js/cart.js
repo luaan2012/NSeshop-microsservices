@@ -57,13 +57,14 @@ function removeVoucher(voucherCode) {
 
 function registerModal(cep, edit) {
     
+    $('#registerModal').modal('show');
+
     if (cep.toString().length < 8) 
         return
 
-    if (edit)
+    if (edit) {
         $('#cepRegister').val(cep);
-
-    $('#registerModal').modal('show');
+    }
     
     $("#overlay").fadeIn(300);
 
@@ -100,7 +101,9 @@ $('.sendRegister').click(function () {
         State: $('#stateModal').val(),
     }
 
-    $.post('register-address', registerViewModel, function () {
+    var url = $('.editAddress').length ? 'register-address' : 'edit-address';
+
+    $.post(url, registerViewModel, function () {
     }).done(function (data) {
         console.log(data)
         swal("", "Endereço registrado com sucesso!", "success");
@@ -117,7 +120,5 @@ $('.sendRegister').click(function () {
             swal("", response, "error");
             $("#overlay").fadeOut(300);
         }
-
-        //swal("", "Endereço registrado com sucesso!", "success");
     })
 });

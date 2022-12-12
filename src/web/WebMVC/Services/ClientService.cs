@@ -43,5 +43,16 @@ namespace NS.WebMVC.Services
 
             return ReturnOk();
         }
+
+        public async Task<ResponseResult> EditAddress(AddressViewModel address)
+        {
+            var addressContent = GetContent(address);
+
+            var response = await _httpClient.PostAsync("/client/edit-address/", addressContent);
+
+            if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
     }
 }

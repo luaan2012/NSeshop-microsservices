@@ -25,5 +25,16 @@ namespace NS.WebMVC.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("edit-address")]
+        public async Task<IActionResult> EditAddress(AddressViewModel address)
+        {
+            var response = await _clientService.AddAddress(address);
+
+            if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
+
+            return Ok();
+        }
     }
 }

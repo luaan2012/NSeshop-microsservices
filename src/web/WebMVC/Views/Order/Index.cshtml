@@ -1,6 +1,8 @@
 ﻿@model NS.WebMVC.Models.OrderTransactionViewModel
 
-<section class="padding-y">
+<section class="padding-y mb-5">
+    <div class="container">
+
         <div class="card">
             <div class="tracking-wrap">
                 <div class="step active">
@@ -28,46 +30,44 @@
                 </header>
                 <div class="row">
 
-                    <div class="col-md-6">
-                        <figure class="itemside  mb-3">
-                            <div class="aside">
-                                <img src="~/images/produtos/" alt="" class="border img-xs">
-                            </div>
-                            <figcaption class="info">
-                                <p>
-                                    <b></b>
-                                </p>
-                                <span> </span>
-                            </figcaption>
-                        </figure>
+                    <div class="card border-success">
+                        <div class="card-body">
+
+                            <small>Total Pedido:</small> <small class="text-success">@this.FormatCoin(Model.ValueTotal)</small>
+
+                            <small class="ml-5">Vouche Usado:</small> <small class="@(string.IsNullOrEmpty(Model.VoucherCode) ? "text-danger" : "text-success")"> @(Model?.VoucherCode ?? "Nenhum")</small>
+
+                            <small class="ml-5">Desconto: </small> <small class="text-success"> @this.FormatCoin(Model.Discount)</small>
+
+                        </div>
                     </div>
+
                 </div>
             </article>
 
-            <form asp-action="FinalizarPedido" asp-controller="Pedido">
+            <form asp-action="FinishOrder" asp-controller="Order">
                 <article class="card-body border-top">
-
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label></label>
-                                    <input class="form-control" />
-                                    <span  class="text-danger"></span>
+                                    <label asp-for="CardName"></label>
+                                    <input asp-for="CardName" class="form-control" placeholder="Digite igual está no cartão"/>
+                                    <span asp-validation-for="CardName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label ></label>
+                                    <label asp-for="CardNumber"></label>
                                     <div class="input-group">
-                                        <input class="form-control" />
+                                        <input asp-for="CardNumber" class="form-control" maxlength="16" placeholder="Número do Cartão"/>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp;
                                                 <i class="fab fa-cc-mastercard"></i>
                                             </span>
                                         </div>
-                                        <span class="text-danger"></span>
+                                        <span asp-validation-for="CardName" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -76,24 +76,24 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
                                 <div>
-                                    <label></label>
+                                    <label asp-for="CardExpiration"></label>
                                     <div class="form-inline">
-                                        <input style="width: 190px" class="form-control" />
-                                        <span class="text-danger"></span>
+                                        <input asp-for="CardExpiration" class="form-control dateCard w-25" />
+                                        <span asp-validation-for="CardExpiration" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-4 col-sm-12">                                
                                 <div>
-                                    <spam data-toggle="tooltip" title="" data-original-title="Os 3 dígitos informados atrás do seu cartão">
-                                        <label></label> <i class="fa fa-question-circle"></i>
-                                    </spam>
-
-                                    <div>
-                                        <input style="width: 160px"  class="form-control" />
-                                        <span  class="text-danger"></span>
+                                    <label asp-for="CvvCard"></label> 
+                                    <div class="form-inline">
+                                        <input asp-for="CvvCard" class="form-control w-25" maxlength="4" />
+                                        <span asp-validation-for="CvvCard" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <spam class="tooltipOrder" data-toggle="tooltip" title="Os 3 dígitos informados atrás do seu cartão" data-original-title="Os 3 dígitos informados atrás do seu cartão">
+                                    <i class="fa fa-question-circle"></i>
+                                </spam>
                             </div>
                         </div>
 
@@ -105,8 +105,24 @@
                         <button type="submit" class="btn btn-primary float-md-right"> Finalizar Pedido <i class="fa fa-chevron-right"></i> </button>
                     </div>
 
-                    <a class="btn btn-light"> <i class="fa fa-chevron-left"></i> Voltar ao Endereço </a>
+                    <a class="btn btn-light" asp-action="Index" asp-controller="Cart"> <i class="fa fa-chevron-left"></i> Voltar ao Carrinho </a>
                 </div>
             </form>
         </div>
+    </div>
 </section>
+
+@section scripts{
+
+    <script>
+        (function($) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.dateCard').mask("00/00", {placeholder: "__/__"});
+            
+            var wrapMenu = $('.wrap-menu-desktop');
+            $(wrapMenu).css('top',0); 
+            
+        }(jQuery));
+    </script>
+
+}

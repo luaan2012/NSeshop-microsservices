@@ -19,6 +19,15 @@ namespace NS.WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var cart = await _shopsBffService.GetCart();
+
+            if(cart?.Items?.Count <= 0)
+            {
+                TempData["CartEmpty"] = "true";
+
+                return RedirectToAction("Index", "Store");
+            }
+
             TempData["address"] = await _clientService.GetAddress();
 
             return View(await _shopsBffService.GetCart());

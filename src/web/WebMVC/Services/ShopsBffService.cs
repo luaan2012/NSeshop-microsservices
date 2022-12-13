@@ -177,7 +177,7 @@ namespace NS.WebMVC.Services
         {
             var orderContent = GetContent(orderTransaction);
 
-            var response = await _httpClient.PostAsync("/compras/pedido/", orderContent);
+            var response = await _httpClient.PostAsync("/shops/order/", orderContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -186,7 +186,7 @@ namespace NS.WebMVC.Services
 
         public async Task<OrderViewModel> GetLastOrder()
         {
-            var response = await _httpClient.GetAsync("/compras/pedido/ultimo/");
+            var response = await _httpClient.GetAsync("/shops/order/last/");
 
             HandleErrosResponse(response);
 
@@ -195,7 +195,7 @@ namespace NS.WebMVC.Services
 
         public async Task<IEnumerable<OrderViewModel>> GetListByClientId()
         {
-            var response = await _httpClient.GetAsync("/compras/pedido/lista-cliente/");
+            var response = await _httpClient.GetAsync("/shops/order/list-client/");
 
             HandleErrosResponse(response);
 

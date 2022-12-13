@@ -31,7 +31,7 @@ namespace NS.WebMVC.Models
         public string CardNumber { get; set; }
 
         [Required(ErrorMessage = "Informe o nome do portador do cartão")]
-        [DisplayName("Nome do Portador")]
+        [DisplayName("Digite o Nome Completo")]
         public string CardName { get; set; }
 
         [RegularExpression(@"(0[1-9]|1[0-2])\/[0-9]{2}", ErrorMessage = "O vencimento deve estar no padrão MM/AA")]

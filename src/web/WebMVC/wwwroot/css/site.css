@@ -5,6 +5,13 @@
     position: relative !important;
 }
 
+.tooltipOrder {
+    float: left;
+    top: -50px;
+    left: 155px;
+    position: relative;
+}
+
 .fa-envelope {
     float: left !important;
     top: 25px !important;

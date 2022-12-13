@@ -97,7 +97,7 @@ $('.sendRegister').click(function () {
 
     var registerViewModel = {
         PublicPlace: $('#addressModal').val(),
-        Complement: $('#complementModalNew').val(),
+        Complement: $('#complementModal').val(),
         Number: $('#numberModal').val(),
         Neighborhood: $('#neighborhoodModal').val(),
         Cep: $('#cepRegister').val(),
@@ -124,3 +124,4 @@ $('.sendRegister').click(function () {
         }
     })
 });
+

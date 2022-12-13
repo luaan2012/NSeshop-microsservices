@@ -338,6 +338,11 @@
         if(openWishList)
             $('.js-panel-wish').addClass('show-header-cart');
 
+        var messageEmpty = '@TempData["CartEmpty"]';
+        
+        if(messageEmpty)
+            swal("", "Você precisa ter ao menos um produto para seguir para o carrinho", "error");
+
     });
         
 </script>

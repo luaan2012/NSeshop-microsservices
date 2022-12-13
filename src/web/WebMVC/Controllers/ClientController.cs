@@ -30,7 +30,7 @@ namespace NS.WebMVC.Controllers
         [Route("edit-address")]
         public async Task<IActionResult> EditAddress(AddressViewModel address)
         {
-            var response = await _clientService.AddAddress(address);
+            var response = await _clientService.EditAddress(address);
 
             if (ResponseHasError(response)) return BadRequest(response.Errors.Messages);
 

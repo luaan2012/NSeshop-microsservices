@@ -44,12 +44,12 @@
 </div>
 
 <!-- Register Address-->
-<div class="modal fade" id="registerModal" tabindex="999999" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" tabindex="999999" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Registre um endereço para entrega</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#registerModal').modal('hide')">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -61,14 +61,14 @@
                         <input type="text" class="form-control" id="cepRegister" placeholder="00000-000" maxlength="8" onkeyup="registerModal(this.value)">
                     </div>
                     <div class="showRegister" style="display:none;">
-
+                        <input type="hidden" id="idModalRegister"/>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Endereço</label>
                             <input type="text" class="form-control" id="addressModal" placeholder="Digite seu endereço">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complementModal" placeholder="Digite seu complemento">
+                            <label for="recipient-name" class="col-form-label">Complementoo</label>
+                            <input type="text" class="form-control" id="complementModal" placeholder="Digite seu número">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Bairro</label>

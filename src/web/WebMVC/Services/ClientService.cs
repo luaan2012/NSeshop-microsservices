@@ -10,6 +10,7 @@ namespace NS.WebMVC.Services
     {
         Task<AddressViewModel> GetAddress();
         Task<ResponseResult> AddAddress(AddressViewModel address);
+        Task<ResponseResult> EditAddress(AddressViewModel address);
     }
 
     public class ClientService : Service, IClientService

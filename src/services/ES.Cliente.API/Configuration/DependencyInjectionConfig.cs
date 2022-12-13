@@ -22,6 +22,7 @@ namespace NS.Clients.API.Configuration
 
             services.AddScoped<IRequestHandler<RegisterClientCommand, ValidationResult>, ClientCommandHandler>();
             services.AddScoped<IRequestHandler<AddAddressCommand, ValidationResult>, ClientCommandHandler>();
+            services.AddScoped<IRequestHandler<EditAddressCommand, ValidationResult>, ClientCommandHandler>();
 
             services.AddScoped<INotificationHandler<ClientRegistradoEvent>, ClienteEventHandler>();
 

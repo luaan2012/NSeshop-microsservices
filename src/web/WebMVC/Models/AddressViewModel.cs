@@ -20,6 +20,7 @@ namespace NS.WebMVC.Models
         public string City { get; set; }
         [Required]
         public string State { get; set; }
+        public Guid Id{ get; set; }
 
         public override string ToString()
         {

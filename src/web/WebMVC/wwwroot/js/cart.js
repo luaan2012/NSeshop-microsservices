@@ -55,15 +55,20 @@ function removeVoucher(voucherCode) {
         })
 }
 
-function registerModal(cep, edit) {
+function registerModal(cep, id, complement, number) {
     
     $('#registerModal').modal('show');
 
     if (cep.toString().length < 8) 
         return
 
-    if (edit) {
+    console.log(complement)
+
+    if ($('.editAddress').length) {
+        $('#complementModal').val(complement);
         $('#cepRegister').val(cep);
+        $('#numberModal').val(number);
+        $('#idModalRegister').val(id);
     }
     
     $("#overlay").fadeIn(300);
@@ -71,7 +76,6 @@ function registerModal(cep, edit) {
     $.get('https://viacep.com.br/ws/'+cep+'/json/', function () {
     }).done(function (data) {
         $('#addressModal').val(data.logradouro);
-        $('#complementModal').val(data.complemento);
         $('#neighborhoodModal').val(data.bairro);
         $('#cityModal').val(data.localidade);
         $('#stateModal').val(data.uf);
@@ -93,20 +97,21 @@ $('.sendRegister').click(function () {
 
     var registerViewModel = {
         PublicPlace: $('#addressModal').val(),
-        Complement: $('#complementModal').val(),
+        Complement: $('#complementModalNew').val(),
         Number: $('#numberModal').val(),
         Neighborhood: $('#neighborhoodModal').val(),
         Cep: $('#cepRegister').val(),
         City: $('#cityModal').val(),
         State: $('#stateModal').val(),
+        Id: $('#idModalRegister').val()
     }
 
-    var url = $('.editAddress').length ? 'register-address' : 'edit-address';
+    var url = $('.editAddress').length ? 'edit-address' : 'register-address';
 
     $.post(url, registerViewModel, function () {
     }).done(function (data) {
-        console.log(data)
         swal("", "Endereço registrado com sucesso!", "success");
+        $('.swal-button--confirm').click(function () { window.location.reload() })
     }).fail(function (data) {
         if (data.responseJSON) {
             var response = "";
@@ -115,10 +120,9 @@ $('.sendRegister').click(function () {
                 response += v + ' | ';
             })
 
-            console.log(response)
-
-            swal("", response, "error");
             $("#overlay").fadeOut(300);
+            swal("", response, "error");
+            $('.swal-button--confirm').click(function () { window.location.reload() })
         }
     })
 });

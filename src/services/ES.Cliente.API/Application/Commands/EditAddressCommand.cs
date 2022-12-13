@@ -13,13 +13,14 @@ namespace NS.Clientes.API.Application.Commands
         public string Cep { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public Guid Id { get; set; }
 
         public EditAddressCommand()
         {
         }
 
         public EditAddressCommand(Guid clientId, string publicPlace, string number, string complement,
-            string neighborhood, string cep, string city, string state)
+            string neighborhood, string cep, string city, string state, Guid id)
         {
             AggregateId = clientId;
             ClientId = clientId;
@@ -30,6 +31,7 @@ namespace NS.Clientes.API.Application.Commands
             Cep = cep;
             City = city;
             State = state;
+            Id = id;
         }
 
         public override bool IsValid()

@@ -105,7 +105,6 @@ $('.sendRegister').click(function () {
 
     $.post(url, registerViewModel, function () {
     }).done(function (data) {
-        console.log(data)
         swal("", "Endereço registrado com sucesso!", "success");
     }).fail(function (data) {
         if (data.responseJSON) {
@@ -114,9 +113,6 @@ $('.sendRegister').click(function () {
             $.each(data.responseJSON, function (i, v) {
                 response += v + ' | ';
             })
-
-            console.log(response)
-
             swal("", response, "error");
             $("#overlay").fadeOut(300);
         }

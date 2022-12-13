@@ -176,9 +176,10 @@
                                 @this.FormatCoin(Model.ValueTotal)
                             </span>
                         </div>
-                    </div>
+                    </div>                    
 
-                    <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                    <small class="text-danger">@(address is null ? "Cadastre um endereço para prosseguir" : ""</small>
+                    <button href="@Url.Action("Index", "Cart")" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" @(address is null ? "disabled" : "")>
                         Seguir para o pagamento
                     </button>
                 </div>

@@ -28,7 +28,7 @@ namespace NS.BFF.Compras.Services
         {
             var pedidoContent = GetContent(pedido);
 
-            var response = await _httpClient.PostAsync("/pedido/", pedidoContent);
+            var response = await _httpClient.PostAsync("/order/", pedidoContent);
 
             if (!HandlerErrorResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
@@ -37,7 +37,7 @@ namespace NS.BFF.Compras.Services
 
         public async Task<OrderDTO> GetLastOrder()
         {
-            var response = await _httpClient.GetAsync("/pedido/ultimo/");
+            var response = await _httpClient.GetAsync("/order/last/");
 
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
 
@@ -48,7 +48,7 @@ namespace NS.BFF.Compras.Services
 
         public async Task<IEnumerable<OrderDTO>> GetListByClient()
         {
-            var response = await _httpClient.GetAsync("/pedido/lista-cliente/");
+            var response = await _httpClient.GetAsync("/order/list-client/");
 
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
 

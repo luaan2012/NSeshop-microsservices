@@ -29,8 +29,7 @@ namespace NS.BFF.Compras.Controllers
         }
 
         [HttpPost]
-        [Route("shops/order")]
-        [AllowAnonymous]
+        [Route("shops/order/addOrder")]
         public async Task<IActionResult> AddOrder(OrderDTO pedido)
         {
             var cart = await _cartService.GetCart();

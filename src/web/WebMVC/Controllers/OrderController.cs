@@ -55,7 +55,7 @@ namespace NS.WebMVC.Controllers
         {
             var response = await _shopsBffService.GetLastOrder();
 
-            if (response.PedidoItems.Count == 0 ) return RedirectToAction("Index", "Store");
+            if (response.OrderItems.Count == 0 ) return RedirectToAction("Index", "Store");
 
             return View("OrderFinished", response);
         }

@@ -177,7 +177,7 @@ namespace NS.WebMVC.Services
         {
             var orderContent = GetContent(orderTransaction);
 
-            var response = await _httpClient.PostAsync("/shops/order/", orderContent);
+            var response = await _httpClient.PostAsync("/shops/order/addOrder/", orderContent);
 
             if (!HandleErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 

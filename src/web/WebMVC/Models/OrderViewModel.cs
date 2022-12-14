@@ -18,7 +18,7 @@
         public decimal Discount { get; set; }
         public bool VoucherUsed { get; set; }
 
-        public List<ItemOrderViewModel> PedidoItems { get; set; } = new List<ItemOrderViewModel>();
+        public List<ItemOrderViewModel> OrderItems { get; set; } = new List<ItemOrderViewModel>();
 
         #endregion
 

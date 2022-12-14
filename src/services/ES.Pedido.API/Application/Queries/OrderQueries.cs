@@ -22,15 +22,15 @@ namespace NS.Pedidos.API.Application.Queries
         public async Task<OrderDTO> GetLastOrder(Guid clientId)
         {
             const string sql = @"SELECT
-                                P.ID AS 'ProdutoId', P.CODIGO, P.VOUCHERUTILIZADO, P.DESCONTO, P.VALORTOTAL,P.PEDIDOSTATUS,
-                                P.LOGRADOURO,P.NUMERO, P.BAIRRO, P.CEP, P.COMPLEMENTO, P.CIDADE, P.ESTADO,
-                                PIT.ID AS 'ProdutoItemId',PIT.PRODUTONOME, PIT.QUANTIDADE, PIT.PRODUTOIMAGEM, PIT.VALORUNITARIO 
-                                FROM PEDIDOS P 
-                                INNER JOIN PEDIDOITEMS PIT ON P.ID = PIT.PEDIDOID 
-                                WHERE P.CLIENTEID = @clienteId 
-                                AND P.DATACADASTRO between DATEADD(minute, -3,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
-                                AND P.PEDIDOSTATUS = 1 
-                                ORDER BY P.DATACADASTRO DESC";
+                                P.ID AS 'ProductId', P.CODE, P.VOUCHERUSED, P.DISCOUNT, P.VALUETOTAL ,P.ORDERSTATUS,
+                                P.PUBLICPLACE,P.NUMBER, P.NEIGHBORHOOD, P.CEP, P.COMPLEMENT, P.CITY, P.STATE,
+                                PIT.ID AS 'ProductItemId',PIT.PRODUCTNAME, PIT.QUANTITY, PIT.PRODUCTIMAGE, PIT.VALUEUNITY 
+                                FROM ORDERS P 
+                                INNER JOIN ORDERITEMS PIT ON P.ID = PIT.ORDERID 
+                                WHERE P.CLIENTID = @clientId 
+                                AND P.DATAREGISTER between DATEADD(minute, -3,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
+                                AND P.ORDERSTATUS = 1 
+                                ORDER BY P.DATAREGISTER DESC";
 
             var order = await _orderRepository.GetConnection()
                 .QueryAsync<dynamic>(sql, new { clientId });
@@ -49,22 +49,22 @@ namespace NS.Pedidos.API.Application.Queries
         {
             var pedido = new OrderDTO
             {
-                Code = result[0].CODIGO,
-                Status = result[0].PEDIDOSTATUS,
-                ValueTotal = result[0].VALORTOTAL,
-                Discount = result[0].DESCONTO,
-                VoucherUsed = result[0].VOUCHERUTILIZADO,
+                Code = result[0]?.CODE,
+                Status = result[0]?.ORDERSTATUS,
+                ValueTotal = result[0]?.VALUETOTAL,
+                Discount = result[0]?.DISCOUNT,
+                VoucherUsed = result[0]?.VOUCHERUSED,
 
                 OrderItems = new List<ItemOrderDTO>(),
                 Address = new AddressDTO
                 {
-                    PublicPlace = result[0].LOGRADOURO,
-                    Neighborhood = result[0].BAIRRO,
-                    Cep = result[0].CEP,
-                    City = result[0].CIDADE,
-                    Complement = result[0].COMPLEMENTO,
-                    State = result[0].ESTADO,
-                    Number = result[0].NUMERO
+                    PublicPlace = result[0]?.PUBLICPLACE,
+                    Neighborhood = result[0]?.NEIGHBORHOOD,
+                    Cep = result[0]?.CEP,
+                    City = result[0]?.CITY,
+                    Complement = result[0]?.COMPLEMENT,
+                    State = result[0]?.STATE,
+                    Number = result[0]?.NUMBER
                 }
             };
 
@@ -72,10 +72,10 @@ namespace NS.Pedidos.API.Application.Queries
             {
                 var pedidoItem = new ItemOrderDTO
                 {
-                    Name = item.PRODUTONOME,
-                    Value = item.VALORUNITARIO,
-                    Quantity = item.QUANTIDADE,
-                    Image = item.PRODUTOIMAGEM
+                    Name = item?.PRODUCTNAME,
+                    Value = item?.VALUEUNITY,
+                    Quantity = item?.QUANTITY,
+                    Image = item?.PRODUCTIMAGE
                 };
 
                 pedido.OrderItems.Add(pedidoItem);

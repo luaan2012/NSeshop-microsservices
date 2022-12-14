@@ -21,9 +21,9 @@ namespace NS.Pedidos.API.Application.Commands
         public AddressDTO Address { get; set; }
 
         // Cartao
-        public string NumberCard { get; set; }
-        public string NameCard { get; set; }
-        public string ExpirationCard { get; set; }
+        public string CardNumber { get; set; }
+        public string CardName { get; set; }
+        public string CardExpiration { get; set; }
         public string CvvCard { get; set; }
 
         public override bool IsValid()
@@ -48,11 +48,11 @@ namespace NS.Pedidos.API.Application.Commands
                     .GreaterThan(0)
                     .WithMessage("Valor do pedido inválido");
 
-                RuleFor(c => c.NumberCard)
+                RuleFor(c => c.CardNumber)
                     .CreditCard()
                     .WithMessage("Número de cartão inválido");
 
-                RuleFor(c => c.NameCard)
+                RuleFor(c => c.CardName)
                     .NotNull()
                     .WithMessage("Nome do portador do cartão requerido.");
 
@@ -61,7 +61,7 @@ namespace NS.Pedidos.API.Application.Commands
                     .LessThan(5)
                     .WithMessage("O CVV do cartão precisa ter 3 ou 4 números.");
 
-                RuleFor(c => c.ExpirationCard)
+                RuleFor(c => c.CardExpiration)
                     .NotNull()
                     .WithMessage("Data expiração do cartão requerida.");
             }

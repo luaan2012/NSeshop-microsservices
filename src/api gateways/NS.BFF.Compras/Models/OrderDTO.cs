@@ -36,21 +36,21 @@ namespace NS.BFF.Compras.Models
 
         [Required(ErrorMessage = "Informe o número do cartão")]
         [DisplayName("Número do Cartão")]
-        public string NumberCart { get; set; }
+        public string CardNumber { get; set; }
 
         [Required(ErrorMessage = "Informe o nome do portador do cartão")]
         [DisplayName("Nome do Portador")]
-        public string NameCart { get; set; }
+        public string CardName { get; set; }
 
         [RegularExpression(@"(0[1-9]|1[0-2])\/[0-9]{2}", ErrorMessage = "O vencimento deve estar no padrão MM/AA")]
         [CardExpiration(ErrorMessage = "Cartão Expirado")]
         [Required(ErrorMessage = "Informe o vencimento")]
         [DisplayName("Data de Vencimento MM/AA")]
-        public string CartExpiration { get; set; }
+        public string CardExpiration { get; set; }
 
         [Required(ErrorMessage = "Informe o código de segurança")]
         [DisplayName("Código de Segurança")]
-        public string CvvCartao { get; set; }
+        public string CvvCard { get; set; }
 
         #endregion
     }

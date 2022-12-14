@@ -6,7 +6,7 @@ namespace NS.Pedidos.API.Application.DTO
     {
         public Guid Id { get; set; }
         public int Code { get; set; }
-
+        public Guid ClientId { get; set; }
         public int Status { get; set; }
         public DateTime Data { get; set; }
         public decimal ValueTotal { get; set; }

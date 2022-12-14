@@ -49,7 +49,7 @@ namespace NS.Carrinho.API.Services.gRPC
                 Clientid = carrinho.ClientId.ToString(),
                 Valuetotal = (double?)carrinho.ValueTotal ?? 0,
                 Discount = (double?)carrinho.Discount ?? 0,
-                Voucherused = carrinho.UsedVoucher,
+                Voucherused = carrinho.VoucherUsed,
             };
 
             if (carrinho.Voucher != null)
@@ -59,7 +59,7 @@ namespace NS.Carrinho.API.Services.gRPC
                     Code = carrinho.Voucher.Code,
                     Percentage = (double?)carrinho?.Voucher?.Percentage ?? 0,
                     Valuediscount = (double?)carrinho?.Voucher?.ValueDiscount ?? 0,
-                    Typediscount = (int?)carrinho?.Voucher?.TypeDiscount ?? 0
+                    Discounttype = (int?)carrinho?.Voucher?.DiscountType ?? 0
                 };
             }
 

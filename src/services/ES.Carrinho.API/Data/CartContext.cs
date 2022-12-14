@@ -32,10 +32,10 @@ namespace NS.Carrinho.API.Data
                 .OwnsOne(c => c.Voucher, v =>
                 {
                     v.Property(vc => vc.Code)
-                        .HasColumnName("VoucherCodigo")
+                        .HasColumnName("VoucherCode")
                         .HasColumnType("varchar(50)");
 
-                    v.Property(vc => vc.TypeDiscount)
+                    v.Property(vc => vc.DiscountType)
                         .HasColumnName("DiscountType");
 
                     v.Property(vc => vc.Percentage)

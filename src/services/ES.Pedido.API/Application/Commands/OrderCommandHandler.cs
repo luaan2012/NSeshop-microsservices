@@ -1,6 +1,8 @@
 ﻿using FluentValidation.Results;
 using MediatR;
 using NS.Core.Messages;
+using NS.Core.Messages.Integration;
+using NS.MessageBus;
 using NS.Pedidos.API.Application.Commands;
 using NS.Pedidos.API.Application.DTO;
 using NS.Pedidos.API.Application.Events;
@@ -15,12 +17,15 @@ namespace NS.Pedidos.API.Application.Commands
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IVoucherRepository _voucherRepository;
+        private readonly IMessageBus _bus;
 
         public OrderCommandHandler(IVoucherRepository voucherRepository,
-                                    IOrderRepository orderRepository)
+                                    IOrderRepository orderRepository,
+                                    IMessageBus bus)
         {
             _voucherRepository = voucherRepository;
             _orderRepository = orderRepository;
+            _bus = bus;
         }
 
         public async Task<ValidationResult> Handle(AddOrderCommand message, CancellationToken cancellationToken)
@@ -29,25 +34,25 @@ namespace NS.Pedidos.API.Application.Commands
             if (!message.IsValid()) return message.ValidationResult;
 
             // Mapear Pedido
-            var pedido = MapOrder(message);
+            var order = MapOrder(message);
 
             // Aplicar voucher se houver
-            if (!await ApplyVoucher(message, pedido)) return ValidationResult;
+            if (!await ApplyVoucher(message, order)) return ValidationResult;
 
             // Validar pedido
-            if (!ValidatePedido(pedido)) return ValidationResult;
+            if (!ValidatePedido(order)) return ValidationResult;
 
             // Processar pagamento
-            if (!ProcessPayment(pedido)) return ValidationResult;
+            if (!await ProcessPayment(order, message)) return ValidationResult;
 
             // Se pagamento tudo ok!
-            pedido.AuthorizeOrder();
+            order.AuthorizeOrder();
 
             // Adicionar Evento
-            pedido.AddEvent(new OrderRealizedEvent(pedido.Id, pedido.ClientId));
+            order.AddEvent(new OrderRealizedEvent(order.Id, order.ClientId));
 
             // Adicionar Pedido Repositorio
-            _orderRepository.Add(pedido);
+            _orderRepository.Add(order);
 
             // Persistir dados de pedido e voucher
             return await PersistData(_orderRepository.UnitOfWork);
@@ -99,7 +104,7 @@ namespace NS.Pedidos.API.Application.Commands
             return true;
         }
 
-        private bool ValidatePedido(Order order)
+        public bool ValidatePedido(Order order)
         {
             var orderValueOriginal = order.ValueTotal;
             var orderDiscount = order.Discount;
@@ -121,9 +126,31 @@ namespace NS.Pedidos.API.Application.Commands
             return true;
         }
 
-        public bool ProcessPayment(Order order)
+        public async Task<bool> ProcessPayment(Order order, AddOrderCommand message)
         {
-            return true;
+            var orderStart = new StartedOrderIntegrationEvent
+            {
+                OrderId = order.Id,
+                ClientId = order.ClientId,
+                Value = order.ValueTotal,
+                TypePayment = 1, // fixo. Alterar se tiver mais tipos
+                CartName = message.CardName,
+                CartNumber = message.CardNumber,
+                MounthOfYear = message.CardExpiration,
+                CVV = message.CvvCard
+            };
+
+            var result = await _bus
+                .RequestAsync<StartedOrderIntegrationEvent, ResponseMessage>(orderStart);
+
+            if (result.ValidationResult.IsValid) return true;
+
+            foreach (var erro in result.ValidationResult.Errors)
+            {
+                AddError(erro.ErrorMessage);
+            }
+
+            return false;
         }
     }
 }

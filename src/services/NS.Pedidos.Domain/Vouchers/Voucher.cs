@@ -9,7 +9,7 @@ namespace NS.Pedidos.Domain
         public decimal? Percentage { get; private set; }
         public decimal? ValueDiscount { get; private set; }
         public int Quantity { get; private set; }
-        public TypeDiscountVoucher TypeDiscount { get; private set; }
+        public DiscountTypeVoucher DiscountType { get; private set; }
         public DateTime DataCreation { get; private set; }
         public DateTime? DataUse { get; private set; }
         public DateTime DataValidad { get; private set; }

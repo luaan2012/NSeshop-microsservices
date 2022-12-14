@@ -118,13 +118,13 @@ namespace NS.Pedidos.Infra.Migrations
                     b.Property<DateTime>("DataValidad")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DiscountType")
+                        .HasColumnType("int");
+
                     b.Property<decimal?>("Percentage")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TypeDiscount")
                         .HasColumnType("int");
 
                     b.Property<bool>("Used")

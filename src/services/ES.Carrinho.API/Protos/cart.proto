@@ -35,5 +35,5 @@ message VoucherResponse {
 	double percentage = 1;
 	double valuediscount = 2;
 	string code = 3;
-	int32 typediscount = 4;
+	int32 discounttype = 4;
 }

@@ -117,7 +117,7 @@ namespace NS.Carrinho.API.Controllers
         {
             var cart = await GetCartClient();
 
-            cart.RemoveVoucher(voucher);
+            cart.RemoveVoucher();
 
             _context.ClientCarts.Update(cart);
 

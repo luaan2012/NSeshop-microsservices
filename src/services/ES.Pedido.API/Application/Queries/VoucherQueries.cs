@@ -28,7 +28,7 @@ namespace NS.Pedidos.API.Application.Queries
             return new VoucherDTO
             {
                 Code = voucher.Code,
-                TypeDiscount = (int)voucher.TypeDiscount,
+                DiscountType = (int)voucher.DiscountType,
                 Percentage = voucher.Percentage,
                 ValueDiscount = voucher.ValueDiscount
             };

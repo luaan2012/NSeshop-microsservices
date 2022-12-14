@@ -9,7 +9,7 @@
                     <span class="icon">
                         <i class="fa fa-location-arrow"></i>
                     </span>
-                    <span class="text"> Endereço</span>
+                    <span class="text"> Carrinho</span>
                 </div>
                 <div class="step active">
                     <span class="icon">
@@ -25,12 +25,33 @@
                 </div>
             </div>
 
-            <vc:Summary></vc:Summary>
-
             <article class="card-body">
                 <header class="mb-4">
                     <h4 class="card-title">Seu pedido</h4>
                 </header>
+                <div class="row">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="col-md-6">
+                            <figure class="itemside  mb-3">
+                                <div class="aside">
+                                    <img src="~/images/@item.Image" alt="@item.Name" class="border img-xs">
+                                </div>
+                                <figcaption class="info">
+                                    <p>
+                                        <b>@item.Name</b>
+                                    </p>
+                                    <span>@this.UnitsByProductValueTotal(item.Quantity, item.Value) </span>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    }
+                </div>
+            </article>
+
+            <vc:Summary></vc:Summary>
+
+            <article class="card-body">
                 <div class="row">
 
                     <div class="card border-success">
@@ -55,7 +76,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label asp-for="CardName"></label>
-                                    <input asp-for="CardName" class="form-control" placeholder="Digite igual está no cartão"/>
+                                    <input asp-for="CardName" class="form-control" placeholder="Digite igual está no cartão" />
                                     <span asp-validation-for="CardName" class="text-danger"></span>
                                 </div>
                             </div>
@@ -63,7 +84,7 @@
                                 <div class="form-group">
                                     <label asp-for="CardNumber"></label>
                                     <div class="input-group">
-                                        <input asp-for="CardNumber" class="form-control" maxlength="16" placeholder="Número do Cartão"/>
+                                        <input asp-for="CardNumber" class="form-control" maxlength="16" placeholder="Número do Cartão" />
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp;
@@ -86,9 +107,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12">                                
+                            <div class="col-md-4 col-sm-12">
                                 <div>
-                                    <label asp-for="CvvCard"></label> 
+                                    <label asp-for="CvvCard"></label>
                                     <div class="form-inline">
                                         <input asp-for="CvvCard" class="form-control w-25" maxlength="4" />
                                         <span asp-validation-for="CvvCard" class="text-danger"></span>
@@ -120,11 +141,11 @@
     <script>
         (function($) {
             $('[data-toggle="tooltip"]').tooltip();
-            $('.dateCard').mask("00/00", {placeholder: "__/__"});
-            
+            $('.dateCard').mask("00/00", { placeholder: "__/__" });
+
             var wrapMenu = $('.wrap-menu-desktop');
-            $(wrapMenu).css('top',0); 
-            
+            $(wrapMenu).css('top', 0);
+
         }(jQuery));
     </script>
 

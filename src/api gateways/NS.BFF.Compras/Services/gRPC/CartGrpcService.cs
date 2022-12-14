@@ -39,7 +39,7 @@ namespace NS.BFF.Compras.Services.gRPC
                     Code = carrinhoResponse.Voucher.Code,
                     Percentage = (decimal?)carrinhoResponse.Voucher.Percentage,
                     ValueDiscount = (decimal?)carrinhoResponse.Voucher.Valuediscount,
-                    TypeDiscount = carrinhoResponse.Voucher.Typediscount
+                    DiscountType = carrinhoResponse.Voucher.Discounttype
                 };
             }
 

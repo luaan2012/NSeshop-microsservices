@@ -13,7 +13,7 @@ namespace NS.Carrinho.API.Model
         public List<ItemCart> Items { get; set; } = new List<ItemCart>();
         public ValidationResult ValidationResult { get; set; }
 
-        public bool UsedVoucher { get; set; }
+        public bool VoucherUsed { get; set; }
         public decimal Discount { get; set; }
 
         public Voucher Voucher { get; set; }
@@ -29,14 +29,14 @@ namespace NS.Carrinho.API.Model
         public void ApplyVoucher(Voucher voucher)
         {
             Voucher = voucher;
-            UsedVoucher = true;
+            VoucherUsed = true;
             CalculateCartValue();
         }
 
-        public void RemoveVoucher(Voucher voucher)
+        public void RemoveVoucher()
         {
             Voucher = null;
-            UsedVoucher = false;
+            VoucherUsed = false;
             Discount = 0;
             CalculateCartValue();
         }
@@ -49,12 +49,12 @@ namespace NS.Carrinho.API.Model
 
         private void CalculateTotalValueDiscount()
         {
-            if (!UsedVoucher) return;
+            if (!VoucherUsed) return;
 
             decimal discount = 0;
             var value = ValueTotal;
 
-            if (Voucher.TypeDiscount == TypeDiscountVoucher.Percentage)
+            if (Voucher.DiscountType == DiscountTypeVoucher.Percentage)
             {
                 if (Voucher.Percentage.HasValue)
                 {

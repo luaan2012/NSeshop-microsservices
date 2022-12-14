@@ -41,6 +41,16 @@ namespace NS.Pedidos.Domain.Pedidos
             OrderStatus = OrderStatus.Authorized;
         }
 
+        public void CancelOrder()
+        {
+            OrderStatus = OrderStatus.Cancel;
+        }
+
+        public void FinalizeOrder()
+        {
+            OrderStatus = OrderStatus.Paid;
+        }
+
         public void AssignVoucher(Voucher voucher)
         {
             VoucherUsed = true;
@@ -66,7 +76,7 @@ namespace NS.Pedidos.Domain.Pedidos
             decimal discount = 0;
             var value = ValueTotal;
 
-            if (Voucher.TypeDiscount == TypeDiscountVoucher.Percentage)
+            if (Voucher.DiscountType == DiscountTypeVoucher.Percentage)
             {
                 if (Voucher.Percentage.HasValue)
                 {

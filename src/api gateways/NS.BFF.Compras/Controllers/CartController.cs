@@ -103,9 +103,9 @@ namespace NS.BFF.Compras.Controllers
 
         [HttpPost]
         [Route("shops/cart/apply-voucher")]
-        public async Task<IActionResult> ApplyVoucher([FromBody] string voucherCodigo)
+        public async Task<IActionResult> ApplyVoucher([FromBody] string voucherCode)
         {
-            var voucher = await _orderService.GetVoucherByCode(voucherCodigo);
+            var voucher = await _orderService.GetVoucherByCode(voucherCode);
             if (voucher is null)
             {
                 AddErrorProcessing("Voucher inválido ou não encontrado!");
@@ -119,9 +119,9 @@ namespace NS.BFF.Compras.Controllers
 
         [HttpPost]
         [Route("shops/cart/remove-voucher")]
-        public async Task<IActionResult> RemoveVoucher([FromBody] string voucherCodigo)
+        public async Task<IActionResult> RemoveVoucher([FromBody] string voucherCode)
         {
-            var voucher = await _orderService.GetVoucherByCode(voucherCodigo);
+            var voucher = await _orderService.GetVoucherByCode(voucherCode);
 
             if (voucher is null)
             {

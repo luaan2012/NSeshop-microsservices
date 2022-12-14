@@ -34,11 +34,11 @@ namespace NS.Carrinho.API.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool>("UsedVoucher")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("ValueTotal")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("VoucherUsed")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -88,15 +88,15 @@ namespace NS.Carrinho.API.Migrations
 
                             b1.Property<string>("Code")
                                 .HasColumnType("varchar(50)")
-                                .HasColumnName("VoucherCodigo");
+                                .HasColumnName("VoucherCode");
+
+                            b1.Property<int>("DiscountType")
+                                .HasColumnType("int")
+                                .HasColumnName("DiscountType");
 
                             b1.Property<decimal?>("Percentage")
                                 .HasColumnType("decimal(18,2)")
                                 .HasColumnName("Percentage");
-
-                            b1.Property<int>("TypeDiscount")
-                                .HasColumnType("int")
-                                .HasColumnName("DiscountType");
 
                             b1.Property<decimal?>("ValueDiscount")
                                 .HasColumnType("decimal(18,2)")

@@ -44,14 +44,14 @@ namespace NS.Catalogo.API.Services
                     return;
                 }
 
-                foreach (var produto in products)
+                foreach (var product in products)
                 {
-                    var quantidadeProduto = message.Items.FirstOrDefault(p => p.Key == produto.Id).Value;
+                    var quantidadeProduto = message.Items.FirstOrDefault(p => p.Key == product.Id).Value;
                     
-                    if (produto.IsAvailable(quantidadeProduto))
+                    if (product.IsAvailable(quantidadeProduto))
                     {
-                        produto.WithDrawStock(quantidadeProduto);
-                        productsWithStock.Add(produto);
+                        product.WithDrawStock(quantidadeProduto);
+                        productsWithStock.Add(product);
                     }
                 }
 
@@ -68,17 +68,17 @@ namespace NS.Catalogo.API.Services
 
                 if (!await productRepository.UnitOfWork.Commit())
                 {
-                    throw new DomainException($"Problemas ao atualizar estoque do pedido {message.PedidoId}");
+                    throw new DomainException($"Problemas ao atualizar estoque do pedido {message.OrderId}");
                 }
 
-                var pedidoBaixado = new OrderDownloadedStockIntegrationEvent(message.ClienteId, message.PedidoId);
-                await _bus.PublishAsync(pedidoBaixado);
+                var orderDown = new OrderDownloadedStockIntegrationEvent(message.ClientId, message.OrderId);
+                await _bus.PublishAsync(orderDown);
             }
         }
 
         public async void CancelOrderWithoutStock(AuthorizedOrderIntegrationEvent message)
         {
-            var pedidoCancelado = new CanceledOrderIntegrationEvent(message.ClienteId, message.PedidoId);
+            var pedidoCancelado = new CanceledOrderIntegrationEvent(message.ClientId, message.OrderId);
             await _bus.PublishAsync(pedidoCancelado);
         }
     }

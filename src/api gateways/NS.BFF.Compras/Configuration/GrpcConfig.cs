@@ -1,4 +1,5 @@
-﻿using NS.BFF.Compras.Services.gRPC;
+﻿using NS.APICore.Extensions;
+using NS.BFF.Compras.Services.gRPC;
 using NS.Carrinho.API.Services.gRPC;
 
 namespace NS.BFF.Compras.Configuration
@@ -14,7 +15,8 @@ namespace NS.BFF.Compras.Configuration
             services.AddGrpcClient<ShoppingCart.ShoppingCartClient>(options =>
             {
                 options.Address = new Uri(configuration["CartUrl"]);
-            }).AddInterceptor<GrpcServiceInterceptor>();
+            }).AddInterceptor<GrpcServiceInterceptor>()
+            .AllowSelfSignedCertificate();
         }
     }
 }

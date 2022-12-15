@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NS.Core.Data;
 using NS.Pagamentos.API.Models;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NS.Pagamentos.API.Data.Repository
 {
@@ -26,10 +29,10 @@ namespace NS.Pagamentos.API.Data.Repository
             _context.Transactions.Add(transaction);
         }
 
-        public async Task<Payment> GetPaymentByOrderId(Guid pedidoId)
+        public async Task<Payment> GetPaymentByOrderId(Guid orderId)
         {
             return await _context.Payments.AsNoTracking()
-                .FirstOrDefaultAsync(p => p.OrderId == pedidoId);
+                .FirstOrDefaultAsync(p => p.OrderId == orderId);
         }
 
         public async Task<IEnumerable<Transactions>> GetTransactionByOrderId(Guid orderId)

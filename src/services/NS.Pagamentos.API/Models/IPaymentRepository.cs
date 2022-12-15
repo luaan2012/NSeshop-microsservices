@@ -1,4 +1,7 @@
 ﻿using NS.Core.Data;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NS.Pagamentos.API.Models
 {

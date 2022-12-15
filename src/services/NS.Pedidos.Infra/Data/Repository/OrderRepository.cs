@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NS.Core.Data;
 using NS.Pedidos.Domain.Pedidos;
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace NS.Pedidos.Infra.Data.Repository
 {

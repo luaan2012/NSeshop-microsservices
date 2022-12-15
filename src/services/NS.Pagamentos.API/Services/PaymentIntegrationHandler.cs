@@ -3,6 +3,7 @@ using NS.Core.Messages.Integration;
 using NS.MessageBus;
 using NS.Pagamentos.API.Models;
 
+
 namespace NS.Pagamentos.API.Services
 {
     public class PaymentIntegrationHandler : BackgroundService
@@ -82,8 +83,29 @@ namespace NS.Pagamentos.API.Services
                 if (!response.ValidationResult.IsValid)
                     throw new DomainException($"Falha ao capturar pagamento do pedido {message.OrderId}");
 
-                await _bus.PublishAsync(new PaidOrderIntegrationEvent(message.ClientId, message.OrderId));
+                var sorted = new Random().Next(2, 5);
+
+                switch (sorted)
+                {
+                    case 1:
+                        await SortedClass(new PaidOrderIntegrationEvent(message.ClientId, message.OrderId));
+                        break;
+                    case 2:
+                        await SortedClass(new CanceledOrderIntegrationEvent(message.ClientId, message.OrderId));
+                        break;
+                    case 3:
+                        await SortedClass(new RecuseOrderIntegrationEvent(message.ClientId, message.OrderId));
+                        break;
+                    case 4:
+                        await SortedClass(new DeliveredOrderIntegrationEvent(message.ClientId, message.OrderId));
+                        break;
+                };
             }
+        }
+
+        private async Task SortedClass<T>(T obj) where T : IntegrationEvent
+        {
+            await _bus.PublishAsync(obj);
         }
     }
 }

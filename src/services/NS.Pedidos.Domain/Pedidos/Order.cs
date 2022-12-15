@@ -51,6 +51,16 @@ namespace NS.Pedidos.Domain.Pedidos
             OrderStatus = OrderStatus.Paid;
         }
 
+        public void RecuseOrder()
+        {
+            OrderStatus = OrderStatus.Recuse;
+        }
+
+        public void DeliveredOrder()
+        {
+            OrderStatus = OrderStatus.Delivered;
+        }
+
         public void AssignVoucher(Voucher voucher)
         {
             VoucherUsed = true;

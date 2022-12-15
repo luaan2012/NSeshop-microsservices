@@ -6,8 +6,8 @@ namespace NS.Pedidos.API.Application.Queries
 {
     public interface IOrderQueries
     {
-        Task<OrderDTO> GetLastOrder(Guid clienteId);
-        Task<IEnumerable<OrderDTO>> GetListByClientId(Guid clienteId);
+        Task<OrderDTO> GetLastOrder(Guid clientId);
+        Task<IEnumerable<OrderDTO>> GetListByClientId(Guid clientId);
         Task<OrderDTO> GetOrderAuthorize();
 
     }

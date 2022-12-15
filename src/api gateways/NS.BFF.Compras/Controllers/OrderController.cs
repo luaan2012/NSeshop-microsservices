@@ -126,7 +126,6 @@ namespace NS.BFF.Compras.Controllers
             order.Valuetotal = cart.ValueTotal;
             order.Discount = cart.Discount;
             order.OrderItems = cart.Items;
-
             order.Address = address;
         }
     }

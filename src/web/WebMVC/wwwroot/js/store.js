@@ -183,6 +183,8 @@ function openModal(id) {
         $('.productStock').html(quantityStock(data.quantityStock));
         $('.item1').find('img').attr('src', 'images/' + data.image);
         $('.item1').parent().attr('data-thumb', 'images/' + data.image);
+        $('.wrap-slick3-dots').find('img').attr('src', 'images/' + data.image)
+
 
         $('#productId').val(data.id);
 

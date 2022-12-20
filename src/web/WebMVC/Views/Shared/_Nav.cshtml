@@ -40,7 +40,7 @@
                         <li data-link="Perfil">
                             <a href="javascript:void(0)">Meu Perfil</a>
                             <ul class="sub-menu">
-                                <li><a href="javascript:void(0)">Meu Perfil</a></li>
+                                @*<li><a href="javascript:void(0)">Meu Perfil</a></li>*@
                                 <li><a asp-action="MyOrders" asp-controller="Order"> Meu Pedidos</a></li>
                                 <li style="border-top:1px solid #b1b1b1 !important" class="dropdown-divider"></li>
                                 <li><a asp-action="logout" asp-controller="Identity">Sair</a></li>
@@ -56,7 +56,7 @@
                 {
                     if (Context.Request.Path.Value != "/Cart")
                     {
-                        <vc:cart></vc:cart>                        
+                        <vc:cart></vc:cart>
                     }
 
                     <vc:wish-list></vc:wish-list>
@@ -92,7 +92,7 @@
 
             @if (Context.Request.Path.Value != "/Cart")
             {
-                <vc:cart-mobile></vc:cart-mobile>                
+                <vc:cart-mobile></vc:cart-mobile>
             }
 
             <vc:wish-list-mobile></vc:wish-list-mobile>
@@ -150,6 +150,15 @@
         <li>
             <a asp-action="Contact" asp-controller="Institutional">Contato</a>
         </li>
+
+        <li>
+            <a asp-action="MyOrders" asp-controller="Order"> Meu Pedidos</a>
+        </li>
+
+        <li>
+            <a asp-action="logout" asp-controller="Identity">Sair</a>
+        </li>
+
     </ul>
 </div>
 

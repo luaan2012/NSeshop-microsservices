@@ -44,14 +44,14 @@
                                             <th class="column-5">Preço</th>
                                             <th class="column-4">Quantidade</th>
                                             <th class="column-5">Total</th>
-                                            <th class="column-3"></th>
+                                            <th class="column-5"></th>
                                         </tr>
 
                                         @foreach (var product in Model.Items)
                                         {
                                             <tr class="table_row">
                                                 <td class="column-1">
-                                                    <div class="how-itemcart1">
+                                                    <div class="how-itemcart1" onclick="removeItemCart('@product.ProductId')">
                                                         <img src="~/images/@product.Image" alt="IMG">
                                                     </div>
                                                 </td>

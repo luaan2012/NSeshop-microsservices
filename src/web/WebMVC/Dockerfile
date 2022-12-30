@@ -7,12 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["./web/WebMVC/NS.WebMVC.csproj", "src/web/WebMVC/"]
-COPY ["../../../building blocks/NS.APICore/NS.APICore.csproj", "building blocks/NS.APICore/"]
+COPY ["./web/WebMVC/NS.WebMVC.csproj", "web/WebMVC/"]
+COPY ["./building blocks/NS.APICore/NS.APICore.csproj", "building blocks/NS.APICore/"]
 COPY ["./building blocks/NS.Core/NS.Core.csproj", "building blocks/NS.Core/"]
 RUN dotnet restore "web/WebMVC/NS.WebMVC.csproj"
 COPY . .
-WORKDIR "/src/src/web/WebMVC"
+WORKDIR "web/WebMVC"
 RUN dotnet build "NS.WebMVC.csproj" -c Release -o /app/build
 
 FROM build AS publish

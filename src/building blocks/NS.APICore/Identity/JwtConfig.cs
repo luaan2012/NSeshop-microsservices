@@ -22,7 +22,8 @@ namespace NS.APICore.Identity
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
-                x.RequireHttpsMetadata = true;
+                x.RequireHttpsMetadata = false;
+                x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; }};
                 x.SaveToken = true;
                 x.SetJwksOptions(new JwkOptions(appSettings.AutenticationJwksUrl));
             });

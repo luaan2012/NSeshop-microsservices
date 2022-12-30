@@ -9,22 +9,39 @@
     }
   },
   "profiles": {
-    "NS.Identidade.API": {
+    "SelfHosting": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7136;http://localhost:5136",
-      "dotnetRunMessages": true
+      "applicationUrl": "https://localhost:7136;http://localhost:5136"
     },
-    "IIS Express": {
+    "IIS - Dev": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sqlDebugging": true,
+      "nativeDebugging": true
+    },
+    "IIS - Prod": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    "IIS - Staging": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
       }
     },
     "Docker": {

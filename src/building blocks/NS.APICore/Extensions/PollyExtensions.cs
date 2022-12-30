@@ -1,4 +1,5 @@
-﻿using Polly;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using NS.APICore.Extensions;
 using NS.APICore.User;
 using NS.WebMVC.Extensions;
 using NS.WebMVC.Services;
@@ -24,24 +25,28 @@ namespace NS.WebMVC.Configuration
 
             services.AddHttpClient<IAuthenticationsService, AuthenticationService>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogService, CatalogService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IShopsBffService, ShopsBffService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IClientService, ClientService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 

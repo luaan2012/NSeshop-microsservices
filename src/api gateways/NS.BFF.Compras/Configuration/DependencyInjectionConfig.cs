@@ -1,4 +1,5 @@
-﻿using NS.APICore.User;
+﻿using NS.APICore.Extensions;
+using NS.APICore.User;
 using NS.Bff.Compras.Services;
 using NS.BFF.Compras.Extensions;
 using NS.BFF.Compras.Services;
@@ -19,30 +20,35 @@ namespace NS.BFF.API.Configuration
             services.AddHttpClient<ICatalogService, CatalogService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICartService, CartService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IWishListService, WishListService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IOrderService, OrderService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IClientService, ClientService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndTry())
+                .AllowSelfSignedCertificate()
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
         }

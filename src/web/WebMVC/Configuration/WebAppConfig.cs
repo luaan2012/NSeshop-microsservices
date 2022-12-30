@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using NS.WebMVC.Extensions;
 
@@ -10,15 +12,26 @@ namespace NS.WebMVC.Configuration
         {
             services.AddControllersWithViews();
 
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"/var/data_protection_keys/"))
+                .SetApplicationName("NerdStore");               
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+
             services.Configure<AppSettings>(configuration);
         }
 
         public static void UseMvcConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            app.UseForwardedHeaders();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseExceptionHandler("/erro/500");
             app.UseStatusCodePagesWithRedirects("/erro/{0}");

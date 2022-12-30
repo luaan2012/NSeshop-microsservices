@@ -4,7 +4,7 @@ My first complicated project with a lot of business rules that apply in ecommerc
 
 ## :books: Notes
 
-- Technologies used: EasyNetQ, FluentValidation, Poly, NetDevPack, MoreLinq, GRPc, EF, MediaTR, Dapper, JWT and REFIT.
+- Technologies used: EasyNetQ, FluentValidation, Poly, NetDevPack, MoreLinq, GRPc, EF, MediaTR, Dapper, JWT, docker, NGINX and REFIT.
 - I used this <a href="https://technext.github.io/cozastore/">Template</a>  and modified it and many things.
 - This idea came out based on the <a href="https://desenvolvedor.io/">Course</a> I took and I recommend it ".Net Core Enterprise Applications"
 - For GRPC to work, the project needs to be on selfhosting

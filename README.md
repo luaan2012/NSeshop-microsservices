@@ -38,9 +38,9 @@ type it and click next. On the next screen, choose the option "place all certifi
 
 - Second, now with the certificate installed, in the docker folder, let's open a command prompt (CMD) and run the following command:
 
-docker-compose -f nerdstore_production.yml up 
+  docker-compose -f nerdstore_production.yml up 
 
-  NOTE: Please note that to run on docker we are looking at the appsettings.Production. And for docker, I decided to upload a db in a container, but you can change this in the appsettings.Production by putting the command in the connection string: host.docker.internal\\"YOUR server db"
+  NOTE: Please note that to run on docker we are looking at the appsettings.Production. And for docker, I decided to upload a db in a container, but you can change   this in the appsettings.Production by putting the command in the connection string: host.docker.internal\\"YOUR server db"
 
   Example: "Server=host.docker.internal\\MySQL;Database=NerdStore;Trusted_Connection=True;MultipleActiveResultSets=true;User Id=teste;Password=teste"
 

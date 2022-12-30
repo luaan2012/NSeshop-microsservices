@@ -2,7 +2,7 @@
 
 My first complicated project with a lot of business rules that apply in ecommerce these days.
 
-## Install
+## :bulb: Install
 
 - First, enter the "sql" folder in the root of the project, you can create a local database, lite or any other with the "AllData.sql" file that has all the products previously started.
 Note that all API's use their own context (EF) and if you create a local db, not empty, I have provided a file called "product.sql" to fill the products table.
@@ -15,7 +15,7 @@ Note that all API's use their own context (EF) and if you create a local db, not
 
 docker run -d --hostname rabbit-host --name rabbit-nerdstore -p 15672:15672 -p 5672:5672 rabbitmq:management
 
-## Docker
+## :whale: Docker
 
 To run any project in docker, follow the steps below:
 

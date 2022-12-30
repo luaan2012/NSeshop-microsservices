@@ -2,6 +2,11 @@
 
 My first complicated project with a lot of business rules that apply in ecommerce these days.
 
+## :books: Notes
+
+- Technologies used: EasyNetQ, FluentValidation, Poly, NetDevPack, MoreLinq, GRPc, EF, MediaTR, Dapper, JWT and REFIT.
+- Link Template: <a href="https://technext.github.io/cozastore/">
+
 ## :bulb: Install
 
 - First, enter the "sql" folder in the root of the project, you can create a local database, lite or any other with the "AllData.sql" file that has all the products previously started.

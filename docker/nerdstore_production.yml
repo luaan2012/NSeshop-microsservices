@@ -28,12 +28,14 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://*:5001
+    volumes:
+      - dpkeys:/var/data_protection_keys/
     depends_on:
       - api-catalogo
       - api-identidade
       - api-cliente
       - api-bff  
-      - sql-server
+      - sql-server    
 
   api-identidade:
     image: luaan201/nerdstore-api-identidade:latest

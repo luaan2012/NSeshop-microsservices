@@ -9,6 +9,7 @@ namespace NS.Catalog.API.Configuration
         public static void AddDependecyConfig(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBannerRepository, BannerRepository>();
             services.AddScoped<CatalogContext>();
         }
     } 

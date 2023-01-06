@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavigationComponent } from './navigation/navigation.component';
 import { AccountComponent } from './account/account.component';
 import { HomeComponent } from './home/home.component';
@@ -12,9 +13,15 @@ import { StoreComponent } from './store/store.component';
 import { BlogComponent } from './institutional/blog/blog.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { HomeService } from './home/services/home.service';
+
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { HttpClientModule, } from '@angular/common/http';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavigationComponent,
     AccountComponent,
@@ -23,13 +30,19 @@ import { FooterComponent } from './footer/footer.component';
     AboutComponent,
     StoreComponent,
     BlogComponent,
-      FooterComponent
+    FooterComponent,
    ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    TooltipModule.forRoot(),
+    CarouselModule.forRoot(),
+    TabsModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HomeService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

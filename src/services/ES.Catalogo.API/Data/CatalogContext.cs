@@ -11,6 +11,7 @@ namespace NS.Catalog.API.Data
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Banner> Banners { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

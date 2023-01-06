@@ -22,6 +22,35 @@ namespace NS.Catalogo.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("NS.Catalog.API.Models.Banner", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AltImage")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("TimeSleep")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
+
             modelBuilder.Entity("NS.Catalog.API.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -48,6 +77,9 @@ namespace NS.Catalogo.API.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
+
+                    b.Property<int>("ProductCategory")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductType")
                         .HasColumnType("int");

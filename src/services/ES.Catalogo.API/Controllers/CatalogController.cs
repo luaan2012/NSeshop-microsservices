@@ -4,6 +4,7 @@ using NS.ApiCore.Controllers;
 using NS.Catalog.API.Models;
 using NS.Catalogo.API.Data.Interface;
 using NS.Catalogo.API.Models;
+using System.Text.Json;
 
 namespace NS.Catalogo.API.Controllers
 {
@@ -25,9 +26,9 @@ namespace NS.Catalogo.API.Controllers
 
         [AllowAnonymous]   
         [HttpGet("catalog/products/highlighted")]
-        public async Task<IEnumerable<Product>> GetHighLighted()
+        public async Task<List<HighLighted>> GetHighLighted()
         {
-            return await _productRepository.GetHighLighted();
+            return JsonSerializer.Deserialize<List<HighLighted>>(JsonSerializer.Serialize(await _productRepository.GetHighLighted())); ;
         }
 
         [HttpGet("catalog/products")]

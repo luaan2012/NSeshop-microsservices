@@ -13,6 +13,7 @@ namespace NS.Catalog.API.Models
         public bool Active { get; set; }
         public bool Highlighted { get; set; }
         public ProductType ProductType { get; set; }
+        public ProductCategory ProductCategory { get; set; }
         public DateTime DateRegister { get; set; }
 
         public void WithDrawStock(int quantity)

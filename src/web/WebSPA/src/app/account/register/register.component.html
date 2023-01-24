@@ -1,0 +1,75 @@
+<section class="signup">
+  <div class="container">
+    <div class="signup-content">
+      <div class="signup-form">
+        <h2 class="form-title">Crie uma conta</h2>
+
+        <div class="alert alert-danger" *ngIf="errors.length > 0">
+          <h3 id="msgRetorno">Opa! :(</h3>
+          <ul>
+            <li *ngFor="let error of errors"><small>{{ error }}</small></li>
+          </ul>
+        </div>
+
+        <form novalidate class="register-form" (ngSubmit)="createAccount()" [formGroup]="registerForm">
+          <div class="form-group">
+            <label for="name" [ngClass]="{'label-touch': displayMessage['name'],'label-ok': !displayMessage['name']}">
+              <i class="zmdi zmdi-account material-icons-name"></i>
+            </label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Seu nome" formControlName="name" [ngClass]="{'is-invalid': displayMessage['name'], 'is-valid': (!displayMessage['name'] && f.name.dirty)}" />
+            <span class="text-danger" *ngIf="displayMessage['name'] ">
+                <p [innerHTML]="displayMessage['name'] "></p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">
+              <i class="zmdi zmdi-email" [ngClass]="{'label-touch': displayMessage['email'],'label-ok': !displayMessage['email']}"></i>
+            </label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Seu e-mail" formControlName="email" [ngClass]="{'is-invalid': displayMessage['email'], 'is-valid': (!displayMessage['email'] && f.email.dirty) }" />
+            <span class="text-danger" *ngIf="displayMessage['email'] ">
+                <p [innerHTML]="displayMessage['email'] "></p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="cpf">
+              <i class="zmdi zmdi-receipt" [ngClass]="{'label-touch': displayMessage['cpf'],'label-ok': !displayMessage['cpf']}"></i>
+            </label>
+            <input type="cpf" class="form-control" name="cpf" id="cpf" placeholder="Seu CPF" formControlName="cpf" cpf [textMask]="{mask: MASKS['cpf'].textMask}" [ngClass]="{'is-invalid': displayMessage['cpf'], 'is-valid': (!displayMessage['cpf'] && f.cpf.dirty) }" />
+            <span class="text-danger" *ngIf="displayMessage['cpf'] ">
+                <p [innerHTML]="displayMessage['cpf'] "></p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="pass">
+              <i class="zmdi zmdi-lock" [ngClass]="{'label-touch': displayMessage['password'],'label-ok': !displayMessage['password']}"></i>
+            </label>
+            <input type="password" class="form-control" name="pass" id="pass" placeholder="Senha" formControlName="password" [ngClass]="{'is-invalid': displayMessage['password'], 'is-valid': (displayMessage['password'] && f.password.dirty) }" />
+            <span class="text-danger" *ngIf="displayMessage['password'] ">
+                <p [innerHTML]="displayMessage['password'] "></p>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="re-pass">
+              <i class="zmdi zmdi-lock-outline" [ngClass]="{'label-touch': displayMessage['passwordConfirm'],'label-ok': !displayMessage['passwordConfirm']}"></i>
+            </label>
+            <input type="password" class="form-control" name="re_pass" id="re_pass" placeholder="Repita sua senha" formControlName="passwordConfirm" [ngClass]="{'is-invalid': displayMessage['passwordConfirm'], 'is-valid': (displayMessage['passwordConfirm'] && f.passwordConfirm.dirty) }" />
+            <span class="text-danger" *ngIf="displayMessage['passwordConfirm'] ">
+                <p [innerHTML]="displayMessage['passwordConfirm'] "></p>
+            </span>
+          </div>
+
+          <div class="form-group form-button">
+            <input type="submit" class="" value="Cadastrar" [disabled]="!registerForm.valid" [ngClass]="{'form-submit-not': !registerForm.valid, 'form-submit': registerForm.valid}" />
+          </div>
+        </form>
+      </div>
+
+      <div class="signup-image">
+        <figure><img src="assets/images/signup-image.jpg" alt="sing up image"></figure>
+        <a style="text-decoration: underline!important;" [routerLink]="['/entrar']" class="signup-image-link">Possui conta? Clique
+          aqui</a>
+          <a style="text-decoration: underline!important;margin-top:15px;color:green" [routerLink]="['/home']" class="signup-image-link">Voltar</a>
+      </div>
+    </div>
+  </div>
+</section>

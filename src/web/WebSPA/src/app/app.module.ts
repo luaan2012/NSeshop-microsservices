@@ -1,47 +1,48 @@
-import { NgModule } from '@angular/core';
+import { AccountModule } from './account/account.module';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { NavigationComponent } from './navigation/navigation.component';
-import { AccountComponent } from './account/account.component';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './institutional/contact/contact.component';
-import { AboutComponent } from './institutional/about/about.component';
-import { StoreComponent } from './store/store.component';
-import { BlogComponent } from './institutional/blog/blog.component';
-import { FooterComponent } from './footer/footer.component';
-
-import { HomeService } from './home/services/home.service';
-
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HttpClientModule, } from '@angular/common/http';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { NgxSpinnerModule } from "ngx-spinner";
+
+import { AppComponent } from './app.component';
+import { StoreComponent } from './main/store/store.component';
+import { HomeComponent } from './main/home/home.component';
+import { BlogComponent } from './institutional/blog/blog.component';
+import { AboutComponent } from './institutional/about/about.component';
+import { ContactComponent } from './institutional/contact/contact.component';
+import { MenuModule } from './menu/menu.module';
+import { HomeService } from './main/home/services/home.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    AccountComponent,
-    HomeComponent,
-    ContactComponent,
-    AboutComponent,
     StoreComponent,
+    HomeComponent,
     BlogComponent,
-    FooterComponent,
+    AboutComponent,
+    ContactComponent
    ],
   imports: [
-    AppRoutingModule,
+    AccountModule,
+    MenuModule,
     BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),
     TabsModule.forRoot(),
-    HttpClientModule
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    HomeService,
+    HomeService
   ],
   bootstrap: [AppComponent]
 })

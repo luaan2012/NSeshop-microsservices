@@ -1,31 +1,34 @@
 import { HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { throwError } from "rxjs";
+import { LocalStorageUtils } from "../utils/localstorage";
 
 export abstract class BaseService {
 
-    protected UrlServiceV1: string = environment.apiUrlBase;
-    // public LocalStorage = new LocalStorageUtils();
+    protected UrlStore: string = environment.apiUrlStore;
+    protected UrlAccount: string = environment.apiUrlAccount;
+
+    public LocalStorage = new LocalStorageUtils();
 
     protected ObterHeaderJson() {
+      return {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+      };
+    }
+
+    protected GetAuthHeaderJson() {
         return {
             headers: new HttpHeaders({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.LocalStorage.GetTokenUser()}`
             })
         };
     }
 
-    // protected ObterAuthHeaderJson() {
-    //     return {
-    //         headers: new HttpHeaders({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${this.LocalStorage.obterTokenUsuario()}`
-    //         })
-    //     };
-    // }
-
     protected extractData(response: any) {
-        return response.data || {};
+        return response || {};
     }
 
     protected serviceError(response: Response | any) {
@@ -39,16 +42,14 @@ export abstract class BaseService {
                 response.error.errors = customError;
             }
         }
-        // if (response.status === 500) {
-        //     customError.push("Ocorreu um erro no processamento, tente novamente mais tarde ou contate o nosso suporte.");
+        if (response.status === 500) {
+            customError.push("Ocorreu um erro no processamento, tente novamente mais tarde ou contate o nosso suporte.");
 
-        //     // Erros do tipo 500 não possuem uma lista de erros
-        //     // A lista de erros do HttpErrorResponse é readonly
-        //     customResponse.error.errors = customError;
-        //     return throwError(customResponse);
-        // }
-
-        console.error(response);
+            // Erros do tipo 500 não possuem uma lista de erros
+            // A lista de erros do HttpErrorResponse é readonly
+            customResponse.error.errors = customError;
+            return throwError(customResponse);
+        }
         return throwError(response);
     }
 }

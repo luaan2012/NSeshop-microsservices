@@ -1,3 +1,7 @@
+<ng-template #modalLogin>
+  <app-login ></app-login>
+</ng-template>
+
 <header class="header-v4" [ngClass]="showNav() ? 'd-none' : ''">
   <!-- Header desktop -->
   <div #menudesktop class="container-menu-desktop">
@@ -17,7 +21,7 @@
               <a [routerLink]="['/home']">Home</a>
             </li>
 
-            <li data-link="loja">
+            <li data-link="loja" *ngIf="account.LocalStorage.IsLogged()">
               <a [routerLink]="['/loja']">Loja</a>
             </li>
 
@@ -55,7 +59,7 @@
 
           <ul class="main-menu" *ngSwitchCase="false">
             <li data-link="Entrar">
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#modalLoginForm">Entrar</a>
+              <a href="javascript:void(0)" (click)="openModal(modalLogin)">Entrar</a>
             </li>
 
             <li data-link="Registro">

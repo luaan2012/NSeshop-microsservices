@@ -10,7 +10,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AccountAppComponent } from "./account.app.component";
 import { AccountRoutingModule } from "./account.route";
-import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 
 import { AccountGuard } from "./service/account.guard";
@@ -19,9 +18,8 @@ import { StoreService } from "../main/store/services/store.service";
 
 @NgModule({
   declarations:[
-    LoginComponent,
     RegisterComponent,
-    AccountAppComponent
+    AccountAppComponent,
   ],
   imports:[
     CommonModule,

@@ -18,7 +18,6 @@ import { ContactComponent } from './institutional/contact/contact.component';
 import { MenuModule } from './menu/menu.module';
 import { HomeService } from './main/home/services/home.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +37,7 @@ import { HomeService } from './main/home/services/home.service';
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),
     TabsModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

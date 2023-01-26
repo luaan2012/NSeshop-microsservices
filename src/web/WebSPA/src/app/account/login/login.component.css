@@ -1,0 +1,23 @@
+.fa-lock {
+  float: left !important;
+  top: 25px !important;
+  left: 10px !important;
+  position: relative !important;
+}
+
+.fa-envelope {
+  float: left !important;
+  top: 25px !important;
+  left: 10px !important;
+  position: relative !important;
+}
+
+#defaultForm-pass {
+  left: -83px;
+  padding-left: 33px;
+}
+
+#defaultForm-email {
+  left: -83px;
+  padding-left: 33px;
+}

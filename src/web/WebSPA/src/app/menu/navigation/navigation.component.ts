@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AccountService } from 'src/app/account/service/account.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { AccountService } from 'src/app/account/service/account.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent{
+  modalRef?: BsModalRef;
 
-  constructor(private router: Router, public account: AccountService){}
+  constructor(private router: Router, public account: AccountService, private modalService: BsModalService){}
 
   @ViewChild('menudesktop', {static: true}) myNav:ElementRef;
   @ViewChild('wrapMenu', {static: true}) wrapMenu:ElementRef;
@@ -28,5 +30,9 @@ export class NavigationComponent{
   showNav(): boolean {
     var rotas = ['/conta/entrar','/conta/cadastrar','/conta/forget'];
     return rotas.includes(this.router.url);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }

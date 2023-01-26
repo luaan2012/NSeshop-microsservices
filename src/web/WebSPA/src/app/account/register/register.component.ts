@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MASKS, NgBrazilValidators, number } from 'ng-brazil';
+import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
 import { FormBaseComponent } from 'src/app/components/form-base.component';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/usuario';
 import { AccountService } from '../service/account.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -93,7 +92,6 @@ export class RegisterComponent extends FormBaseComponent implements OnInit, Afte
   }
 
   processSuccess(response: any) {
-    console.log(response)
     this.registerForm.reset();
     this.errors = [];
 

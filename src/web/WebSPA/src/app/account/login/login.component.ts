@@ -18,7 +18,6 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
   modalRef?: BsModalRef;
-  errors: any[] = []
   loginForm: FormGroup;
   user: User;
 
@@ -67,22 +66,15 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
   }
 
   processSuccess(response: any) {
-    console.log(response)
     this.loginForm.reset();
-    this.errors = [];
 
     this.account.LocalStorage.SaveDataUser(response);
 
-    this.toastr.toastrConfig.timeOut = 1500;
-    this.toastr.toastrConfig.positionClass = 'toast-top-center';
-    let toast = this.toastr.success('Cadastro realizado com Sucesso!');
-    if (toast) {
-      toast.onHidden.subscribe(() => {
-        this.router.navigate(['/home']);
-      });
-    }else{
-      this.router.navigate(['/home']);
-    }
+    this.toastr.toastrConfig.timeOut = 1000;
+
+    this.toastr.success('Bem vindo!');
+
+    this.modalService.hide();
   }
 
   ProcessFail(fail: any) {

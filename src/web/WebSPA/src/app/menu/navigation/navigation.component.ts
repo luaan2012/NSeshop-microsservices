@@ -35,4 +35,9 @@ export class NavigationComponent{
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  clearDataUser(){
+    this.account.LocalStorage.ClearDataUser();
+    this.router.navigate(['/home']);
+  }
 }

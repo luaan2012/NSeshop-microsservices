@@ -40,4 +40,12 @@ export class NavigationComponent{
     this.account.LocalStorage.ClearDataUser();
     this.router.navigate(['/home']);
   }
+
+  showCart(){
+    document.getElementsByClassName('js-panel-cart')[0].classList.add('show-header-cart');
+  }
+
+  showWish(){
+    document.getElementsByClassName('js-panel-wish')[0].classList.add('show-header-cart');
+  }
 }

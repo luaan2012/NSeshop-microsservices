@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { HomeService } from './services/home.service';
 import { Banner } from '../../models/banner';
 import { Products } from '../../models/produto';
+import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -20,14 +21,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   errorMessage: string;
   myInterval: number = 2000;
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: HomeService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
+    this.spinner.show();
 
     this.homeService.getBanners().subscribe({
       next: (banners: Banner[]) => this.banners = banners,
       error: (error: any) => this.errorMessage
-    })
+    }).add(() => this.spinner.hide());
 
     this.homeService.getHighLighted().subscribe({
       next: (produto: Products[]) => {
@@ -37,7 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.maisBuscados = produto.filter(x => x.productCategory == 3)
       },
       error: (error: any) => this.errorMessage
-    })
+    }).add(() => this.spinner.hide());
   }
 
   ngAfterViewInit(): void {
@@ -62,7 +64,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         right[index].setAttribute('style','margin-left: 170px');
         right[index].insertAdjacentHTML('beforeend', '<i class="fa-solid fa-chevron-right fa-2xl text-dark"></i>');
       }
-
     }, 1000);
   }
 

@@ -26,6 +26,8 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
     private toastr: ToastrService) {
     super();
 
+    this.toastr.toastrConfig.positionClass = 'toast-top-center';
+
     this.validationMessages = {
       email: {
         required: 'Informe o e-mail',
@@ -78,7 +80,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
   }
 
   ProcessFail(fail: any) {
-    this.displayMessage['password'] = fail.error.errors['Messages'] ? fail.error.errors['Messages'] : fail.error.errors;
+    this.displayMessage['password'] = fail.error.errors['Password'] ? fail.error.errors['Password'] : fail.error.errors['Messages'];
     this.toastr.error('Ocorreu um erro!', 'Opa :(');
   }
 }

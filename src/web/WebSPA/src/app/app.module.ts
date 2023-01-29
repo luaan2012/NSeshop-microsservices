@@ -17,6 +17,9 @@ import { AboutComponent } from './institutional/about/about.component';
 import { ContactComponent } from './institutional/contact/contact.component';
 import { MenuModule } from './menu/menu.module';
 import { HomeService } from './main/home/services/home.service';
+import { Store } from './main/store/myStore/store.store';
+import { StoreService } from './main/store/services/store.service';
+import { ConfigToarst } from './utils/configToarst';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { HomeService } from './main/home/services/home.service';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    HomeService
+    HomeService,
+    Store,
+    StoreService,
+    ConfigToarst
   ],
   bootstrap: [AppComponent]
 })

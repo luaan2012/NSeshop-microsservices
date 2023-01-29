@@ -2,6 +2,9 @@
   <app-login ></app-login>
 </ng-template>
 
+<app-cart></app-cart>
+<app-wishlist></app-wishlist>
+
 <header class="header-v4" [ngClass]="showNav() ? 'd-none' : ''">
   <!-- Header desktop -->
   <div #menudesktop class="container-menu-desktop">
@@ -54,8 +57,8 @@
         <!-- Icon header -->
         <div [ngSwitch]="account.LocalStorage.IsLogged()" class="wrap-icon-header flex-w flex-r-m">
 
-          <app-wishlistCount *ngSwitchCase="true"></app-wishlistCount>
-          <app-cartCount *ngSwitchCase="true"></app-cartCount>
+          <app-wishlistCount *ngSwitchCase="true" (click)="showWish()"></app-wishlistCount>
+          <app-cartCount *ngSwitchCase="true" (click)="showCart()"></app-cartCount>
 
           <ul class="main-menu" *ngSwitchCase="false">
             <li data-link="Entrar">

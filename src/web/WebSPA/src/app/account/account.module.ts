@@ -14,7 +14,6 @@ import { RegisterComponent } from "./register/register.component";
 
 import { AccountGuard } from "./service/account.guard";
 import { AccountService } from "./service/account.service";
-import { StoreService } from "../main/store/services/store.service";
 
 @NgModule({
   declarations:[
@@ -37,8 +36,7 @@ import { StoreService } from "../main/store/services/store.service";
   ],
   providers:[
     AccountGuard,
-    AccountService,
-    StoreService
+    AccountService
   ]
 })
 

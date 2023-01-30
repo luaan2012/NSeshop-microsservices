@@ -20,6 +20,8 @@ import { HomeService } from './main/home/services/home.service';
 import { Store } from './main/store/myStore/store.store';
 import { StoreService } from './main/store/services/store.service';
 import { ConfigToarst } from './utils/configToarst';
+import { FormsModule } from '@angular/forms';
+import { MyCartComponent } from './myCart/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { ConfigToarst } from './utils/configToarst';
     HomeComponent,
     BlogComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    MyCartComponent
    ],
   imports: [
     AccountModule,
     MenuModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

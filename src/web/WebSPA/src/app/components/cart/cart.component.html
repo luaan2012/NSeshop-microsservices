@@ -18,7 +18,7 @@
         <ul class="header-cart-wrapitem w-full">
 
           <li class="header-cart-item flex-w flex-t m-b-12" *ngFor="let product of cart?.items">
-            <div class="header-cart-item-img">
+            <div class="header-cart-item-img" (click)="removeItem(product?.productId, product.name)">
               <img src="assets/images/{{product?.image}}" alt="IMG">
             </div>
 
@@ -44,7 +44,7 @@
               Limpar
             </a>
 
-            <a href="javascript:void(0)" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+            <a href="javascript:void(0)" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" [routerLink]="['/carrinho']">
               Carrinho
             </a>
           </div>

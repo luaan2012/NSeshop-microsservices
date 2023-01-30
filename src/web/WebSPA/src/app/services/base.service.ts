@@ -19,10 +19,27 @@ export abstract class BaseService {
       };
     }
 
+    protected GetHeaderUnlerncoded() {
+      return {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded'
+        })
+      };
+    }
+
     protected GetAuthHeaderJson() {
         return {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.LocalStorage.GetTokenUser()}`
+            })
+        };
+    }
+
+    protected GetAuthHeaderUnlecoded() {
+        return {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${this.LocalStorage.GetTokenUser()}`
             })
         };

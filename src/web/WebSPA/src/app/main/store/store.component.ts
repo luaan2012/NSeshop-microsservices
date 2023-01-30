@@ -43,8 +43,6 @@ export class StoreComponent implements OnInit {
           toast.onHidden.subscribe(() => {
             this.router.navigate(['/home']);
           });
-        }else{
-          this.router.navigate(['/home']);
         }
       }
     }).add(() => this.spinner.hide());

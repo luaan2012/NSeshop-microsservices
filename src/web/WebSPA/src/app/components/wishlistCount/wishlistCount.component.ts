@@ -32,6 +32,6 @@ export class WishlistCountComponent implements OnInit {
       this.wishService.GetQuantity().subscribe({
         next: (a: number) => { a > 0 ? this.count = a : this.count = 0}
       })
-    }, 100);
+    }, 400);
   }
 }

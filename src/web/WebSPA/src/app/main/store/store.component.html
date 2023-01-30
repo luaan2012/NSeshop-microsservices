@@ -268,7 +268,7 @@
                   </div>
 
                   <div class="block2-txt-child2 flex-r p-t-3">
-                    <a href="javascript:void(0)" #wishList class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 {{product?.wishList}}" (click)="addWish(product.id, wishList)">
+                    <a href="javascript:void(0)" #wishList class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 {{product?.wishList}} {{product?.id}}" (click)="addWish(product.id, wishList)">
                       <img class="icon-heart1 dis-block trans-04" src="./assets/images/icons/icon-heart-01.png" alt="ICON">
                       <img class="icon-heart2 dis-block trans-04 ab-t-l" src="./assets/images/icons/icon-heart-02.png" alt="ICON">
                     </a>
@@ -387,7 +387,7 @@
                                               <i class="fs-16 zmdi zmdi-minus"></i>
                                           </div>
 
-                                          <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="{{quantity}}">
+                                          <input [(ngModel)]="quantity" class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="{{quantity}}" />
 
                                           <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" (click)="add()">
                                               <i class="fs-16 zmdi zmdi-plus"></i>

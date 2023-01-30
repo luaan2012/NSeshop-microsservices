@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Products } from 'src/app/models/produto';
@@ -48,8 +49,8 @@ export class Store {
     }
 
     public getProduct(): Observable<Products[]> {
-        return this.store
-            .pipe(map(store => store.store));
+      return this.store
+          .pipe(map(store => store.store));
     }
 
     public getWish(): Observable<Products[]> {

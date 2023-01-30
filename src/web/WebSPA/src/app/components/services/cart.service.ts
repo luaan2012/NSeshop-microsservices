@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable } from "rxjs";
 import { Cart, Products } from "src/app/models/produto";
@@ -26,6 +26,11 @@ export class CartService extends BaseService{
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 
+  updatedCart(id: string, product: Products): Observable<Products> {
+    return this.http.put<Products>(this.UrlBFF + 'shops/cart/items/' + id, product, this.GetAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+
   CleanCart(): Observable<any> {
     return this.http.delete<any>(this.UrlBFF + 'shops/cart/removeCart', this.GetAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -33,6 +38,16 @@ export class CartService extends BaseService{
 
   RemoveOneItem(id: string): Observable<any> {
     return this.http.delete<any>(this.UrlBFF + 'shops/cart/items/' + id, this.GetAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+
+  applyDiscount(voucherCode: string): Observable<any> {
+    return this.http.post(`${this.UrlBFF + 'shops/cart/apply-voucher'}`,`\"${voucherCode}\"`, this.GetAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+
+  removeDiscount(voucherCode: string): Observable<any> {
+    return this.http.post(`${this.UrlBFF + 'shops/cart/remove-voucher'}`,`\"${voucherCode}\"`, this.GetAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 }

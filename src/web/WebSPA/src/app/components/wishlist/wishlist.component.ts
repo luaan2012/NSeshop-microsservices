@@ -19,19 +19,20 @@ export class WishlistComponent implements OnInit {
     private toarst: ToastrService) { }
 
   ngOnInit() {
-    this.getWish();
-
     this.store.getWish().subscribe({
-      next: () => { this.getWish()},
-      error: () => { }
+      next: () => {
+        setTimeout(() => {
+          this.getWish()
+        }, 400);
+      },
+      error: () => { this.toarst.warning('Erro ao tentar carregar sua lista de desejo') }
     }).add(() => this.spinner.hide())
   }
 
   getWish(){
     this.spinner.show();
     this.wishService.GetWish().subscribe({
-      next: (wish: Cart) => { this.wishList = wish},
-      error: (error: any) => { this.toarst.warning('Erro ao tentar carregar sua lista de desejo'); }
+      next: (wish: Cart) => { this.wishList = wish}
     }).add(() => this.spinner.hide())
   }
 
@@ -45,5 +46,17 @@ export class WishlistComponent implements OnInit {
       next: () => { this.wishList = null; this.store.setWishRemove('wish', '');},
       error: (error: any) => { this.toarst.warning('Erro ao tentar limpar sua lista de desejo'); }
     }).add(() => this.spinner.hide())
+  }
+
+  removeItem(id: string, name: string){
+    this.spinner.show();
+    this.wishService.RemoveWishItem(id).subscribe({
+      next: () => {
+      this.toarst.info(name + ' foi removido do seu carrinho');
+      this.store.setWish('wish', '');
+      document.getElementsByClassName(id)[0].classList.remove('js-addedwish-b2');
+    },
+      error: () => { 'Não foi possível remover ' + name + ' do seu carrinho'}
+    }).add( () => this.spinner.hide());
   }
 }

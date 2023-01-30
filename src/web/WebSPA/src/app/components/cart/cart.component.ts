@@ -18,13 +18,11 @@ export class CartComponent implements OnInit {
       private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.getCart();
-
     this.store.getProduct().subscribe({
       next: () => { setTimeout(() => {
         this.getCart();
-      }, 200)},
-      error: () => { },
+      }, 400)},
+      error: () => { this.toarst.warning('Erro ao tentar carregar seu carrinho') },
     }).add(() => this.spinner.hide())
   }
 
@@ -32,8 +30,7 @@ export class CartComponent implements OnInit {
     this.spinner.show();
 
     this.cartService.GetCart().subscribe({
-      next: (cart: Cart) => { this.cart = cart;},
-      error: () => { this.toarst.warning('Erro ao tentar carregar seu carrinho');}
+      next: (cart: Cart) => { this.cart = cart;}
     }).add(() => this.spinner.hide())
   }
 
@@ -53,5 +50,13 @@ export class CartComponent implements OnInit {
         this.toarst.warning('Erro ao tentar limpar seu carrinho')
       }
     }).add(() => this.spinner.hide());
+  }
+
+  removeItem(id: string, name: string){
+    this.spinner.show();
+    this.cartService.RemoveOneItem(id).subscribe({
+      next: () => { this.toarst.info(name + ' foi removido do seu carrinho.'); this.store.set('store', '')},
+      error: () => { this.toarst.warning('Não foi possível remover ' + name + ' do seu carrinho')}
+    }).add( () => this.spinner.hide());
   }
 }

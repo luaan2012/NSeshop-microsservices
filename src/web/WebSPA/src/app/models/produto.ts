@@ -18,7 +18,14 @@ export interface Products {
 export interface Cart {
   discount: number,
   valueTotal: number,
-  voucher: string,
+  voucher: Voucer,
   voucherUsed: boolean,
   items: Products[]
+}
+
+export interface Voucer {
+  percentage: number,
+  valueDiscount: number,
+  code: string,
+  discountType: number,
 }

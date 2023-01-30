@@ -17,7 +17,7 @@
       <ul class="header-cart-wrapitem w-full" style="padding-left: 0rem!important">
 
         <li class="header-cart-item flex-w flex-t m-b-12" *ngFor="let wish of wishList?.items">
-          <div class="header-cart-item-img">
+          <div class="header-cart-item-img" (click)="removeItem(wish?.productId, wish.name)">
             <img src="assets/images/{{wish?.image}}" alt="IMG">
           </div>
 

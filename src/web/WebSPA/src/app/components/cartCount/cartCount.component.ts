@@ -19,17 +19,19 @@ export class CartCountComponent implements OnInit {
     this.getQuantity()
 
     this.store.getProduct().subscribe({
-      next: () => { this.getQuantity()},
+      next: () => {
+        setTimeout(() => {
+          this.getQuantity()
+        }, 400);
+      },
       error: () => {}
     })
   }
 
   getQuantity() {
-    setTimeout(() =>{
-      this.cartService.GetQuantity().subscribe({
-        next: (count: number) => { count > 0 ? this.count = count : this.count = 0;},
-        error: () => {}
-      })
-    }, 200)
+    this.cartService.GetQuantity().subscribe({
+      next: (count: number) => { count > 0 ? this.count = count : this.count = 0;},
+      error: () => {}
+    })
   }
 }

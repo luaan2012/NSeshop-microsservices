@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { CartService } from '../../components/services/cart.service';
 import { Cart } from '../../models/produto';
 import { ConfigToarst } from '../../utils/configToarst';
 import { AddressService } from '../services/address.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-cart',
@@ -20,9 +21,10 @@ export class MyCartComponent implements OnInit {
   appDiscount: any;
   address: Address;
   cep: any;
+  modalRef?: BsModalRef;
 
   constructor(private cartService: CartService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store) { }
+  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.store.getProduct().subscribe({
@@ -32,6 +34,8 @@ export class MyCartComponent implements OnInit {
       }, 400)},
       error: () => { this.toarst.warning('Erro ao tentar carregar seu carrinho') }
     }).add(() => this.spinner.hide())
+
+    this.getAddress();
   }
 
   getCart(){
@@ -61,6 +65,10 @@ export class MyCartComponent implements OnInit {
       next: (address: Address) => { this.address = address },
       error: () => { },
     }).add(() => this.spinner.hide())
+  }
+
+  openAddress(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
   }
 
   digitQuantity(id: string, input: HTMLInputElement){
@@ -125,5 +133,4 @@ export class MyCartComponent implements OnInit {
       error: (error: any) => { }
     }).add(() => this.spinner.hide())
   }
-
 }

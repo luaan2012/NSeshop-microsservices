@@ -22,6 +22,8 @@ import { StoreService } from './main/store/services/store.service';
 import { ConfigToarst } from './utils/configToarst';
 import { FormsModule } from '@angular/forms';
 import { MyCartComponent } from './myCart/cart/cart.component';
+import { AddressService } from './myCart/services/address.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { MyCartComponent } from './myCart/cart/cart.component';
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),
     TabsModule.forRoot(),
+    ModalModule.forRoot(),
     NgxSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -51,7 +54,8 @@ import { MyCartComponent } from './myCart/cart/cart.component';
     HomeService,
     Store,
     StoreService,
-    ConfigToarst
+    ConfigToarst,
+    AddressService
   ],
   bootstrap: [AppComponent]
 })

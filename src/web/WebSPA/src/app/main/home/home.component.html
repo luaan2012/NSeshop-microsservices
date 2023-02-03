@@ -151,7 +151,7 @@
                         <img src="./assets/images/{{produto.image}}" alt="IMG-PRODUCT">
 
                         <form asp-action="Index" method="post">
-                          <button type="submit" href="javascript:void(0)"
+                          <button type="submit" href="javascript:void(0)" [routerLink]="['/loja', produto.id]"
                             class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Ver Detalhes
                           </button>

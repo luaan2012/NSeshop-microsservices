@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -21,15 +21,22 @@ export class StoreComponent implements OnInit {
   products: Products[] = [];
   product: Products;
   quantity: number = 1;
+  idDetail: any;
 
   constructor(private storeService: StoreService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
     private cartService: CartService,
     private wishService: WishService,
     private store: Store,
-    private configToarst: ConfigToarst
+    private configToarst: ConfigToarst,
+    private activeRouter: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
+    this.idDetail = this.activeRouter.snapshot.paramMap.get('id')
+
+    if(this.idDetail)
+      window.history.pushState({}, document.title, "/" + "");
+
     this.spinner.show();
 
     this.configToarst.toarstPosition(3);
@@ -53,9 +60,9 @@ export class StoreComponent implements OnInit {
     })
   }
 
-  productDetail(id: string, modal: HTMLDivElement) {
+  productDetail(id: any) {
     this.product = this.products.find(x => x.id == id);
-    modal.classList.add('show-modal1');
+    document.getElementsByClassName('js-modal1')[0].classList.add('show-modal1');
   }
 
   addCart(id: string) {
@@ -73,7 +80,7 @@ export class StoreComponent implements OnInit {
         if (error?.length > 0) {
           let message: string = '';
           for (let index = 0; index < error.length; index++) {
-            message += error[index] + ' ';
+            message += error[index] + ', ';
           }
           this.toarst.warning(message);
         }else{
@@ -131,6 +138,8 @@ export class StoreComponent implements OnInit {
             v.wishList = 'js-addedwish-b2';
           }
         })
+        if(this.idDetail)
+          this.productDetail(this.idDetail);
       },
       error: () => {}
     });

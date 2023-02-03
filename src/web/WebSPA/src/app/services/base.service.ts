@@ -8,6 +8,7 @@ export abstract class BaseService {
     protected UrlStore: string = environment.apiUrlStore;
     protected UrlAccount: string = environment.apiUrlAccount;
     protected UrlBFF: string = environment.apiUrlBFF;
+    protected urlClient: string = environment.apiUrlClient;
 
     public LocalStorage = new LocalStorageUtils();
 

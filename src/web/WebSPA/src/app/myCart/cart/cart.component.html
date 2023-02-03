@@ -113,34 +113,35 @@
                                         </span>
                                     </div>
 
-                                    <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+                                    <div class="size-209 p-r-18 p-r-0-sm w-full-ssm" **ngIf="address;else adicionar">
 
                                       <p class="stext-111 cl6 p-t-2">
+                                          {{address}}
                                       </p>
 
                                       <div class="p-t-15">
 
-                                          <div class="flex-w">
-                                              <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer editAddress">
-                                                  Editar
-                                              </div>
-                                          </div>
+                                            <div class="flex-w">
+                                                <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer editAddress">
+                                                    Editar
+                                                </div>
+                                            </div>
 
-                                      </div>
+                                        </div>
 
-                                      <p class="stext-111 cl6 p-t-2">
-                                          Você não possui endereço
-                                      </p>
+                                        <p class="stext-111 cl6 p-t-2">
+                                            Você não possui endereço
+                                        </p>
 
-                                      <div class="p-t-15">
+                                        <div class="p-t-15" #adicionar>
 
-                                          <div class="flex-w">
-                                              <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                                  Adicionar
-                                              </div>
-                                          </div>
+                                            <div class="flex-w">
+                                                <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                                    Adicionar
+                                                </div>
+                                            </div>
 
-                                      </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -187,15 +188,57 @@
     </div>
 </section>
 
-<!-- @section scripts{
+<!-- Register Address-->
+<div class="modal fade" id="registerModal" tabindex="999999" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Registre um endereço para entrega</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Digite o cep:</label>
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                      <input type="text" class="form-control" id="cepRegister" placeholder="00000-000" maxlength="8">
+                  </div>
+                  <div class="showRegister" style="display:none;">
+                      <input type="hidden" id="idModalRegister"/>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Endereço</label>
+                          <input type="text" class="form-control" id="addressModal" placeholder="Digite seu endereço">
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Complementoo</label>
+                          <input type="text" class="form-control" id="complementModal" placeholder="Digite seu número">
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Bairro</label>
+                          <input type="text" class="form-control" id="neighborhoodModal" placeholder="Digite seu bairro">
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Cidade</label>
+                          <input type="text" class="form-control" id="cityModal" placeholder="Digite sua cidade">
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Estado</label>
+                          <input type="text" class="form-control" id="stateModal" placeholder="Digite seu estado">
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Numero</label>
+                          <input type="text" class="form-control" id="numberModal" placeholder="Digite seu número">
+                      </div>
 
-    <script>
-        (function($) {
-
-            var wrapMenu = $('.wrap-menu-desktop');
-            $(wrapMenu).css('top',0);
-
-        }(jQuery));
-    </script>
-
-} -->
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary editModal">Editar cep</button>
+              <button type="button" class="btn btn-primary sendRegister">Registrar endereço</button>
+          </div>
+      </div>
+  </div>
+</div>

@@ -3,9 +3,11 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from 'src/app/main/store/myStore/store.store';
+import { Address } from 'src/app/models/client';
 import { CartService } from '../../components/services/cart.service';
 import { Cart } from '../../models/produto';
 import { ConfigToarst } from '../../utils/configToarst';
+import { AddressService } from '../services/address.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,9 +18,11 @@ export class MyCartComponent implements OnInit {
 
   cart: Cart;
   appDiscount: any;
+  address: Address;
+  cep: any;
 
   constructor(private cartService: CartService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-    private confToarst: ConfigToarst, private store: Store) { }
+  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store) { }
 
   ngOnInit() {
     this.store.getProduct().subscribe({
@@ -51,6 +55,14 @@ export class MyCartComponent implements OnInit {
     }).add(() => this.spinner.hide());
   }
 
+  getAddress(){
+    this.spinner.show();
+    this.addressService.GetAddress().subscribe({
+      next: (address: Address) => { this.address = address },
+      error: () => { },
+    }).add(() => this.spinner.hide())
+  }
+
   digitQuantity(id: string, input: HTMLInputElement){
     let product = this.cart?.items.find(x => x.productId == id);
     product.quantity = parseInt(input.value);
@@ -79,7 +91,7 @@ export class MyCartComponent implements OnInit {
         if (error?.length > 0) {
           let message: string = '';
           for (let index = 0; index < error.length; index++) {
-            message += error[index] + ' ';
+            message += error[index] + ', ';
           }
           this.toarst.warning(message);
         } else {
@@ -105,4 +117,13 @@ export class MyCartComponent implements OnInit {
       error: () => { this.toarst.error('Aconteceu algo errado ao tentar remover o desconto') }
     }).add(() => this.spinner.hide())
   }
+
+  getCep(){
+    this.spinner.show();
+    this.addressService.getCep().subscribe({
+      next: (cep: any) => { this.cep = cep },
+      error: (error: any) => { }
+    }).add(() => this.spinner.hide())
+  }
+
 }

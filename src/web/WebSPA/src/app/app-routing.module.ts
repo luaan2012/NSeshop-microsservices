@@ -17,6 +17,7 @@ const routes: Routes = [
       .then(m => m.AccountModule)
   },
   { path: 'loja', component: StoreComponent },
+  { path: 'loja/:id', component: StoreComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contato', component: ContactComponent },
   { path: 'carrinho', component: MyCartComponent },

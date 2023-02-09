@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -9,22 +9,36 @@ import { Cart } from '../../models/produto';
 import { ConfigToarst } from '../../utils/configToarst';
 import { AddressService } from '../services/address.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { FormBaseComponent } from 'src/app/components/form-base.component';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { MASKS, NgBrazilValidators } from 'ng-brazil';
+import { CustomValidators } from 'ng2-validation';
+import { NgTemplateOutlet } from '@angular/common';
+import { CurrencyUtils } from 'src/app/utils/currency-utils';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['../cart.component.css']
 })
-export class MyCartComponent implements OnInit {
+export class MyCartComponent extends FormBaseComponent implements OnInit {
 
   cart: Cart;
   appDiscount: any;
   address: Address;
   cep: any;
   modalRef?: BsModalRef;
+  cepDigit: string = '';
+  registerForm: FormGroup;
+  MASKS = MASKS;
+  errors: any[] = []
 
-  constructor(private cartService: CartService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store, private modalService: BsModalService) { }
+  constructor(private fb: FormBuilder, private cartService: CartService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
+  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store, private modalService: BsModalService) {
+    super();
+  }
+
+  get f(): any { return this.registerForm.controls; }
 
   ngOnInit() {
     this.store.getProduct().subscribe({
@@ -36,6 +50,16 @@ export class MyCartComponent implements OnInit {
     }).add(() => this.spinner.hide())
 
     this.getAddress();
+
+    this.registerForm = this.fb.group({
+      cep: ['', [Validators.minLength(9), NgBrazilValidators.cep]],
+      neighborhood: ['', Validators.required],
+      publicPlace: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      number: ['', Validators.required],
+      complement: ['']
+    });
   }
 
   getCart(){
@@ -69,6 +93,12 @@ export class MyCartComponent implements OnInit {
 
   openAddress(template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
+  }
+
+  closeAddress(){
+    this.modalRef.hide();
+    this.registerForm.reset();
+    this.cep = null;
   }
 
   digitQuantity(id: string, input: HTMLInputElement){
@@ -126,11 +156,62 @@ export class MyCartComponent implements OnInit {
     }).add(() => this.spinner.hide())
   }
 
-  getCep(){
+  public getCep(cepe: string){
+    if(cepe.length < 8)
+      return;
+
+    document.getElementById('hidecep').classList.add('d-none');
+    document.getElementById('loadingCep').classList.remove('d-none');
+
+    setTimeout(() => {
+      this.addressService.getCep(CurrencyUtils.CleanString(cepe)).subscribe({
+        next: (cep: any) => {
+          this.cep = cep;
+
+          this.registerForm = this.fb.group({
+            cep: [cepe, Validators.minLength(9)],
+            neighborhood: [cep.bairro, Validators.required],
+            publicPlace: [cep.logradouro, Validators.required],
+            city: [cep.localidade, Validators.required],
+            state: [cep.uf, Validators.required],
+            number: ['', Validators.required],
+            complement: ['']
+          });
+        },
+        error: (error: any) => { }
+      })
+      document.getElementById('loadingCep').classList.add('d-none');
+      document.getElementById('hidecep').classList.remove('d-none');
+    }, 2000);
+  }
+
+  AddAddress(){
     this.spinner.show();
-    this.addressService.getCep().subscribe({
-      next: (cep: any) => { this.cep = cep },
-      error: (error: any) => { }
-    }).add(() => this.spinner.hide())
+
+    this.address = Object.assign({}, this.address, this.registerForm.value)
+    this.address.cep = CurrencyUtils.CleanString(this.address.cep);
+    this.address.number = this.address.number.toString();
+    this.addressService.AddAddress(this.address).subscribe({
+       next: (success) => { this.processSuccess()},
+       error: (error) => { this.ProcessFail(error) }
+     }).add(() => this.spinner.hide());
+  }
+
+  processSuccess() {
+    this.registerForm.reset();
+    this.errors = [];
+
+    this.toarst.toastrConfig.timeOut = 1500;
+    this.toarst.toastrConfig.positionClass = 'toast-top-center';
+
+    this.toarst.success('Endereço registrado com Sucesso!');
+
+    this.modalRef.hide();
+  }
+
+  ProcessFail(fail: any) {
+    console.log(fail)
+    this.errors = fail.error.errors['Messages'] ? fail.error.errors['Messages'] : fail.error.errors;
+    this.toarst.error('Ocorreu um erro!', this.errors[0]);
   }
 }

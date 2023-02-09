@@ -20,10 +20,13 @@ import { HomeService } from './main/home/services/home.service';
 import { Store } from './main/store/myStore/store.store';
 import { StoreService } from './main/store/services/store.service';
 import { ConfigToarst } from './utils/configToarst';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyCartComponent } from './myCart/cart/cart.component';
 import { AddressService } from './myCart/services/address.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TextMaskModule } from 'angular2-text-mask';
+import { NgBrazil } from 'ng-brazil';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AccountModule,
     MenuModule,
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -48,6 +50,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     NgxSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TextMaskModule,
+    NgBrazil,
+    CustomFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

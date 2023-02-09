@@ -5,6 +5,13 @@
   position: relative !important;
 }
 
+.fa-magnifying-glass{
+    float: right !important;
+    top: 28px !important;
+    left: -8px !important;
+    position: relative !important;
+}
+
 .tooltipOrder {
   float: left;
   top: -63px;

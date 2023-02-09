@@ -16,8 +16,13 @@ export class AddressService extends BaseService{
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 
-  getCep(): Observable<any> {
-    return this.http.get<any>('https://viacep.com.br/ws/01001000/json/', this.ObterHeaderJson())
+  AddAddress(address: Address): Observable<Address> {
+    return this.http.post<Address>(this.urlClient + 'client/address', address, this.GetAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+  }
+
+  getCep(cep: string): Observable<any> {
+    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`, this.GetAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
   }
 }

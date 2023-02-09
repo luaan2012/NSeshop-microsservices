@@ -3,5 +3,5 @@ export const environment = {
     apiUrlStore: 'https://localhost:7401/',
     apiUrlAccount: 'https://localhost:7136/api/auth/',
     apiUrlBFF: 'https://localhost:7221/',
-    apiUrlClient: 'https://localhost:7038'
+    apiUrlClient: 'https://localhost:7038/'
 }

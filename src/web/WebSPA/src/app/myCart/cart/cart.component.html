@@ -201,51 +201,67 @@
 </section>
 
 <ng-template #template>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Registre um endereço para entrega</h5>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="recipient-name" class="col-form-label">Digite o cep:</label>
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="form-control" id="cepRegister" placeholder="00000-000" maxlength="8">
-      </div>
-      <div class="showRegister" style="display:none;">
-        <input type="hidden" id="idModalRegister" />
+  <form novalidate class="register-form" (ngSubmit)="AddAddress()" [formGroup]="registerForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Registre um endereço para entrega</h5>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeAddress()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Endereço</label>
-          <input type="text" class="form-control" id="addressModal" placeholder="Digite seu endereço">
+          <i class="fa-solid fa-magnifying-glass" id="hidecep"></i>
+          <img class="fa-magnifying-glass d-none" id="loadingCep" src="../../../assets/images/icons/icons8-spinner.gif" alt="" style="max-width: 5%;">
+          <input #inputCep type="text" class="form-control" name="cep" id="cepRegister" placeholder="Digite seu CEP" formControlName="cep" cep [textMask]="{mask: MASKS['cep'].textMask}" (blur)="getCep(inputCep.value)" />
+          <span class="text-danger" *ngIf="f?.cep?.errors">
+            <p>CEP inválido</p>
+          </span>
         </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Complementoo</label>
-          <input type="text" class="form-control" id="complementModal" placeholder="Digite seu número">
+        <div class="showRegister" *ngIf="cep">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Endereço</label>
+            <input type="text" class="form-control" id="addressModal" name="publicPlace" placeholder="Digite seu endereço" formControlName="publicPlace" />
+            <span class="text-danger" *ngIf="f?.publicPlace?.errors?.required">
+              <p>Endereço é obrigatório</p>
+          </span>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Complemento</label>
+            <input type="text" class="form-control" id="complementModal" name="complement" placeholder="Digite um complemento" formControlName="complement"/>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Bairro</label>
+            <input type="text" class="form-control" id="neighborhoodModal" placeholder="Digite seu bairro" formControlName="neighborhood"/>
+            <span class="text-danger" *ngIf="f?.neighborhood?.errors?.required">
+              <p>Bairro obrigatório</p>
+          </span>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Cidade</label>
+            <input type="text" class="form-control" id="cityModal" name="city" placeholder="Digite sua cidade" formControlName="city"/>
+            <span class="text-danger" *ngIf="f?.city?.errors?.required">
+              <p>Cidade obrigatória</p>
+          </span>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Estado</label>
+            <input type="text" class="form-control" id="state" name="state" placeholder="Digite seu estado" formControlName="state"/>
+            <span class="text-danger" *ngIf="f?.state?.errors?.required">
+              <p>Estado obrigatório</p>
+          </span>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Numero</label>
+            <input type="number" class="form-control" id="numberModal" name="number" formControlName="number" placeholder="Digite seu número"/>
+            <span class="text-danger" *ngIf="f?.number?.errors?.required">
+              <p>Numero obrigatorio</p>
+          </span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Bairro</label>
-          <input type="text" class="form-control" id="neighborhoodModal" placeholder="Digite seu bairro">
-        </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Cidade</label>
-          <input type="text" class="form-control" id="cityModal" placeholder="Digite sua cidade">
-        </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Estado</label>
-          <input type="text" class="form-control" id="stateModal" placeholder="Digite seu estado">
-        </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Numero</label>
-          <input type="text" class="form-control" id="numberModal" placeholder="Digite seu número">
-        </div>
-
-      </div>
-    </form>
-  </div>
+    </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary editModal">Editar cep</button>
-    <button type="button" class="btn btn-primary sendRegister">Registrar endereço</button>
+    <button type="button" class="btn btn-secondary editModal" (click)="closeAddress()">Cancelar</button>
+    <button type="submit" class="btn btn-primary sendRegister" [disabled]="!registerForm.valid">Registrar endereço</button>
   </div>
+</form>
 </ng-template>

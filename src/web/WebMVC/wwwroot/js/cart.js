@@ -62,8 +62,6 @@ function registerModal(cep, id, complement, number) {
     if (cep.toString().length < 8) 
         return
 
-    console.log(complement)
-
     if ($('.editAddress').length) {
         $('#complementModal').val(complement);
         $('#cepRegister').val(cep);

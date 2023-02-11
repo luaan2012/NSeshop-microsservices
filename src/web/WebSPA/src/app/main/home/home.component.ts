@@ -3,6 +3,9 @@ import { HomeService } from './services/home.service';
 import { Banner } from '../../models/banner';
 import { Products } from '../../models/produto';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfigToarst } from 'src/app/utils/configToarst';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +23,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public maisBuscados: Products[];
   errorMessage: string;
   myInterval: number = 2000;
+  detaisProduct: string;
 
-  constructor(private homeService: HomeService, private spinner: NgxSpinnerService) {}
+  constructor(private homeService: HomeService, private spinner: NgxSpinnerService,
+    private activeRouter: ActivatedRoute, private configToarst: ConfigToarst,
+    private toarst: ToastrService, private router: Router) {}
 
   ngOnInit(): void {
+    let login = this.activeRouter.snapshot.paramMap.get('login')
+
+    if(login){
+      this.configToarst.toarstPosition(3);
+      this.toarst.error('Sua sessao expirou, faca o login novamente');
+      window.history.pushState({}, document.title, "/" + "");
+      document.getElementById('loginNav').click();
+    }
+
     this.spinner.show();
 
     this.homeService.getBanners().subscribe({
@@ -69,5 +84,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
    changeInterval(interval:number){
     this.myInterval = interval;
+   }
+
+   details(id: string){
+    if(this.homeService.LocalStorage.IsLogged())
+      this.router.navigate(['/loja', id]);
+    else{
+      document.getElementById('loginNav').click();
+      localStorage.setItem('detail', id);
+    }
+   }
+
+   bannersDetails(id: string){
+    if(this.homeService.LocalStorage.IsLogged())
+      this.router.navigate(['/loja', { banner: id }]);
+    else{
+      document.getElementById('loginNav').click();
+      localStorage.setItem('detailBanner', id);
+    }
    }
 }

@@ -31,7 +31,8 @@ export class WishlistComponent implements OnInit {
   getWish(){
     this.spinner.show();
     this.wishService.GetWish().subscribe({
-      next: (wish: Cart) => { this.wishList = wish}
+      next: (wish: Cart) => { this.wishList = wish},
+      error: () => { },
     }).add(() => this.spinner.hide())
   }
 

@@ -7,8 +7,7 @@ import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  templateUrl: './cart.component.html'
 })
 export class CartComponent implements OnInit {
   cart: Cart;
@@ -30,7 +29,8 @@ export class CartComponent implements OnInit {
     this.spinner.show();
 
     this.cartService.GetCart().subscribe({
-      next: (cart: Cart) => { this.cart = cart;}
+      next: (cart: Cart) => { this.cart = cart;},
+      error: () => { },
     }).add(() => this.spinner.hide())
   }
 

@@ -5,7 +5,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FormBaseComponent } from 'src/app/components/form-base.component';
+import { Store } from 'src/app/main/store/myStore/store.store';
 import { User } from 'src/app/models/usuario';
+import { ConfigToarst } from 'src/app/utils/configToarst';
 import { AccountService } from '../service/account.service';
 
 @Component({
@@ -22,11 +24,11 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
   user: User;
 
   constructor(private modalService: BsModalService, private fb: FormBuilder, private account: AccountService, private router: Router,
-    private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService, private store: Store, private configToarst: ConfigToarst,
     private toastr: ToastrService) {
     super();
 
-    this.toastr.toastrConfig.positionClass = 'toast-top-center';
+    this.configToarst.toarstPosition(7);
 
     this.validationMessages = {
       email: {
@@ -47,6 +49,10 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+
+  closeModal() {
+    this.modalService.hide();
   }
 
   ngAfterViewInit(): void {
@@ -76,7 +82,14 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
     this.toastr.success('Bem vindo!');
 
+    this.store.setWish('wish', '');
+    this.store.set('store', '');
     this.modalService.hide();
+    if(localStorage.getItem('detail'))
+      this.router.navigate(['loja', localStorage.getItem('detail')]);
+
+    if(localStorage.getItem('detailBanner'))
+      this.router.navigate(['loja', localStorage.getItem('detail')]);
   }
 
   ProcessFail(fail: any) {

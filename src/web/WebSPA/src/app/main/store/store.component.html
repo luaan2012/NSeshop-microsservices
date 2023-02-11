@@ -2,28 +2,28 @@
   <div class="bg0 m-t-23 p-b-140">
     <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
-            <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+            <div class="flex-w flex-l-m filter-tope-group m-tb-10" id="filters" #buttons>
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1 type-0" (click)="filter(buttons, 0)">
                     Todos Produtos
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@ProductType.Phones">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 type-4" (click)="filter(buttons, 4)">
                     Celulares
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@ProductType.GamesConsoles">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 type-2" (click)="filter(buttons, 2)">
                     Games e Consoles
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@ProductType.Electronic">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 type-3" (click)="filter(buttons, 3)">
                     Eletronicos
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@ProductType.Books">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 type-1" (click)="filter(buttons, 1)">
                     Livros
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@ProductType.Acessories">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 type-5" (click)="filter(buttons, 5)">
                     Acessorios
                 </button>
             </div>
@@ -249,7 +249,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="./assets/images/{{product.image}}" alt="IMG-PRODUCT">
+                <img src="assets/images/{{product?.image}}" alt="IMG-PRODUCT">
 
                 <a href="javascript:void(0)" (click)="productDetail(product.id)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                   Ver detalhe
@@ -258,7 +258,7 @@
 
               <div class="block2-txt flex-w flex-t p-t-14">
                 <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                  <a href="javascript:void(0)" (click)="productDetail(product.id)" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                     {{ product.name }}
                   </a>
 
@@ -269,8 +269,8 @@
 
                 <div class="block2-txt-child2 flex-r p-t-3">
                   <a href="javascript:void(0)" #wishList class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 {{product?.wishList}} {{product?.id}}" (click)="addWish(product.id, wishList)">
-                    <img class="icon-heart1 dis-block trans-04" src="./assets/images/icons/icon-heart-01.png" alt="ICON">
-                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="./assets/images/icons/icon-heart-02.png" alt="ICON">
+                    <img class="icon-heart1 dis-block trans-04" src="assets/images/icons/icon-heart-01.png" alt="ICON">
+                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="assets/images/icons/icon-heart-02.png" alt="ICON">
                   </a>
                 </div>
               </div>

@@ -44,7 +44,6 @@
             <li data-link="Perfil" *ngIf="account.LocalStorage.IsLogged()">
               <a href="javascript:void(0)">Meu Perfil</a>
               <ul class="sub-menu">
-                <li><a href="javascript:void(0)">Meu Perfil</a></li>
                 <li><a href="javascript:void(0)" [routerLink]="['/meus-pedidos']"> Meu Pedidos</a></li>
                 <li style="border-top:1px solid #b1b1b1 !important" class="dropdown-divider"></li>
                 <li><a href="javascript:void(0)"(click)="clearDataUser()">Sair</a></li>
@@ -62,7 +61,7 @@
 
           <ul class="main-menu" *ngSwitchCase="false">
             <li data-link="Entrar">
-              <a href="javascript:void(0)" (click)="openModal(modalLogin)">Entrar</a>
+              <a href="javascript:void(0)" id="loginNav" (click)="openModal(modalLogin)">Entrar</a>
             </li>
 
             <li data-link="Registro">

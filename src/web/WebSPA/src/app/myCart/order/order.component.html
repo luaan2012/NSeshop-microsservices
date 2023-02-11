@@ -64,10 +64,13 @@
                 </div>
             </article>
 
-            <div class="alert alert-danger" *ngIf="errors?.length > 0">
+            <div class="alert alert-danger" *ngIf="errors">
               <h3 id="msgRetorno">Opa! :(</h3>
-              <ul>
+              <ul *ngIf="errors?.length > 0">
                 <li *ngFor="let error of errors"><small>{{ error }}</small></li>
+              </ul>
+              <ul>
+                <li><small>{{ errors['CardExpiration'] }}</small></li>
               </ul>
             </div>
 

@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { Products } from 'src/app/models/produto';
 
 export interface State {
-    store: Products[]
+  store: Products[]
 }
 export interface Wish {
   wish: Products[]

@@ -2,7 +2,7 @@ import { AccountModule } from './account/account.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule, } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -31,6 +31,8 @@ import { MyOrdersComponent } from './myCart/myOrders/myOrders.component';
 import { OrderService } from './myCart/services/order.service';
 import { OrderComponent } from './myCart/order/order.component';
 import { StatusOrder } from './utils/pipeStatus';
+import { HttpConfigInterceptor } from './services/interceptor.module';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,9 @@ import { StatusOrder } from './utils/pipeStatus';
     ConfigToarst,
     AddressService,
     OrderService,
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }
   ],
   bootstrap: [AppComponent]
 })

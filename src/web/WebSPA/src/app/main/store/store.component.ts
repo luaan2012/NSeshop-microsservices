@@ -13,15 +13,16 @@ import { StoreService } from './services/store.service';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.scss']
 })
 export class StoreComponent implements OnInit {
 
   modalRef?: BsModalRef;
   products: Products[] = [];
+  filters: Products[] = [];
   product: Products;
   quantity: number = 1;
   idDetail: any;
+  idBanner: any;
 
   constructor(private storeService: StoreService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
     private cartService: CartService,
@@ -32,10 +33,16 @@ export class StoreComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.idDetail = this.activeRouter.snapshot.paramMap.get('id')
+    this.idDetail = this.activeRouter.snapshot.paramMap.get('id');
+    this.activeRouter.paramMap.subscribe(parms =>{
+      this.idBanner = parms.get('banner')
+    })
 
     if(this.idDetail)
       window.history.pushState({}, document.title, "/" + "");
+
+    if(this.idBanner)
+      window.history.pushState({}, document.title, "/" + "loja");
 
     this.spinner.show();
 
@@ -43,7 +50,7 @@ export class StoreComponent implements OnInit {
     this.configToarst.toarstTimeOut(4000);
 
     this.storeService.GetProductsStore().subscribe({
-      next: (products: Products[]) => { this.products = this.wishList(products)},
+      next: (products: Products[]) => { this.wishList(products);},
       error: () => {
         let toast = this.toarst.warning('Ocorreu um erro ao carregar a loja, tente novamente mais tarde.', 'Loja indisponivel');
         if (toast) {
@@ -130,7 +137,7 @@ export class StoreComponent implements OnInit {
     }
   }
 
-  wishList(products: Products[]): Products[]{
+  wishList(products: Products[]){
     this.wishService.GetWish().subscribe({
       next: (a: Cart) => {
         products.forEach((v, i) => {
@@ -140,10 +147,17 @@ export class StoreComponent implements OnInit {
         })
         if(this.idDetail)
           this.productDetail(this.idDetail);
+
+        if(this.idBanner){
+          console.log(this.idBanner)
+          var html = document.getElementById('filters') as HTMLDivElement;
+          this.filter(html, this.idBanner);
+        }
       },
       error: () => {}
     });
-    return products;
+    this.filters = products;
+    this.products = products;
   }
 
   removeWishListItem(){
@@ -152,5 +166,21 @@ export class StoreComponent implements OnInit {
     for (let index = 0; index < elements.length; index++) {
       elements[index].classList.remove('js-addedwish-b2');
     }
+  }
+
+  filter(button: HTMLDivElement, type: number){
+    this.products = this.filters;
+
+    for (let index = 0; index < button.children.length; index++) {
+      if(button.children[index].className.includes('type-'+type))
+        button.children[index].classList.add('how-active1')
+      else
+        button.children[index].classList.remove('how-active1')
+    }
+
+    if(type == 0)
+      return;
+
+    this.products = this.products.filter(x => x.productType == type);
   }
 }

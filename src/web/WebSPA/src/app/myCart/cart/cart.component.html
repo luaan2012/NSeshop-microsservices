@@ -211,7 +211,7 @@
     <div class="modal-body">
         <div class="form-group">
           <i class="fa-solid fa-magnifying-glass" id="hidecep"></i>
-          <img class="fa-magnifying-glass d-none" id="loadingCep" src="../../../assets/images/icons/icons8-spinner.gif" alt="" style="max-width: 5%;">
+          <img class="fa-magnifying-glass d-none" id="loadingCep" src="assets/images/icons/icons8-spinner.gif" alt="" style="max-width: 5%;">
           <input #inputCep type="text" class="form-control" name="cep" id="cepRegister" placeholder="Digite seu CEP" formControlName="cep" cep [textMask]="{mask: MASKS['cep'].textMask}" (blur)="getCep(inputCep.value)" />
           <span class="text-danger" *ngIf="f?.cep?.errors">
             <p>CEP inválido</p>

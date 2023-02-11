@@ -29,7 +29,8 @@ export class WishlistCountComponent implements OnInit {
   getQuantity(){
     setTimeout(() => {
       this.wishService.GetQuantity().subscribe({
-        next: (a: number) => { a > 0 ? this.count = a : this.count = 0}
+        next: (a: number) => { a > 0 ? this.count = a : this.count = 0},
+        error: () => {}
       })
     }, 400);
   }

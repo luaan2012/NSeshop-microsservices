@@ -6,7 +6,6 @@ import { AccountService } from 'src/app/account/service/account.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent{
   modalRef?: BsModalRef;

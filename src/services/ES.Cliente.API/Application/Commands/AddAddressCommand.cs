@@ -14,7 +14,7 @@ namespace NS.Clientes.API.Application.Commands
         public string City { get; set; }
         public string State { get; set; }
 
-        public AddAddressCommand()
+		public AddAddressCommand()
         {
         }
 

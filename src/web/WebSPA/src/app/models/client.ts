@@ -6,5 +6,6 @@ export interface Address {
   cep: string,
   city: string,
   state: string,
-  id: string
+  id: string,
+  completAddress: string
 }

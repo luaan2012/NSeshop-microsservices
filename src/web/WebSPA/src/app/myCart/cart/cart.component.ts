@@ -95,6 +95,22 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  openEditAddress(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+
+    this.cep = this.address.cep;
+
+    this.registerForm = this.fb.group({
+      cep: [this.address.cep],
+      neighborhood: [this.address.neighborhood, Validators.required],
+      publicPlace: [this.address.publicPlace, Validators.required],
+      city: [this.address.city, Validators.required],
+      state: [this.address.state, Validators.required],
+      number: [this.address.number, Validators.required],
+      complement: [this.address.complement]
+    });
+  }
+
   closeAddress(){
     this.modalRef.hide();
     this.registerForm.reset();
@@ -113,7 +129,7 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
 
   less(id: string){
     let product = this.cart?.items.find(x => x.productId == id);
-    product.quantity--;
+    product.quantity <= 0 ? product.quantity = 0 : product.quantity--;
   }
 
   attCart(id: string){
@@ -185,33 +201,48 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
     }, 2000);
   }
 
+  EditAddress(){
+    this.address = Object.assign({}, this.address, this.registerForm.value)
+    this.address.cep = CurrencyUtils.CleanString(this.address.cep);
+    this.address.number = this.address.number.toString();
+    this.addressService.EditAddress(this.address).subscribe({
+       next: (success) => { this.processSuccess('Endereco editado com sucesso!'); this.getAddress()},
+       error: (error) => { this.ProcessFail(error) }
+     }).add(() => this.spinner.hide());
+  }
+
   AddAddress(){
     this.spinner.show();
+
+    if(document?.getElementsByClassName('editAddress')[0]){
+      this.EditAddress();
+      return;
+    }
 
     this.address = Object.assign({}, this.address, this.registerForm.value)
     this.address.cep = CurrencyUtils.CleanString(this.address.cep);
     this.address.number = this.address.number.toString();
     this.addressService.AddAddress(this.address).subscribe({
-       next: (success) => { this.processSuccess()},
+       next: () => { this.processSuccess('Endereco adicionado com sucesso!')},
        error: (error) => { this.ProcessFail(error) }
      }).add(() => this.spinner.hide());
   }
 
-  processSuccess() {
+  processSuccess(message) {
     this.registerForm.reset();
     this.errors = [];
 
     this.toarst.toastrConfig.timeOut = 1500;
     this.toarst.toastrConfig.positionClass = 'toast-top-center';
 
-    this.toarst.success('Endereço registrado com Sucesso!');
+    this.toarst.success(message);
 
     this.modalRef.hide();
   }
 
   ProcessFail(fail: any) {
     console.log(fail)
-    this.errors = fail.error.errors['Messages'] ? fail.error.errors['Messages'] : fail.error.errors;
-    this.toarst.error('Ocorreu um erro!', this.errors[0]);
+    this.errors = fail?.error?.errors['Messages'] ? fail?.error?.errors['Messages'] : fail?.error?.errors;
+    this.toarst.error(this.errors[0], 'Opa :(');
   }
 }

@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
     this.store.getProduct().subscribe({
       next: () => { setTimeout(() => {
         this.getCart();
-      }, 400)},
+      }, 1000)},
       error: () => { this.toarst.warning('Erro ao tentar carregar seu carrinho') },
     }).add(() => this.spinner.hide())
   }

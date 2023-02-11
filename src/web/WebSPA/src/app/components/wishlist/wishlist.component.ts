@@ -8,7 +8,6 @@ import { WishService } from '../services/wish.service';
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
 
@@ -23,7 +22,7 @@ export class WishlistComponent implements OnInit {
       next: () => {
         setTimeout(() => {
           this.getWish()
-        }, 400);
+        }, 1000);
       },
       error: () => { this.toarst.warning('Erro ao tentar carregar sua lista de desejo') }
     }).add(() => this.spinner.hide())

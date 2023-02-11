@@ -5,7 +5,6 @@ import { WishService } from '../services/wish.service';
 @Component({
   selector: 'app-wishlistCount',
   templateUrl: './wishlistCount.component.html',
-  styleUrls: ['./wishlistCount.component.css']
 })
 export class WishlistCountComponent implements OnInit {
 

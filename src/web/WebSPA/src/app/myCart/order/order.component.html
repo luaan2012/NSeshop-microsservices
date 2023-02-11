@@ -1,3 +1,142 @@
-<p>
-  order works!
-</p>
+<section class="padding-y mb-5">
+    <div class="container">
+
+        <div class="card shadow rounded">
+            <div class="tracking-wrap">
+                <div class="step active">
+                    <span class="icon">
+                        <i class="fa fa-location-arrow"></i>
+                    </span>
+                    <span class="text"> Carrinho</span>
+                </div>
+                <div class="step active">
+                    <span class="icon">
+                        <i class="fa fa-credit-card"></i>
+                    </span>
+                    <span class="text"> Pagamento </span>
+                </div>
+                <div class="step">
+                    <span class="icon">
+                        <i class="fa fa-check-square"></i>
+                    </span>
+                    <span class="text"> Confirmação</span>
+                </div>
+            </div>
+
+            <article class="card-body">
+                <header class="mb-4">
+                    <h4 class="card-title">Seu pedido</h4>
+                </header>
+                <div class="row">
+
+                        <div class="col-md-6" *ngFor="let item of order?.items">
+                            <figure class="itemside  mb-3">
+                                <div class="aside">
+                                    <img src="assets/images/{{item?.image}}" alt="{{item?.image}}" class="border img-xs">
+                                </div>
+                                <figcaption class="info">
+                                    <p>
+                                        <b>{{item?.name}}</b>
+                                    </p>
+                                    <span>{{item?.quantity}}x R${{item?.value}} = Total: R$ {{item?.value * item?.quantity}}</span>
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                </div>
+            </article>
+
+            <article class="card-body">
+                <div class="row">
+
+                    <div class="card border-success">
+                        <div class="card-body">
+
+                            <small>Total Pedido: </small> <small class="text-success">R$ {{order?.valueTotal}}</small>
+
+                            <small style="margin-left: 40px;">Vouche Usado: </small> <small [innerHTML]="order?.voucherUsed ? order?.voucherCode : 'Nenhum'"></small>
+
+                            <small style="margin-left: 40px;">Desconto: </small> <small class="text-success">{{order?.discount}} </small>
+
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+
+            <div class="alert alert-danger" *ngIf="errors?.length > 0">
+              <h3 id="msgRetorno">Opa! :(</h3>
+              <ul>
+                <li *ngFor="let error of errors"><small>{{ error }}</small></li>
+              </ul>
+            </div>
+
+            <form novalidate class="register-form" (ngSubmit)="finalizeOrder()" [formGroup]="registerForm">
+                <article class="card-body border-top">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="CardName">Digite o Nome Completo</label>
+                                    <input asp-for="CardName" class="form-control mt-1" placeholder="Digite igual está no cartão" formControlName="cardName"
+                                    [ngClass]="{'is-invalid': displayMessage['cardName']}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-inline">
+                                <label asp-for="CardNumber">Número do Cartão</label>
+                                <input class="form-control w-50 cc-number-input mt-1" maxlength="19" placeholder="Número do Cartão" formControlName="cardNumber"
+                                [ngClass]="{'is-invalid': displayMessage['cardNumber']}"
+                                />
+
+                                <div class="cc-types">
+                                  <img class="cc-types__img cc-types__img--amex">
+                                  <img class="cc-types__img cc-types__img--visa">
+                                  <img class="cc-types__img cc-types__img--mastercard">
+                                  <img class="cc-types__img cc-types__img--disc">
+                                  <img class="cc-types__img cc-types__img--genric">
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: -12px">
+                            <div class="col-md-4 col-sm-12">
+                                    <div class="form-inline">
+                                        <label for="cardExpiration">Data de Vencimento MM/AA"</label>
+                                        <input name="cardExpiration" class="form-control dateCard w-25 cc-expiry-input mt-1" formControlName="cardExpiration"
+                                        [ngClass]="{'is-invalid': displayMessage['cardExpiration']}"
+                                        />
+                                    </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                    <label asp-for="CvvCard"></label>
+                                    <div class="form-inline">
+                                        <label for="cvvCard">Código de Segurança</label>
+                                        <input name="cvvCard" class="form-control w-25 cc-cvc-input mt-1" maxlength="4" formControlName="cvvCard"
+                                        [ngClass]="{'is-invalid': displayMessage['cvvCard']}"
+                                        />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="card-body border-top">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="text-left">
+                      <a class="btn btn-light" asp-action="Index" asp-controller="Cart"> <i class="fa fa-chevron-left"></i> Voltar ao Carrinho </a>
+
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary float-md-right"> Finalizar Pedido <i class="fa fa-chevron-right"></i> </button>
+                    </div>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

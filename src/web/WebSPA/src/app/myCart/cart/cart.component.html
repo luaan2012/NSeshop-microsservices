@@ -124,14 +124,14 @@
 
                     <div *ngIf="address">
                       <p class="stext-111 cl6 p-t-2">
-                        {{address}}
+                        {{address.completAddress}}
                       </p>
 
                       <div class="p-t-15">
 
                         <div class="flex-w">
                           <div
-                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer editAddress">
+                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer editAddress" (click)="openEditAddress(template)">
                             Editar
                           </div>
                         </div>
@@ -188,7 +188,7 @@
 
                 <small class="text-danger"></small>
 
-                <a href="" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer mt-2">
+                <a href="javascript:void(0)" [routerLink]="['/finalizar-pedido']" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer mt-2">
                   Seguir para o pagamento
                 </a>
               </div>
@@ -260,8 +260,8 @@
         </div>
     </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary editModal" (click)="closeAddress()">Cancelar</button>
-    <button type="submit" class="btn btn-primary sendRegister" [disabled]="!registerForm.valid">Registrar endereço</button>
+    <button type="button" class="btn btn-secondary" (click)="closeAddress()">Cancelar</button>
+    <button type="submit" class="btn btn-primary sendRegister" [disabled]="!registerForm.valid" [innerHTML]="this.address ? 'Editar endereço' : 'Registrar endereço'"></button>
   </div>
 </form>
 </ng-template>

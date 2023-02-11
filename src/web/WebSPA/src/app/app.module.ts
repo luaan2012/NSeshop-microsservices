@@ -27,6 +27,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgBrazil } from 'ng-brazil';
 import { CustomFormsModule } from 'ng2-validation';
+import { MyOrdersComponent } from './myCart/myOrders/myOrders.component';
+import { OrderService } from './myCart/services/order.service';
+import { OrderComponent } from './myCart/order/order.component';
+import { StatusOrder } from './utils/pipeStatus';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { CustomFormsModule } from 'ng2-validation';
     BlogComponent,
     AboutComponent,
     ContactComponent,
-    MyCartComponent
+    MyCartComponent,
+    MyOrdersComponent,
+    OrderComponent,
+    StatusOrder
    ],
   imports: [
     AccountModule,
@@ -62,7 +69,8 @@ import { CustomFormsModule } from 'ng2-validation';
     Store,
     StoreService,
     ConfigToarst,
-    AddressService
+    AddressService,
+    OrderService,
   ],
   bootstrap: [AppComponent]
 })

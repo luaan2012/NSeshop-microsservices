@@ -1,3 +1,50 @@
-<p>
-  myOrders works!
-</p>
+<section class="padding-y">
+      <div class="container">
+            <div class="col-md-12" style="padding-bottom: 35px" *ngFor="let item of order">
+                <article class="card">
+                    <header class="card-header">
+                        <b class="d-inline-block mr-3">Pedido ID: #{{item.code}} <b [innerHTML]="item.status | statusOrder"></b></b>
+                        <span> {{item.data | date:'short'}}</span>
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6 class="text-muted">Pagamento</h6>
+                                <span class="text-success">
+                                    <i class="fas fa-credit-card"></i>
+                                    Transação em cartão de crédito
+                                </span>
+
+                                <p>
+                                    <span class="b">Total: R$ {{item.valuetotal}}</span>
+                                </p>
+
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted">Endereço de entrega</h6>
+                                <p>
+                                    {{item.address.completAddress}}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <ul class="row">
+                              <li class="col-md-4" *ngFor="let items of item.items">
+                                  <figure class="itemside  mb-3">
+                                      <div class="aside">
+                                          <img src="~/images/{{items.image}}" alt="{{items.image}}" class="border img-xs">
+                                      </div>
+                                      <figcaption class="info">
+                                          <p>
+                                              <b>{{items.name}}</b>
+                                          </p>
+                                          <span></span>
+                                      </figcaption>
+                                  </figure>
+                              </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+      </div>
+  </section>

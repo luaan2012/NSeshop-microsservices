@@ -12,7 +12,13 @@ namespace NS.Cliente.API.Models
         public string City { get; private set; }
         public string State { get; private set; }
         public Guid ClientId { get; private set; }
-
+        public string CompletAddress
+        {
+            get
+            {
+                return $"{PublicPlace}, {Number} {Complement} - {Neighborhood} - {City} - {State}";
+            }
+        }
         // EF Relation
         public Client Client { get; protected set; }
 

@@ -5,8 +5,6 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-cartCount',
   templateUrl: './cartCount.component.html',
-  styleUrls: ['./cartCount.component.css'],
-  inputs: ['data-notify']
 })
 export class CartCountComponent implements OnInit {
 
@@ -22,7 +20,7 @@ export class CartCountComponent implements OnInit {
       next: () => {
         setTimeout(() => {
           this.getQuantity()
-        }, 400);
+        }, 1000);
       },
       error: () => {}
     })

@@ -20,8 +20,6 @@ export abstract class FormBaseComponent {
     protected ConfigValidFormBase(
         formInputElements: ElementRef[],
         formGroup: FormGroup) {
-
-          console.log(formInputElements, formGroup)
         let controlBlurs: Observable<any>[] = formInputElements
             .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
 
@@ -32,7 +30,6 @@ export abstract class FormBaseComponent {
 
     protected ValidForm(formGroup: FormGroup) {
         this.displayMessage = this.genericValidator.processMessages(formGroup);
-        console.log(this.displayMessage);
         this.chancesNotSave = true;
     }
 }

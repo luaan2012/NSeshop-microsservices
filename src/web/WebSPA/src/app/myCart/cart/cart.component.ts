@@ -15,6 +15,7 @@ import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
 import { NgTemplateOutlet } from '@angular/common';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cart',
@@ -33,11 +34,14 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
   MASKS = MASKS;
   errors: any[] = []
 
-  constructor(private fb: FormBuilder, private cartService: CartService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-  private addressService: AddressService, private confToarst: ConfigToarst, private store: Store, private modalService: BsModalService) {
+  constructor(private fb: FormBuilder, private cartService: CartService, private toarst: ToastrService,
+  private spinner: NgxSpinnerService, private router: Router, private addressService: AddressService,
+   private confToarst: ConfigToarst, private store: Store, private modalService: BsModalService,
+   private titleService: Title)
+  {
     super();
+    this.titleService.setTitle("Carrinho - NerdStore");
   }
-
   get f(): any { return this.registerForm.controls; }
 
   ngOnInit() {

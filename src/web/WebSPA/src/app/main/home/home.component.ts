@@ -6,6 +6,7 @@ import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigToarst } from 'src/app/utils/configToarst';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private homeService: HomeService, private spinner: NgxSpinnerService,
     private activeRouter: ActivatedRoute, private configToarst: ConfigToarst,
-    private toarst: ToastrService, private router: Router) {}
+    private toarst: ToastrService, private router: Router, private titleService: Title)
+    {
+      this.titleService.setTitle("Home - NerdStore");
+    }
 
   ngOnInit(): void {
     let login = this.activeRouter.snapshot.paramMap.get('login')

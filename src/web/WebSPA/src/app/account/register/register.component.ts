@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/usuario';
 import { AccountService } from '../service/account.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,11 @@ export class RegisterComponent extends FormBaseComponent implements OnInit, Afte
   MASKS = MASKS;
 
   constructor(private fb: FormBuilder, private account: AccountService, private router: Router,
-    private spinner: NgxSpinnerService,
-    private toastr: ToastrService)
+    private spinner: NgxSpinnerService, private toastr: ToastrService, private titleService: Title)
   {
     super();
+
+    this.titleService.setTitle("Registro - NerdStore");
 
     this.validationMessages = {
       name: {

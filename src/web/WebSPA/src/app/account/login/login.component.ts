@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -25,8 +26,11 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
   constructor(private modalService: BsModalService, private fb: FormBuilder, private account: AccountService, private router: Router,
     private spinner: NgxSpinnerService, private store: Store, private configToarst: ConfigToarst,
-    private toastr: ToastrService) {
+    private toastr: ToastrService, private titleService: Title)
+  {
     super();
+
+    this.titleService.setTitle("Login - NerdStore");
 
     this.configToarst.toarstPosition(7);
 

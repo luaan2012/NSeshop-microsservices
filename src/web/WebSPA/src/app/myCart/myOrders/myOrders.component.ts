@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { OrderFinished } from 'src/app/models/OrderTransaction';
@@ -14,8 +15,10 @@ export class MyOrdersComponent implements OnInit {
   order: OrderFinished[] = [];
 
   constructor(private toarst: ToastrService, private spinner: NgxSpinnerService,
-    private confToarst: ConfigToarst, private orderService: OrderService)
-   { }
+    private confToarst: ConfigToarst, private orderService: OrderService, private titleService: Title)
+  {
+    this.titleService.setTitle("Meus pedidos - NerdStore");
+  }
 
   ngOnInit() {
     this.getMyOrders()

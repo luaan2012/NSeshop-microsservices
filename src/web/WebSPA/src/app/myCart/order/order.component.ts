@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -30,9 +31,11 @@ export class OrderComponent extends FormBaseComponent implements OnInit {
   registerForm: FormGroup;
   errors: any;;
   constructor(private fb: FormBuilder, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-    private addressService: AddressService, private confToarst: ConfigToarst, private cartService: CartService, private orderService: OrderService)
-   {
+    private addressService: AddressService, private confToarst: ConfigToarst, private cartService: CartService, private orderService: OrderService,
+    private titleService: Title)
+  {
     super();
+    this.titleService.setTitle("Finalizar Pedido - NerdStore");
 
     this.validationMessages = {
       cardName: {

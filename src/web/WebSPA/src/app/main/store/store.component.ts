@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -24,13 +25,13 @@ export class StoreComponent implements OnInit {
   idDetail: any;
   idBanner: any;
 
-  constructor(private storeService: StoreService, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
-    private cartService: CartService,
-    private wishService: WishService,
-    private store: Store,
-    private configToarst: ConfigToarst,
-    private activeRouter: ActivatedRoute
-    ) {}
+  constructor(private storeService: StoreService, private toarst: ToastrService,
+    private spinner: NgxSpinnerService, private router: Router, private cartService: CartService,
+    private wishService: WishService, private store: Store, private configToarst: ConfigToarst,
+    private activeRouter: ActivatedRoute, private titleService: Title)
+    {
+      this.titleService.setTitle("Loja - NerdStore");
+    }
 
   ngOnInit(): void {
     this.idDetail = this.activeRouter.snapshot.paramMap.get('id');

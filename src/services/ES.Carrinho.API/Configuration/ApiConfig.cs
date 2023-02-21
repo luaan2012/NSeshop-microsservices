@@ -11,10 +11,10 @@ namespace NS.Carrinho.API.Configuration
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CartContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection").Replace("{AppDir}", AppDomain.CurrentDomain.BaseDirectory)));
 
             services.AddDbContext<WishListContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection").Replace("{AppDir}", AppDomain.CurrentDomain.BaseDirectory)));
 
             services.AddControllers();
 

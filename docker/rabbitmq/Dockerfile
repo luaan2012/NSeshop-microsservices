@@ -1,0 +1,6 @@
+FROM rabbitmq:3-management
+ENV RABBITMQ_DEFAULT_USER=nerdstore
+ENV RABBITMQ_DEFAULT_PASS=nerdstore
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443

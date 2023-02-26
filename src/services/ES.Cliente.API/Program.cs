@@ -1,6 +1,7 @@
 using MediatR;
 using NS.APICore.Extensions;
 using NS.APICore.Identity;
+using NS.Clientes.API.Data;
 using NS.Clients.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,12 @@ builder.Services.RegisterServices();
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ClientsContext>();
+    context.Database.EnsureCreated();
+}
 
 app.UseSwaggerConfiguration();
 

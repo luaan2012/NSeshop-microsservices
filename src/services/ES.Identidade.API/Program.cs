@@ -1,5 +1,6 @@
 using NS.APICore.Extensions;
 using NS.Identidade.API.Configuration;
+using NS.Identidade.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,12 @@ builder.Services.AddDependecyInjection();
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.UseSwaggerConfiguration();
 

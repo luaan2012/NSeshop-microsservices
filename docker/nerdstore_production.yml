@@ -21,7 +21,6 @@ services:
 
   web-mvc:
     image: luaan2012/nerdstore-web-mvc-ecommerce:latest
-    #container_name: nerdstore-web-mvc-ecommerce
     build:
       context: ../src
       dockerfile: ./web/WebMVC/Dockerfile

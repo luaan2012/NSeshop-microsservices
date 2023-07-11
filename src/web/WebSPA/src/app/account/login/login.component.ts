@@ -32,7 +32,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
     this.titleService.setTitle("Login - NerdStore");
 
-    this.configToarst.toarstPosition(7);
+    this.configToarst.toarstPosition(1);
 
     this.validationMessages = {
       email: {
@@ -98,6 +98,6 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
 
   ProcessFail(fail: any) {
     this.displayMessage['password'] = fail.error.errors['Password'] ? fail.error.errors['Password'] : fail.error.errors['Messages'];
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    this.toastr.error('Ocorreu um erro ao tentar fazer o login!', 'Opa :(');
   }
 }

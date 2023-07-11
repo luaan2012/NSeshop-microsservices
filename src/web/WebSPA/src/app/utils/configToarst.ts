@@ -33,7 +33,10 @@ export class ConfigToarst {
       case 8:
         this.toarst.toastrConfig.positionClass = 'toast-bottom-center';
         break;
-    }
+      case 9:
+        this.toarst.toastrConfig.positionClass = 'toast-top-left';
+        break;
+      }
   }
 
   toarstTimeOut(time: number){

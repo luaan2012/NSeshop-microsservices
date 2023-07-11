@@ -1,7 +1,7 @@
 export const environment = {
-    production: false,
-    apiUrlStore: 'https://localhost:7401/',
-    apiUrlAccount: 'https://localhost:7136/api/auth/',
-    apiUrlBFF: 'https://localhost:7221/',
-    apiUrlClient: 'https://localhost:7038/'
+  production: false,
+  apiUrlStore: 'https://nerdstore-api-catalog.up.railway.app/',
+  apiUrlAccount: 'https://nerdstore-api-identity.up.railway.app/api/auth/',
+  apiUrlBFF: 'https://nerdstore-api-bff.up.railway.app/',
+  apiUrlClient: 'https://nerdstore-api-client.up.railway.app/'
 }

@@ -48,7 +48,7 @@
                         </div>
                       </td>
                       <td class="column-2">{{item?.name}}</td>
-                      <td class="column-5">{{item?.value}}</td>
+                      <td class="column-5">R$ {{item?.value | number: "1.2-2"}}</td>
                       <td class="column-4">
                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
                           <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
@@ -64,7 +64,7 @@
                           </div>
                         </div>
                       </td>
-                      <td class="column-5">R$ {{item?.quantity * item?.value}}</td>
+                      <td class="column-5">R$ {{item?.quantity * item?.value | number: "1.2-2"}}</td>
                       <td class="column-3" style="cursor:pointer" (click)="attCart(item?.productId)"><i
                           class="fa-solid fa-rotate"></i></td>
                     </tr>
@@ -108,7 +108,7 @@
 
                   <div class="size-209">
                     <span class="mtext-110 cl2">
-                      {{cart?.discount + cart?.valueTotal}}
+                      R$ {{cart?.discount + cart?.valueTotal}}
                     </span>
                   </div>
                 </div>
@@ -151,7 +151,6 @@
                             Adicionar
                           </div>
                         </div>
-
                       </div>
                     </div>
 
@@ -181,7 +180,7 @@
 
                   <div class="size-209 p-t-1">
                     <span class="mtext-110 cl2 text-success">
-                      {{cart?.valueTotal}}
+                      R$ {{cart?.valueTotal}}
                     </span>
                   </div>
                 </div>

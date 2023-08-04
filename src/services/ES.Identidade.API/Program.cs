@@ -18,11 +18,11 @@ builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
-using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
-{
-    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated();
-}
+//using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+//{
+//    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+//    context.Database.EnsureCreated();
+//}
 
 app.UseSwaggerConfiguration();
 

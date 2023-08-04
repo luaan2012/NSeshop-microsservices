@@ -20,7 +20,7 @@ namespace NS.Identidade.API.Configuration
                 .PersistKeysToDatabaseStore<ApplicationDbContext>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()

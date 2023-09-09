@@ -24,13 +24,13 @@ namespace NS.Pedidos.API.Application.Queries
         public async Task<OrderDTO> GetLastOrder(Guid clientId)
         {
             const string sql = @"SELECT
-                                P.ID AS 'ProductId', P.CODE, P.VOUCHERUSED, P.DISCOUNT, P.VALUETOTAL ,P.ORDERSTATUS,
+                                P.ID AS 'ProductId', P.DataRegister, P.CODE, P.VOUCHERUSED, P.DISCOUNT, P.VALUETOTAL ,P.ORDERSTATUS,
                                 P.PUBLICPLACE,P.NUMBER, P.NEIGHBORHOOD, P.CEP, P.COMPLEMENT, P.CITY, P.STATE,
                                 PIT.ID AS 'ProductItemId',PIT.PRODUCTNAME, PIT.QUANTITY, PIT.PRODUCTIMAGE, PIT.VALUEUNITY 
                                 FROM ORDERS P 
                                 INNER JOIN ORDERITEMS PIT ON P.ID = PIT.ORDERID 
                                 WHERE P.CLIENTID = @clientId 
-                                AND P.DATAREGISTER between DATEADD(minute, -3,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
+                                AND P.DATAREGISTER between DATEADD(minute, -6,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
                                 AND P.ORDERSTATUS = 1 
                                 ORDER BY P.DATAREGISTER DESC";
 
@@ -87,7 +87,7 @@ namespace NS.Pedidos.API.Application.Queries
                 ValueTotal = result[0]?.VALUETOTAL,
                 Discount = result[0]?.DISCOUNT,
                 VoucherUsed = result[0]?.VOUCHERUSED,
-
+                Data = result[0]?.DataRegister,
                 OrderItems = new List<ItemOrderDTO>(),
                 Address = new AddressDTO
                 {

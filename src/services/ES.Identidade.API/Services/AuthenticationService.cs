@@ -86,7 +86,7 @@ namespace NS.Identidade.API.Services
             {
                 Issuer = currentIssuer,
                 Subject = identityClaims,
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Expires = DateTime.UtcNow.AddHours(_appTokenSettingsSettings.RefreshTokenExpiration),
                 SigningCredentials = key
             });
 
@@ -99,7 +99,7 @@ namespace NS.Identidade.API.Services
             {
                 AccessToken = encodedToken,
                 RefreshToken = refreshToken.Token,
-                ExpiresIn = TimeSpan.FromHours(1).TotalSeconds,
+                ExpiresIn = TimeSpan.FromHours(_appTokenSettingsSettings.RefreshTokenExpiration).TotalSeconds,
                 UserToken = new UserToken
                 {
                     Id = user.Id,

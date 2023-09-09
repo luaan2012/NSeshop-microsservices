@@ -16,7 +16,7 @@ namespace NS.Cliente.API.Models
         {
             get
             {
-                return $"{PublicPlace}, {Number} {Complement} - {Neighborhood} - {City} - {State}";
+                return $"{PublicPlace}, {Number}, {Complement} - {Neighborhood} - {City} - {State}";
             }
         }
         // EF Relation

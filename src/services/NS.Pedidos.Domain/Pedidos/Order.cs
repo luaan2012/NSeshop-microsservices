@@ -10,7 +10,7 @@ namespace NS.Pedidos.Domain.Pedidos
             ClientId = clientId;
             ValueTotal = valueTotal;
             _orderItems = orderItems;
-
+            DataRegister = DateTime.Now;
             Discount = discount;
             VoucherUsed = voucherUsed;
             VoucherId = voucherId;

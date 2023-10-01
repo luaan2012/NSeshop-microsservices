@@ -57,7 +57,7 @@ services:
     container_name: nerdstore-api-carrinho
     build:
       context: ../src
-      dockerfile: ./services/ES.carrinho.API/Dockerfile
+      dockerfile: ./services/ES.Carrinho.API/Dockerfile
     restart: always             
     environment:      
       - ASPNETCORE_ENVIRONMENT=Production
@@ -134,7 +134,7 @@ services:
     container_name: nerdstore-api-pagamento
     build:
       context: ../src
-      dockerfile: ./services/NS.pagamentos.API/Dockerfile
+      dockerfile: ./services/NS.Pagamentos.API/Dockerfile
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -154,7 +154,7 @@ services:
     container_name: nerdstore-api-pedido
     build:
       context: ../src
-      dockerfile: ./services/ES.pedido.API/Dockerfile
+      dockerfile: ./services/ES.Pedido.API/Dockerfile
     restart: always 
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

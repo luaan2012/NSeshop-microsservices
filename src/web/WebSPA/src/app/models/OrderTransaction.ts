@@ -23,5 +23,6 @@ export interface OrderFinished {
   voucherCode: string,
   voucherUsed: boolean,
   items: Products[]
+  orderItems: Products[]
   address: Address
 }

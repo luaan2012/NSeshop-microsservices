@@ -67,12 +67,13 @@ export class OrderComponent extends FormBaseComponent implements OnInit {
     let cardNumber = new FormControl('', [Validators.required, Validators.min(19), Validators.maxLength(19)]);
     let cardName = new FormControl('', [Validators.required, CustomValidators.rangeLength([3, 200])]);
     let cvvCard = new FormControl('', [Validators.required, CustomValidators.rangeLength([3, 4])]);
+    let cvvcardExpirationCard = new FormControl('', [Validators.required, CustomValidators.rangeLength([5, 5])]);
 
     this.registerForm = this.fb.group({
       cardName: cardName,
       cardNumber: cardNumber,
       cvvCard: cvvCard,
-      cardExpiration: ['', Validators.required],
+      cardExpiration: cvvcardExpirationCard,
     });
   }
 
@@ -128,8 +129,8 @@ export class OrderComponent extends FormBaseComponent implements OnInit {
 
   processSuccess() {
     this.errors = [];
-    this.confToarst.toarstPosition(3);
-    this.confToarst.toarstTimeOut(5000);
+    this.confToarst.toarstPosition(7);
+    this.confToarst.toarstTimeOut(2000);
 
     let toast = this.toarst.success('Pedido realizado com sucesso!');
 
@@ -144,7 +145,8 @@ export class OrderComponent extends FormBaseComponent implements OnInit {
 
   ProcessFail(fail: any) {
     this.errors = fail.error.errors['Messages'] ? fail.error.errors['Messages'] : fail.error.errors;
-    this.toarst.error('Ocorreu um erro!', 'Opa :(');
+      console.log(this.errors)
+    this.toarst.error('Aconteceu algo enquanto tentavamos prosseguir', 'Opa :(');
   }
 
 }

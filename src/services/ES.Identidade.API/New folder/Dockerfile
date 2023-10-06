@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["/services/ES.Identidade.API/NS.Identidade.API.csproj", "services/ES.Identidade.API/"]
-COPY ["/building blocks/NS.MessageBus/NS.MessageBus.csproj", "building blocks/NS.MessageBus/"]
-COPY ["/building blocks/NS.Core/NS.Core.csproj", "building blocks/NS.Core/"]
-COPY ["/building blocks/NS.APICore/NS.APICore.csproj", "building blocks/NS.APICore/"]
+COPY ["./services/ES.Identidade.API/NS.Identidade.API.csproj", "services/ES.Identidade.API/"]
+COPY ["./building blocks/NS.MessageBus/NS.MessageBus.csproj", "building blocks/NS.MessageBus/"]
+COPY ["./building blocks/NS.Core/NS.Core.csproj", "building blocks/NS.Core/"]
+COPY ["./building blocks/NS.APICore/NS.APICore.csproj", "building blocks/NS.APICore/"]
 RUN dotnet restore "services/ES.Identidade.API/NS.Identidade.API.csproj"
 COPY . .
 WORKDIR "services/ES.Identidade.API"

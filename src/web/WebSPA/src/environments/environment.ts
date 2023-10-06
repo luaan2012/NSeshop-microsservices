@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  apiUrlStore: 'https://nerdstore-api-catalog.up.railway.app/',
-  apiUrlAccount: 'https://nerdstore-api-identity.up.railway.app/api/auth/',
-  apiUrlBFF: 'https://nerdstore-api-bff.up.railway.app/',
-  apiUrlClient: 'https://nerdstore-api-client.up.railway.app/'
+  apiUrlStore: 'https://api-catalog.portfolioluan.shop/',
+  apiUrlAccount: 'https://api-identity.portfolioluan.shop/api/auth/',
+  apiUrlBFF: 'https://api-bff.portfolioluan.shop/',
+  apiUrlClient: 'https://api-client.portfolioluan.shop/'
 }

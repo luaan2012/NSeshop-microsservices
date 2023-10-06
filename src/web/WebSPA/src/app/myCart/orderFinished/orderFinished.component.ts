@@ -26,12 +26,13 @@ export class OrderFinishedComponent implements OnInit {
 
   ngOnInit() {
     this.getLastOrder()
+    this.getAddress()
   }
 
   getLastOrder(){
     this.spinner.show();
     this.orderService.GetLastOrder().subscribe({
-      next: (order: OrderFinished) => {this.order = order; this.getAddress() },
+      next: (order: OrderFinished) => {this.order = order; },
       error: () => { this.toarst.warning('Erro ao carregar seu pedido :(')}
     }).add(() => this.spinner.hide());
   }

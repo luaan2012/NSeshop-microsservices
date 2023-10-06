@@ -1,3 +1,4 @@
+import { shipPrice } from './../../utils/creditCard';
 import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ViewRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -33,6 +34,7 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
   registerForm: FormGroup;
   MASKS = MASKS;
   errors: any[] = []
+  price = shipPrice
 
   constructor(private fb: FormBuilder, private cartService: CartService, private toarst: ToastrService,
   private spinner: NgxSpinnerService, private router: Router, private addressService: AddressService,
@@ -45,6 +47,8 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
   get f(): any { return this.registerForm.controls; }
 
   ngOnInit() {
+    document.getElementsByClassName('js-panel-cart')[0].classList.remove('show-header-cart');
+
     this.store.getProduct().subscribe({
       next: () => { setTimeout(() => {
         this.getCart();
@@ -215,6 +219,16 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
      }).add(() => this.spinner.hide());
   }
 
+  CanNextPage(template: TemplateRef<any>){
+    console.log(this.address)
+    if(!this.address){
+      this.modalRef = this.modalService.show(template);
+      return
+    }
+
+    this.router.navigate(['/finalizar-pedido']);
+  }
+
   AddAddress(){
     this.spinner.show();
 
@@ -245,8 +259,7 @@ export class MyCartComponent extends FormBaseComponent implements OnInit {
   }
 
   ProcessFail(fail: any) {
-    console.log(fail)
     this.errors = fail?.error?.errors['Messages'] ? fail?.error?.errors['Messages'] : fail?.error?.errors;
-    this.toarst.error(this.errors[0], 'Opa :(');
+    this.toarst.error('Aconteceu um erro..', 'Opa :(');
   }
 }

@@ -38,7 +38,7 @@
                                     <p>
                                         <b>{{item?.name}}</b>
                                     </p>
-                                    <span>{{item?.quantity}}x R${{item?.value}} = Total: R$ {{item?.value * item?.quantity}}</span>
+                                    <span>{{item?.quantity}}x R${{item?.value | number: "1.2-2"}} = Total: R$ {{item?.value * item?.quantity | number: "1.2-2"}}</span>
                                 </figcaption>
                             </figure>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="card border-success">
                         <div class="card-body">
 
-                            <small>Total Pedido: </small> <small class="text-success">R$ {{order?.valueTotal}}</small>
+                            <small>Total Pedido: </small> <small class="text-success">R$ {{order?.valueTotal | number: "1.2-2"}}</small>
 
                             <small style="margin-left: 40px;">Vouche Usado: </small> <small [innerHTML]="order?.voucherUsed ? order?.voucherCode : 'Nenhum'"></small>
 
@@ -64,13 +64,13 @@
                 </div>
             </article>
 
-            <div class="alert alert-danger" *ngIf="errors">
+            <div class="alert alert-danger" *ngIf="errors?.length > 0 || errors?.['CardExpiration']?.[0]">
               <h3 id="msgRetorno">Opa! :(</h3>
-              <ul *ngIf="errors?.length > 0">
+              <ul>
                 <li *ngFor="let error of errors"><small>{{ error }}</small></li>
               </ul>
               <ul>
-                <li><small>{{ errors['CardExpiration'] }}</small></li>
+                <li><small>{{ errors?.['CardExpiration']?.[0] }}</small></li>
               </ul>
             </div>
 
@@ -108,7 +108,7 @@
                             <div class="col-md-4 col-sm-12">
                                     <div class="form-inline">
                                         <label for="cardExpiration">Data de Vencimento MM/AA"</label>
-                                        <input name="cardExpiration" class="form-control dateCard w-25 cc-expiry-input mt-1" formControlName="cardExpiration"
+                                        <input name="cardExpiration" class="form-control dateCard w-25 cc-expiry-input mt-1" maxlength="5" formControlName="cardExpiration"
                                         [ngClass]="{'is-invalid': displayMessage['cardExpiration']}"
                                         />
                                     </div>
@@ -130,7 +130,7 @@
                   <div class="row">
                     <div class="col-md-10">
                       <div class="text-left">
-                      <a class="btn btn-light" asp-action="Index" asp-controller="Cart"> <i class="fa fa-chevron-left"></i> Voltar ao Carrinho </a>
+                      <a class="btn btn-light" [routerLink]="['/carrinho']"> <i class="fa fa-chevron-left"></i> Voltar ao Carrinho </a>
 
                     </div>
                   </div>

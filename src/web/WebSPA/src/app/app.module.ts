@@ -33,6 +33,7 @@ import { OrderComponent } from './myCart/order/order.component';
 import { StatusOrder } from './utils/pipeStatus';
 import { HttpConfigInterceptor } from './services/interceptor.module';
 import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { OrderFinishedComponent } from './myCart/orderFinished/orderFinished.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
     MyCartComponent,
     MyOrdersComponent,
     OrderComponent,
-    StatusOrder
+    StatusOrder,
+    OrderFinishedComponent
    ],
   imports: [
     AccountModule,

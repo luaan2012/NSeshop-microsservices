@@ -82,7 +82,11 @@ export class StoreComponent implements OnInit {
     this.store.set('store', '');
 
     this.cartService.AddCart(this.product).subscribe({
-      next: () => { this.toarst.info(this.product.name + ' foi adicionado ao carrinho') },
+      next: () => {
+        this.toarst.info(this.product.name + ' foi adicionado ao carrinho')
+        document.getElementsByClassName('js-modal1')[0].classList.remove('show-modal1');
+        this.quantity = 1
+      },
       error: (fail: any) => {
         let error = fail.error.errors['Messages'];
         if (error?.length > 0) {

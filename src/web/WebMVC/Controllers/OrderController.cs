@@ -22,6 +22,8 @@ namespace NS.WebMVC.Controllers
 
             var address = await _clientService.GetAddress();
 
+            if (address is null) return RedirectToAction("Index", "Cart");
+
             var order = _shopsBffService.MapForOrder(cart, address);
 
             return View(order);

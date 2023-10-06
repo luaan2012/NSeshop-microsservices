@@ -36,7 +36,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     let login = this.activeRouter.snapshot.paramMap.get('login')
 
-    if(login){
+    if(login == 'openlogin'){
+      document.getElementById('loginNav').click();
+    }
+
+    if(login == 'login'){
       this.configToarst.toarstPosition(3);
       this.toarst.error('Sua sessao expirou, faca o login novamente');
       window.history.pushState({}, document.title, "/" + "");

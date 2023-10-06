@@ -114,3 +114,5 @@ export const maskCreditCard = async (creditCard: string, start: number, end: num
   const maskMatch = '4505290686046367'.match(regExp);
   return maskMatch ? `${startRes}${maskMatch[0].replace(/[a-zA-Z0-9]/g, mask)}${endRes}` : creditCard.replace(/[a-zA-Z0-9]/g, mask);
 };
+
+export const shipPrice = 50.00

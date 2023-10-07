@@ -5,6 +5,7 @@ import { Address } from "src/app/models/client";
 import { OrderFinished, OrderTransaction } from "src/app/models/OrderTransaction";
 import { Cart } from "src/app/models/produto";
 import { BaseService } from "src/app/services/base.service";
+import { shipPrice } from "src/app/utils/creditCard";
 
 @Injectable()
 
@@ -30,7 +31,7 @@ export class OrderService extends BaseService{
 
   mapOrder(cart: Cart, address: Address): OrderTransaction{
     const order: OrderTransaction = {
-      valueTotal: cart?.valueTotal,
+      valueTotal: cart?.valueTotal - shipPrice,
       items: cart?.items,
       discount: cart?.discount,
       voucherUsed: cart?.voucherUsed,

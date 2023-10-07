@@ -1,3 +1,4 @@
+import { shipPrice } from './../../utils/creditCard';
 import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -30,6 +31,7 @@ export class OrderComponent extends FormBaseComponent implements OnInit {
   order: OrderTransaction;
   registerForm: FormGroup;
   errors: any;;
+
   constructor(private fb: FormBuilder, private toarst: ToastrService, private spinner: NgxSpinnerService, private router: Router,
     private addressService: AddressService, private confToarst: ConfigToarst, private cartService: CartService, private orderService: OrderService,
     private titleService: Title)

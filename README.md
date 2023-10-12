@@ -4,41 +4,43 @@ My first complicated project with a lot of business rules that apply in ecommerc
 
 ## :books: Notes
 
-- Technologies used: EasyNetQ, FluentValidation, Poly, NetDevPack, MoreLinq, GRPc, EF, MediaTR, Dapper, JWT, docker, NGINX and REFIT.
-- I used this <a href="https://themewagon.com/themes/free-html5-ecommerce-website-template/">Template</a>  and modified it and many things.
-- This idea came out based on the <a href="https://desenvolvedor.io/">Course</a> I took and I recommend it ".Net Core Enterprise Applications"
-- For GRPC to work, the project needs to be on selfhosting
+- Technologies used: EasyNetQ, FluentValidation, Polly, NetDevPack, MoreLinq, gRPC, EF (Entity Framework), MediatR, Dapper, JWT (JSON Web Tokens), Docker, NGINX, and Refit.
+- I initially used a template and made extensive modifications. <a href="https://themewagon.com/themes/free-html5-ecommerce-website-template/">Template</a>
+- The idea for this project stemmed from a <a href="https://desenvolvedor.io/">Course</a> I took, which I highly recommend, titled ".NET Core Enterprise Applications.
+- To enable gRPC functionality, the project needs to be self-hosted.
 
-## :bulb: Install
+## :bulb: Installation Instructions
 
-- First, enter the "sql" folder in the root of the project, you can create a local database, dblite or any other with the "AllData.sql" file that has all the products previously started.
-Note that all API's use their own context (EF) and if you create a local db, not empty, I have provided a file called "Products.sql" to fill the products table.
+- First, navigate to the "sql" folder in the project's root directory. Here, you can create a local database using SQLite or any other database management system. Use the "AllData.sql" file, which contains all the pre-existing products. Note that each API has its own context (EF), so if you choose to create a local database that is not empty, I've included a file called "Products.sql" to populate the products table.
 
-- Second, change all the connections strings in the "appsettings" of all the API's in the project under development.
+1 - Second, update all connection strings in the "appsettings" files of all APIs within the development project.
 
-- Third, as the project uses RabbitMQ with a docker image, you will need to have docker installed on your machine to run the project in its entirety, because some APIs as soon as they are started will subscribe to the queues. Then after installing, run the following command:
+2 - As the project utilizes RabbitMQ with a Docker image, you'll need to have Docker installed on your machine to run the project in its entirety. Some APIs will subscribe to queues as soon as they're launched. After installing Docker, execute the following command:
 
-  docker run -d --hostname rabbit-host --name rabbit-nerdstore-Dev -p 15672:15672 -p 5672:5672 rabbitmq:management
+3 - docker run -d --hostname rabbit-host --name rabbit-nerdstore-Dev -p 15672:15672 -p 5672:5672 rabbitmq:management
   
-- Fourth, For all start projects, right click on the solution and properties. Select "multiple startup projects" and remember to always leave the WEBMVC project at the bottom.
+4 - To start all projects, right-click on the solution and select "Properties." Choose "Multiple Startup Projects" and ensure that the WEBMVC project is always placed at the bottom.
 
 ![image](https://user-images.githubusercontent.com/100293387/210110996-b3406de6-d947-4543-94e6-18b074863de4.png)
 
-## :whale: Docker
+## :whale: Running with Docker
 
-To run any project in docker, follow the steps below:
+To run any project using Docker, follow these steps:
 
-- First, we need to install a certificate issued from IIS.
-Enter the "docker" folder and then the "certs" folder and double click to install the certificate.
-Choose between "current user" or "local machine" and click next, then next again. The password is "nerdstore", 
-type it and click next. On the next screen, choose the option "place all certificates" and then select the folder 
-"Trusted Root Certification Authorites" so that it is recognized as a valid certificate in your local machine.
+- First, you need to install a certificate issued by IIS.
+  - Navigate to the "docker" folder and then the "certs" folder.
+  - Double-click to install the certificate.
+  - Choose between "current user" or "local machine" and click "Next."
+  - The password is "nerdstore," so type it and click "Next."
+  - On the next screen, select the option "Place all certificates in the following store."
+  - Choose the "Trusted Root Certification Authorities" folder so that the certificate is recognized as valid on your local machine.
 
 ![image](https://user-images.githubusercontent.com/100293387/210111346-eba75c55-4283-435f-802d-06b5ce058495.png)
 
-- Second, now with the certificate installed, in the docker folder, let's open a command prompt (CMD) and run the following command:
+- Second, now that the certificate is installed, navigate to the "docker" folder and open a command prompt (CMD).
 
-  docker-compose -f nerdstore_production.yml up 
+ - Run the following command:
+    docker-compose -f nerdstore_production.yml up 
 
   NOTE: Please note that to run on docker we are looking at the appsettings.Production. And for docker, I decided to upload a db in a container, but you can change   this in the appsettings.Production by putting the command in the connection string: host.docker.internal\ \"YOUR server db"
 

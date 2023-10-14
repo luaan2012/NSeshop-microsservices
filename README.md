@@ -11,7 +11,9 @@ My first complicated project with a lot of business rules that apply in ecommerc
 
 ## :bulb: Live Demo
 
-[here](<https://nerdstorecore.portfolioluan.shop/>).
+.Net = [here](<https://nerdstorecore.portfolioluan.shop/>).
+Angular = [here](<https://nerdstoreangular.portfolioluan.shop/>).
+NextJs = [here](<https://nerdstorenext.portfolioluan.shop/>).
 
 ## :bulb: Installation Instructions
 

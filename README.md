@@ -9,6 +9,12 @@ My first complicated project with a lot of business rules that apply in ecommerc
 - The idea for this project stemmed from a <a href="https://desenvolvedor.io/">Course</a> I took, which I highly recommend, titled ".NET Core Enterprise Applications.
 - To enable gRPC functionality, the project needs to be self-hosted.
 
+## :bulb: Live Demo
+
+- .Net = [here](<https://nerdstorecore.portfolioluan.shop/>).
+- Angular = [here](<https://nerdstoreangular.portfolioluan.shop/>).
+- NextJs = [here](<https://nerdstorenext.portfolioluan.shop/>).
+
 ## :bulb: Installation Instructions
 
 - First, navigate to the "sql" folder in the project's root directory. Here, you can create a local database using SQLite or any other database management system. Use the "AllData.sql" file, which contains all the pre-existing products. Note that each API has its own context (EF), so if you choose to create a local database that is not empty, I've included a file called "Products.sql" to populate the products table.
